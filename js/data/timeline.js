@@ -155,6 +155,7 @@ SLV.data.links = [
   { a: "sung_jinwoo", b: "tusk", t: "shadow", label: "Shadow mage" },
   { a: "sung_jinwoo", b: "kaisel", t: "shadow", label: "Flying mount" },
   { a: "sung_jinwoo", b: "greed", t: "shadow", label: "Shadow soldier", sp: "m" },
+  { a: "sung_jinwoo", b: "kamish_shadow", t: "shadow", label: "Short-lived shadow", sp: "m" },
   { a: "sung_jinwoo", b: "shadow_infantry", t: "shadow", label: "The army" },
   { a: "ashborn", b: "bellion", t: "command", label: "His old Grand Marshal", sp: "m" },
   { a: "kim_chul", b: "iron", t: "origin", label: "Became Iron" },

@@ -97,6 +97,17 @@ SLV.data.shadows = [
     evolution: []
   },
   {
+    id: "kamish_shadow", name: "Kamish", alt: ["Shadow of Kamish"],
+    titles: ["The dragon's shadow"],
+    grade: "", gradeTop: "", origin: "Kamish, the dragon slain years before the story",
+    source: "", first: "Manhwa", arc: "japan", sp: "m", color: "#b91c1c",
+    bio: "Years after the dragon's death, Jinwoo is allowed to see Kamish's remains and uses Shadow Extraction on them. Kamish rises as his shadow, but it had been dead too long: the shadow fades away after only a short time, making it the shortest-lived soldier of the army.",
+    abilities: ["Dragon (in life)"],
+    evolution: [
+      { grade: "", note: "Raised from the dragon's long-dead remains, then faded soon after.", m: 1 }
+    ]
+  },
+  {
     id: "shadow_infantry", name: "Shadow Infantry", alt: ["Shadow soldiers"],
     titles: ["The rank and file"],
     grade: "Normal", gradeTop: "", origin: "Monsters and soldiers Jinwoo has slain: knights, high orcs, ants and more", source: "",

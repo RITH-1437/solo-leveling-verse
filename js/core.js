@@ -183,6 +183,7 @@
         if (o._type === "item" && o.from === id) push(o.id, "source", "Yields");
         if (o._type === "shadow" && o.source === id && e._type !== "gate") push(o.id, "source", "Shadow raised here");
         if (o._type === "shadow" && o.originId === id) push(o.id, "origin", "Became");
+        if (o._type === "monster" && o.becameShadow === id) push(o.id, "origin", "In life");
         if (o._type === "monster" && o.home === id && e._type !== "gate") push(o.id, "source", "Inhabitant");
         if (o._type === "item" && (o.owners || []).includes(id) && !(e.weapons || []).includes(o.id)) push(o.id, "wields", "Wields");
         if (o._type === "skill" && (o.users || []).includes(id) && !(e.abilities || e.powers || []).includes(o.id)) push(o.id, "skill", "Skill");

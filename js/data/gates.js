@@ -116,5 +116,5 @@ SLV.data.monsters = [
   { id: "ant_king", kind: "boss", name: "Ant King", alt: [], home: "jeju_island", first: "Anime Season 2", arc: "jeju", color: "#a78bfa", featured: true,
     bio: "The Ant Queen's offspring, born to be king: fast, flying, and hungry for strong opponents. He nearly wipes out the Jeju raid before Jinwoo kills him and raises him as Beru.", becameShadow: "beru" },
   { id: "kamish", kind: "boss", name: "Kamish", alt: [], home: "", first: "Manhwa", arc: "pre", sp: "m", color: "#b91c1c",
-    bio: "A dragon whose rampage years before the story is one of the worst disasters of the gate era, overcome only at the cost of many hunters' lives. A fang from its body was forged into the daggers Kamish's Wrath." }
+    bio: "A dragon whose rampage years before the story is one of the worst disasters of the gate era, overcome only at the cost of many hunters' lives. A fang from its body was forged into the daggers Kamish's Wrath. Long after its death, Jinwoo raises it briefly as a shadow.", becameShadow: "kamish_shadow" }
 ];
