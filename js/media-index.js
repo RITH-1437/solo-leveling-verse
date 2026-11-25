@@ -10,6 +10,7 @@ window.MEDIA_INDEX = [
   "assets/shadows/greed.webp",
   "assets/shadows/igris.webp",
   "assets/shadows/iron.webp",
+  "assets/shadows/kaisel.webp",
   "assets/shadows/tank.webp",
   "assets/shadows/tusk.webp"
 ];
