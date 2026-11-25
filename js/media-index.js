@@ -4,6 +4,7 @@ window.MEDIA_INDEX = [
   "assets/backgrounds/demon_castle.webp",
   "assets/backgrounds/double_dungeon.webp",
   "assets/backgrounds/dungeon_break.webp",
+  "assets/backgrounds/instant_dungeon.webp",
   "assets/backgrounds/jeju_island.webp",
   "assets/backgrounds/job_change_dungeon.webp",
   "assets/backgrounds/orc_gate.webp",
