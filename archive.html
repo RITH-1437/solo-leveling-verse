@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Archive — Solo Leveling Verse</title>
+  <meta name="description" content="Search and filter every character, Monarch, shadow soldier, gate, monster, weapon and skill of Solo Leveling." />
+  <meta name="theme-color" content="#04050c" />
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/system.css" />
+  <link rel="stylesheet" href="css/archive.css" />
+</head>
+<body data-page="archive">
+  <header id="nav"></header>
+
+  <main>
+    <section class="page-head">
+      <div class="wrap">
+        <p class="kicker" id="tab-kicker">Archive</p>
+        <h1 class="section-title" id="tab-title">Character <em>Archive</em></h1>
+        <p class="section-sub" id="tab-sub"></p>
+      </div>
+    </section>
+
+    <section class="archive">
+      <div class="wrap">
+        <div class="tabs" role="tablist" aria-label="Collections" id="tabs"></div>
+
+        <div class="sys filters" id="filters">
+          <div class="f-search">
+            <label class="label" for="q">Search this collection</label>
+            <div class="field"><span class="ico" aria-hidden="true">⌕</span><input id="q" class="input" type="search" autocomplete="off" placeholder="Name, title, guild, ability…" /></div>
+          </div>
+          <div class="f-facets" id="facets"></div>
+          <div class="f-sort">
+            <label class="label" for="sort">Sort</label>
+            <select id="sort" class="select"></select>
+          </div>
+          <div class="f-content">
+            <span class="label">Content</span>
+            <div class="chip-row" id="content-chips">
+              <button type="button" class="chip active" data-content="all">All</button>
+              <button type="button" class="chip" data-content="anime">Anime</button>
+              <button type="button" class="chip" data-content="manhwa">Manhwa</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="result-bar">
+          <span id="count" aria-live="polite"></span>
+          <span class="hint">Click a card for its status window · <kbd>←</kbd> <kbd>→</kbd> pages · <kbd>/</kbd> global search</span>
+        </div>
+
+        <div class="card-grid" id="grid">
+          <div class="skeleton card-sk"></div><div class="skeleton card-sk"></div><div class="skeleton card-sk"></div><div class="skeleton card-sk"></div>
+          <div class="skeleton card-sk"></div><div class="skeleton card-sk"></div><div class="skeleton card-sk"></div><div class="skeleton card-sk"></div>
+        </div>
+        <div id="empty" hidden></div>
+        <nav class="pager" id="pager" aria-label="Pages"></nav>
+      </div>
+    </section>
+  </main>
+
+  <footer id="foot"></footer>
+  <noscript><p style="padding:20px;text-align:center">The archive needs JavaScript.</p></noscript>
+
+  <script src="js/data/world.js"></script>
+  <script src="js/data/characters.js"></script>
+  <script src="js/data/monarchs.js"></script>
+  <script src="js/data/shadows.js"></script>
+  <script src="js/data/gates.js"></script>
+  <script src="js/data/items.js"></script>
+  <script src="js/data/skills.js"></script>
+  <script src="js/data/timeline.js"></script>
+  <script src="js/media-index.js"></script>
+  <script src="js/core.js"></script>
+  <script src="js/viewer.js"></script>
+  <script src="js/shell.js"></script>
+  <script src="js/archive.js"></script>
+</body>
+</html>

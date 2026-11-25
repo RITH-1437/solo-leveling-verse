@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Timeline — Solo Leveling Verse</title>
+  <meta name="description" content="An interactive chronological timeline of the Solo Leveling universe, from the first gates to the Monarchs War." />
+  <meta name="theme-color" content="#04050c" />
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/system.css" />
+  <link rel="stylesheet" href="css/archive.css" />
+  <link rel="stylesheet" href="css/timeline.css" />
+</head>
+<body data-page="timeline">
+  <header id="nav"></header>
+
+  <main>
+    <section class="page-head">
+      <div class="wrap">
+        <p class="kicker">World history</p>
+        <h1 class="section-title">The Gate Era <em>Timeline</em></h1>
+        <p class="section-sub">The story of Solo Leveling in order, from the day the gates opened. Events beyond the anime stay sealed
+          until you turn on manhwa spoilers or reveal them one at a time.</p>
+      </div>
+    </section>
+
+    <section class="archive">
+      <div class="wrap tl-layout">
+        <aside class="tl-rail" aria-label="Story arcs">
+          <div class="sys">
+            <div class="sys-head"><span class="bang">≡</span>Story arcs</div>
+            <ol class="arc-list" id="arcs"></ol>
+          </div>
+          <div class="sys tl-filter">
+            <div class="sys-head"><span class="bang">◇</span>Event types</div>
+            <div class="chip-row" id="kinds" style="padding:12px 14px 14px"></div>
+          </div>
+        </aside>
+
+        <div class="tl-main">
+          <div class="tl-progress" aria-hidden="true"><span id="tl-fill"></span></div>
+          <div id="timeline" class="timeline"></div>
+          <div id="tl-empty" hidden></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="foot"></footer>
+  <noscript><p style="padding:20px;text-align:center">The timeline needs JavaScript.</p></noscript>
+
+  <script src="js/data/world.js"></script>
+  <script src="js/data/characters.js"></script>
+  <script src="js/data/monarchs.js"></script>
+  <script src="js/data/shadows.js"></script>
+  <script src="js/data/gates.js"></script>
+  <script src="js/data/items.js"></script>
+  <script src="js/data/skills.js"></script>
+  <script src="js/data/timeline.js"></script>
+  <script src="js/media-index.js"></script>
+  <script src="js/core.js"></script>
+  <script src="js/viewer.js"></script>
+  <script src="js/shell.js"></script>
+  <script src="js/timeline.js"></script>
+</body>
+</html>

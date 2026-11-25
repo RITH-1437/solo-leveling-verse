@@ -1,0 +1,50 @@
+/* ==========================================================================
+   SOLO LEVELING VERSE — weapons & equipment
+   --------------------------------------------------------------------------
+   owners[] = entity ids (characters / shadows / monarchs). from = source id.
+   canon: "verified" (default) | "unverified" — an entry kept on request but
+   whose place in the original story is not confirmed; it is badged in the UI.
+   Artwork: assets/weapons/<id>.webp
+   ========================================================================== */
+
+window.SLV = window.SLV || {};
+SLV.data = SLV.data || {};
+
+SLV.data.items = [
+  { id: "kasakas_venom_fang", name: "Kasaka's Venom Fang", alt: ["Rasaka's Fang"], type: "Dagger",
+    owners: ["sung_jinwoo"], from: "kasaka", first: "Anime Season 1", arc: "awakening", color: "#0ea5e9",
+    ability: "Paralysis and bleeding poison",
+    bio: "A dagger made from the fang of the giant serpent Kasaka. It was Jinwoo's signature weapon in his early solo hunts, poisoning what it cuts." },
+  { id: "knight_killer", name: "Knight Killer", alt: [], type: "Dagger",
+    owners: ["sung_jinwoo"], from: "", first: "Anime Season 1", arc: "jobchange", color: "#94a3b8",
+    ability: "A blade suited to piercing armored foes",
+    bio: "An early dagger in Jinwoo's arsenal, carried into his Job Change quest against the undead knights." },
+  { id: "barukas_dagger", name: "Baruka's Dagger", alt: [], type: "Dagger",
+    owners: ["sung_jinwoo"], from: "baruka", first: "Anime Season 2", arc: "redgate", color: "#38bdf8",
+    ability: "A fast, high-grade dagger",
+    bio: "The dagger of Baruka, chief of the ice elves, taken by Jinwoo after clearing the Red Gate." },
+  { id: "demon_kings_daggers", name: "Demon King's Daggers", alt: ["Demon Monarch's Daggers"], type: "Twin daggers",
+    owners: ["sung_jinwoo"], from: "baran", first: "Anime Season 2", arc: "demoncastle", color: "#e2e8f0", featured: true,
+    ability: "Twin daggers that grow stronger when used as a pair",
+    bio: "Taken from Baran's remains at the top of the Demon Castle. They became Jinwoo's main weapons from the Jeju Island raid onward, until Kamish's Wrath replaced them." },
+  { id: "demon_kings_longsword", name: "Demon King's Longsword", alt: [], type: "Longsword",
+    owners: ["sung_jinwoo", "igris"], from: "baran", first: "Anime Season 2", arc: "demoncastle", color: "#cbd5e1", featured: true,
+    ability: "Lightning-charged greatsword of a Monarch",
+    bio: "Baran's own longsword, also claimed in the Demon Castle. Jinwoo prefers daggers, so he hands it to the finest swordsman of his army, Igris." },
+  { id: "kamishs_wrath", name: "Kamish's Wrath", alt: [], type: "Twin daggers",
+    owners: ["sung_jinwoo"], from: "kamish", first: "Manhwa", arc: "ahjin", sp: "m", color: "#b91c1c", featured: true,
+    ability: "Among the strongest weapons on Earth",
+    bio: "Twin daggers forged from a fang of the dragon Kamish. Thomas Andre gives them to Jinwoo, and they replace the Demon King's Daggers as his weapons of choice." },
+  { id: "holy_water_of_life", name: "Holy Water of Life", alt: ["Elixir of Life"], type: "Elixir",
+    owners: ["sung_jinwoo", "park_kyunghye"], from: "demon_castle", first: "Anime Season 2", arc: "demoncastle", color: "#5eead4",
+    ability: "Cures any illness, including the Eternal Sleep",
+    bio: "The quest item Jinwoo climbs the Demon Castle to collect. It is the key ingredient of the Elixir of Life, which he needs to wake his mother from the Eternal Sleep." },
+  { id: "cup_of_reincarnation", name: "Cup of Reincarnation", alt: [], type: "Artifact",
+    owners: ["sung_jinwoo"], from: "", first: "Manhwa", arc: "monarchs", sp: "m", color: "#fde68a",
+    ability: "Turns back time",
+    bio: "A divine artifact able to reverse time. After the Monarchs War, Jinwoo uses it to rewind the world ten years, to before the gates appeared, and takes the war away from Earth." },
+  { id: "shadow_scythe", name: "Shadow Scythe", alt: [], type: "Scythe", canon: "unverified",
+    owners: [], from: "", first: "Unverified", arc: "", color: "#6d28d9",
+    ability: "Unverified",
+    bio: "Requested for this archive, but no Shadow Scythe appears among the weapons Sung Jinwoo carries in the anime or manhwa. It may come from a game or other adaptation. This entry stays as a marked placeholder until a reliable source confirms it. Edit or remove it in js/data/items.js." }
+];

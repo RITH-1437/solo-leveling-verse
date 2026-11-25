@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hunter Database — Solo Leveling Verse</title>
+  <meta name="description" content="Hunter rankings, national-level and S-rank hunters, guild affiliations, countries and organisations of Solo Leveling." />
+  <meta name="theme-color" content="#04050c" />
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/system.css" />
+  <link rel="stylesheet" href="css/archive.css" />
+</head>
+<body data-page="hunters">
+  <header id="nav"></header>
+
+  <main>
+    <section class="page-head">
+      <div class="wrap">
+        <p class="kicker">Hunter Association records</p>
+        <h1 class="section-title">Hunter <em>Database</em></h1>
+        <p class="section-sub">Every awakened hunter on file: official grades, national-level hunters, guilds, organisations and countries.
+          Click a rank to filter the registry, or a row to open the hunter's status window.</p>
+      </div>
+    </section>
+
+    <section class="archive">
+      <div class="wrap">
+        <div class="hd-top">
+          <div class="sys">
+            <div class="sys-head"><span class="bang">!</span>Rank distribution</div>
+            <div class="tiers" id="tiers"></div>
+          </div>
+          <div class="sys">
+            <div class="sys-head"><span class="bang">★</span>National-level &amp; S-rank hunters</div>
+            <div class="national"><div class="national-grid" id="national"></div></div>
+          </div>
+        </div>
+
+        <h2 class="section-title" style="font-size:28px;margin:34px 0 14px" id="registry">Hunter <em>Registry</em></h2>
+        <div class="sys hd-tools">
+          <div><label class="label" for="hq">Search</label>
+            <div class="field"><span class="ico" aria-hidden="true">⌕</span><input id="hq" class="input" type="search" autocomplete="off" placeholder="Name, guild, role…" /></div></div>
+          <div><label class="label" for="h-rank">Rank</label><select id="h-rank" class="select"></select></div>
+          <div><label class="label" for="h-org">Guild / organisation</label><select id="h-org" class="select"></select></div>
+          <div><label class="label" for="h-country">Country</label><select id="h-country" class="select"></select></div>
+        </div>
+        <div class="result-bar">
+          <span id="h-count" aria-live="polite"></span>
+          <label class="switch blue"><input type="checkbox" id="h-civ"><span class="track"></span>Include unranked people</label>
+        </div>
+        <div class="table-wrap">
+          <table class="htable">
+            <thead><tr id="h-head"></tr></thead>
+            <tbody id="h-body"></tbody>
+          </table>
+        </div>
+        <div id="h-empty" hidden></div>
+
+        <h2 class="section-title" style="font-size:28px;margin:44px 0 14px">Guilds &amp; <em>Organisations</em></h2>
+        <div class="guilds" id="guilds"></div>
+
+        <h2 class="section-title" style="font-size:28px;margin:44px 0 14px">Hunters by <em>Country</em></h2>
+        <div class="sys countries" id="countries"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="foot"></footer>
+  <noscript><p style="padding:20px;text-align:center">The hunter database needs JavaScript.</p></noscript>
+
+  <script src="js/data/world.js"></script>
+  <script src="js/data/characters.js"></script>
+  <script src="js/data/monarchs.js"></script>
+  <script src="js/data/shadows.js"></script>
+  <script src="js/data/gates.js"></script>
+  <script src="js/data/items.js"></script>
+  <script src="js/data/skills.js"></script>
+  <script src="js/data/timeline.js"></script>
+  <script src="js/media-index.js"></script>
+  <script src="js/core.js"></script>
+  <script src="js/viewer.js"></script>
+  <script src="js/shell.js"></script>
+  <script src="js/hunters.js"></script>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Solo Leveling Verse — Hunter &amp; Monarch Archive</title>
+  <meta name="description" content="An interactive Solo Leveling encyclopedia: hunters, Monarchs, the Shadow Army, gates, weapons, skills, timeline and relationship network — anime-safe by default." />
+  <meta name="theme-color" content="#04050c" />
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Solo Leveling Verse" />
+  <meta property="og:description" content="The Hunter & Monarch Archive — characters, Monarchs, the Shadow Army, gates and the Shadow Network." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/system.css" />
+  <link rel="stylesheet" href="css/home.css" />
+</head>
+<body data-page="home">
+  <header id="nav"></header>
+
+  <main id="top">
+    <!-- ============================== HERO ============================== -->
+    <section class="hero">
+      <canvas class="hero-mana" id="mana" aria-hidden="true"></canvas>
+      <div class="wrap hero-inner">
+        <div class="hero-copy">
+          <p class="kicker">Hunter &amp; Monarch Archive</p>
+          <h1 class="hero-title"><span>Solo Leveling</span> <em>Verse</em></h1>
+          <p class="hero-lead">From the world's weakest hunter to the King of the Dead. Browse every hunter, Monarch,
+            shadow soldier, gate and weapon, follow the story on the timeline, and explore the Shadow Network. Anime-safe
+            by default. Turn on <strong>Manhwa spoilers</strong> for the rest of the story.</p>
+
+          <div class="sys sys-notice" aria-live="polite">
+            <div class="sys-head"><span class="bang">!</span>Notification</div>
+            <p class="sys-line"><span id="sys-line"></span><span class="caret" aria-hidden="true"></span></p>
+          </div>
+
+          <div class="hero-cta">
+            <a class="btn primary big" href="archive.html">Enter the archive</a>
+            <a class="btn big" href="network.html">Shadow Network</a>
+            <button type="button" class="btn big ghost" id="random">⟳ Random record</button>
+          </div>
+        </div>
+
+        <div class="hero-feature" id="hero-feature">
+          <div class="skeleton" style="position:absolute;inset:0"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== STATS ============================= -->
+    <section class="stats-band" aria-label="World statistics">
+      <div class="wrap">
+        <dl class="stats" id="stats"></dl>
+      </div>
+    </section>
+
+    <!-- ========================= FEATURED CHARACTERS ==================== -->
+    <section class="section" id="featured">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <p class="kicker">Featured</p>
+            <h2 class="section-title">Hunters of <em>Legend</em></h2>
+            <p class="section-sub">The key players of the story. Open a card for the full status window.</p>
+          </div>
+          <div class="rail-ctl">
+            <button type="button" class="btn icon" data-rail="-1" aria-label="Scroll left">‹</button>
+            <button type="button" class="btn icon" data-rail="1" aria-label="Scroll right">›</button>
+            <a class="btn" href="archive.html#characters">All characters →</a>
+          </div>
+        </div>
+        <div class="rail" id="rail-characters"></div>
+      </div>
+    </section>
+
+    <!-- ======================= MONARCHS + HUNTER RANKS ================== -->
+    <section class="section duo">
+      <div class="wrap duo-inner">
+        <div class="reveal">
+          <div class="section-head">
+            <div>
+              <p class="kicker">Kings of destruction</p>
+              <h2 class="section-title">Monarchs &amp; <em>Rulers</em></h2>
+              <p class="section-sub" id="monarch-sub"></p>
+            </div>
+            <a class="btn" href="archive.html#monarchs">All Monarchs →</a>
+          </div>
+          <div class="monarch-grid" id="monarchs"></div>
+        </div>
+        <div class="reveal">
+          <div class="section-head">
+            <div>
+              <p class="kicker">Hunter rankings</p>
+              <h2 class="section-title">Top <em>Hunters</em></h2>
+            </div>
+            <a class="btn" href="hunters.html">Database →</a>
+          </div>
+          <ol class="sys ladder" id="ladder"></ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ SHADOW ARMY ========================= -->
+    <section class="section shadow-sec">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <p class="kicker">The King's soldiers</p>
+            <h2 class="section-title">The Shadow <em>Army</em></h2>
+            <p class="section-sub">Every soldier was once an enemy. Raised with a single word, and loyal for good.</p>
+          </div>
+          <a class="btn" href="archive.html#shadows">Open the army roster →</a>
+        </div>
+        <div class="rail" id="rail-shadows"></div>
+      </div>
+    </section>
+
+    <!-- =========================== LATEST + EXPLORE ===================== -->
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <p class="kicker">Explore</p>
+            <h2 class="section-title">The <em>Universe</em></h2>
+          </div>
+        </div>
+        <div class="explore" id="explore"></div>
+
+        <div class="latest reveal">
+          <div class="sys">
+            <div class="sys-head"><span class="bang">+</span>Latest additions · <span id="latest-date"></span></div>
+            <p class="latest-note" id="latest-note"></p>
+            <div class="latest-list" id="latest"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="foot"></footer>
+  <noscript><p style="padding:20px;text-align:center">Solo Leveling Verse needs JavaScript to open the archive.</p></noscript>
+
+  <script src="js/data/world.js"></script>
+  <script src="js/data/characters.js"></script>
+  <script src="js/data/monarchs.js"></script>
+  <script src="js/data/shadows.js"></script>
+  <script src="js/data/gates.js"></script>
+  <script src="js/data/items.js"></script>
+  <script src="js/data/skills.js"></script>
+  <script src="js/data/timeline.js"></script>
+  <script src="js/media-index.js"></script>
+  <script src="js/core.js"></script>
+  <script src="js/viewer.js"></script>
+  <script src="js/shell.js"></script>
+  <script src="js/home.js"></script>
+</body>
+</html>

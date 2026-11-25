@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shadow Network — Solo Leveling Verse</title>
+  <meta name="description" content="Interactive relationship map of Solo Leveling: family, allies, enemies, guilds, Monarchs, Rulers and the Shadow Army hierarchy." />
+  <meta name="theme-color" content="#04050c" />
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/system.css" />
+  <link rel="stylesheet" href="css/network.css" />
+</head>
+<body data-page="network" data-no-top>
+  <header id="nav"></header>
+
+  <main class="net-shell">
+    <div class="net-bar">
+      <div class="seg" role="radiogroup" aria-label="Layout" id="layouts">
+        <button type="button" role="radio" aria-checked="true" data-layout="universe">Universe</button>
+        <button type="button" role="radio" aria-checked="false" data-layout="army">Shadow Army hierarchy</button>
+      </div>
+      <div class="net-layers" id="layers" role="group" aria-label="Connection layers"></div>
+      <div class="net-find field">
+        <span class="ico" aria-hidden="true">⌕</span>
+        <input id="find" class="input" type="search" autocomplete="off" placeholder="Find a node…" aria-label="Find a node on the map" aria-controls="find-results" />
+        <div class="find-results sys" id="find-results" hidden role="listbox"></div>
+      </div>
+    </div>
+
+    <div class="net-stage" id="stage">
+      <svg id="net" role="application" aria-label="Relationship map. Drag to pan, scroll or pinch to zoom, click a node for details.">
+        <defs>
+          <filter id="glow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <radialGradient id="node-core"><stop offset="0" stop-color="#141a3a"/><stop offset="1" stop-color="#05060f"/></radialGradient>
+        </defs>
+        <g id="vp">
+          <g id="bands"></g>
+          <g id="edges"></g>
+          <g id="nodes"></g>
+        </g>
+      </svg>
+
+      <div class="net-legend sys" id="legend"></div>
+      <div class="net-zoom sys">
+        <button type="button" id="z-in" aria-label="Zoom in">＋</button>
+        <button type="button" id="z-out" aria-label="Zoom out">－</button>
+        <button type="button" id="z-fit" aria-label="Fit to screen" title="Fit (0)">⤢</button>
+      </div>
+      <div class="net-hint" id="hint">Drag to pan · Scroll / pinch to zoom · Click a node for details</div>
+      <div class="net-loading" id="net-loading"><span class="loader"></span> Mapping connections…</div>
+
+      <aside class="net-panel sys" id="panel" aria-label="Node details" hidden></aside>
+    </div>
+  </main>
+
+  <noscript><p style="padding:20px;text-align:center">The Shadow Network needs JavaScript.</p></noscript>
+
+  <script src="js/data/world.js"></script>
+  <script src="js/data/characters.js"></script>
+  <script src="js/data/monarchs.js"></script>
+  <script src="js/data/shadows.js"></script>
+  <script src="js/data/gates.js"></script>
+  <script src="js/data/items.js"></script>
+  <script src="js/data/skills.js"></script>
+  <script src="js/data/timeline.js"></script>
+  <script src="js/media-index.js"></script>
+  <script src="js/core.js"></script>
+  <script src="js/viewer.js"></script>
+  <script src="js/shell.js"></script>
+  <script src="js/network.js"></script>
+</body>
+</html>

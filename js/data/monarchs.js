@@ -1,0 +1,111 @@
+/* ==========================================================================
+   SOLO LEVELING VERSE — Monarchs & Rulers
+   --------------------------------------------------------------------------
+   kind: "monarch" | "ruler".  domain = the Monarch title, king = the race they rule.
+   Nearly everything about the Monarchs is a manhwa spoiler; the anime only
+   shows the Shadow Monarch class and "Demon King" Baran, so those two entries
+   keep an anime-safe `bio` and hide the rest in `bioM`.
+   Artwork: assets/monarchs/<id>.webp
+   ========================================================================== */
+
+window.SLV = window.SLV || {};
+SLV.data = SLV.data || {};
+
+SLV.data.monarchs = [
+  {
+    id: "ashborn", kind: "monarch", name: "Ashborn", nameA: "The Shadow Monarch", alt: ["The Shadow Monarch"], altM: 1,
+    domain: "Monarch of Shadows", king: "King of the Dead", color: "#8b5cf6", featured: true,
+    titles: ["Shadow Monarch"], titlesM: ["Monarch of Shadows", "King of the Dead", "Former Ruler"],
+    status: "Unknown", statusM: "Passed his power to Sung Jinwoo",
+    first: "Anime S1 finale (the class) · identity in the manhwa", arc: "jobchange",
+    bio: "\"Shadow Monarch\" is the hidden class Sung Jinwoo receives at the end of his Job Change quest — a power over the dead that no other hunter has.",
+    bioM: "Ashborn was once the strongest of the Rulers before he became the Monarch of Shadows. Baran and Rakan were among the Monarchs who rebelled against him. In time he chose Sung Jinwoo as the vessel for his power. The System, designed by the Architect, existed to make Jinwoo strong enough to receive it. His shadows, led by Grand Marshal Bellion, pass to Jinwoo.",
+    powers: ["shadow_extraction", "shadow_preservation", "monarchs_domain", "Command of the Shadow Army"],
+    army: "Shadow Army", sp: ""
+  },
+  {
+    id: "antares", kind: "monarch", name: "Antares", alt: ["The Dragon King"],
+    domain: "Monarch of Destruction", king: "King of Dragons", color: "#e0443e", featured: true,
+    titles: ["Monarch of Destruction", "King of Dragons", "Strongest of the Monarchs"],
+    status: "Defeated by Sung Jinwoo", first: "Manhwa", arc: "monarchs", sp: "m",
+    bio: "The strongest of the nine Monarchs and the leader of their war against the Rulers and Earth. He commands the dragons, and his flames can lay waste to entire regions. The final battle of the Monarchs War is Jinwoo against Antares and his dragon army.",
+    powers: ["Flames of destruction", "Command of the dragon army", "Dragon transformation"],
+    army: "Dragons"
+  },
+  {
+    id: "sillad", kind: "monarch", name: "Sillad", alt: ["The Frost Monarch"],
+    domain: "Monarch of Frost", king: "King of the Snow Folk", color: "#7dd3fc", featured: true,
+    titles: ["Monarch of Frost"], status: "Enemy of Sung Jinwoo", first: "Manhwa", arc: "monarchs", sp: "m",
+    bio: "The Frost Monarch, master of ice. When the Monarchs begin their war on Earth he strikes at humanity's strongest: the national-level hunter Christopher Reed and Korea's Association chairman Go Gunhee both die by his hand.",
+    powers: ["Ice and frost magic", "Command of the snow folk"], army: "Snow folk"
+  },
+  {
+    id: "rakan", kind: "monarch", name: "Rakan", alt: ["The Beast Monarch"],
+    domain: "Monarch of Fangs", king: "King of Beasts", color: "#f59e0b", featured: true,
+    titles: ["Monarch of Fangs", "Beast Monarch", "King of Beasts"],
+    status: "Enemy of Sung Jinwoo", first: "Manhwa", arc: "monarchs", sp: "m",
+    bio: "Lord of all beasts. Rakan was one of the Monarchs who betrayed Ashborn, and he fled when the rebellion failed. In the war on Earth he fights alongside the Frost Monarch, clashing with Sung Il-hwan.",
+    powers: ["Bestial speed and ferocity", "Command of beast races"], army: "Beasts"
+  },
+  {
+    id: "querehsha", kind: "monarch", name: "Querehsha", alt: ["Queen of Insects"],
+    domain: "Monarch of Plagues", king: "Queen of Insects", color: "#84cc16",
+    titles: ["Monarch of Plagues", "Queen of Insects"],
+    status: "Enemy of Sung Jinwoo", first: "Manhwa", arc: "monarchs", sp: "m",
+    bio: "The Monarch who rules the insect races and the spread of plague.",
+    powers: ["Plague and poison", "Command of insect armies"], army: "Insects"
+  },
+  {
+    id: "baran", kind: "monarch", name: "Baran", alt: ["Demon King Baran"],
+    domain: "Monarch of White Flames", king: "King of Demons", color: "#e2e8f0", featured: true,
+    titles: ["Demon King", "Ruler of the Demon Castle"], titlesM: ["Monarch of White Flames", "King of Demons"],
+    status: "Defeated by Sung Jinwoo", first: "Anime Season 2 (Demon Castle)", arc: "demoncastle",
+    bio: "The Demon King who waits at the summit of the Demon Castle, riding the wyvern Kaisellin and wielding lightning. Jinwoo defeats him and claims his daggers, his longsword, and the shadow of his wyvern, Kaisel.",
+    bioM: "Baran is the Monarch of White Flames and King of Demons. With Rakan he rebelled against Ashborn; unlike Rakan he fought to the very end.",
+    powers: ["White flames", "Lightning", "Command of the demon army"], army: "Demons"
+  },
+  {
+    id: "tarnak", kind: "monarch", name: "Tarnak", alt: [],
+    domain: "Monarch of Iron Body", king: "King of Monstrous Humanoids", color: "#94a3b8",
+    titles: ["Monarch of Iron Body"], status: "Enemy of Sung Jinwoo", first: "Manhwa", arc: "monarchs", sp: "m",
+    bio: "The Monarch of Iron Body, whose name says it all: a nearly unbreakable body. He rules the monstrous humanoid races.",
+    powers: ["Iron body", "Command of monstrous humanoids"], army: "Monstrous humanoids"
+  },
+  {
+    id: "yogumunt", kind: "monarch", name: "Yogumunt", alt: [],
+    domain: "Monarch of Transfiguration", king: "—", color: "#c084fc",
+    titles: ["Monarch of Transfiguration"], status: "Enemy of Sung Jinwoo", first: "Manhwa", arc: "monarchs", sp: "m",
+    bio: "The Monarch of Transfiguration, one of the nine kings who make war on the Rulers and on Earth.",
+    powers: ["Transfiguration"], army: "—"
+  },
+  {
+    id: "legia", kind: "monarch", name: "Legia", alt: [],
+    domain: "Monarch of the Beginning", king: "King of Giants", color: "#d6a35c",
+    titles: ["Monarch of the Beginning", "King of Giants"], status: "Slain by Sung Jinwoo", first: "Manhwa", arc: "japan", sp: "m",
+    bio: "King of the Giants. Once held captive by the Rulers, he was sent to Earth, where the giants' invasion of Japan brings him face to face with Sung Jinwoo. Jinwoo kills him.",
+    powers: ["Giant physiology", "Command of the giants"], army: "Giants"
+  },
+
+  /* ----------------------------------------------------------------- Rulers */
+  {
+    id: "absolute_being", kind: "ruler", name: "The Absolute Being", alt: ["The Creator"],
+    domain: "Creator of the Rulers and Monarchs", king: "—", color: "#fff4cc",
+    titles: ["The Absolute Being"], status: "Unknown", first: "Manhwa", arc: "monarchs", sp: "m",
+    bio: "The god-like entity at the top of Solo Leveling's cosmology, who created both the Rulers (from light) and the Monarchs (from darkness), whose endless war spills into the human world through the gates.",
+    powers: ["Creation"], army: "—"
+  },
+  {
+    id: "the_rulers", kind: "ruler", name: "The Rulers", alt: ["Fragments of Brilliant Light"],
+    domain: "Servants of the Absolute Being", king: "—", color: "#ffe9a8", featured: true,
+    titles: ["Beings of light"], status: "Opposed to the Monarchs", first: "Manhwa", arc: "monarchs", sp: "m",
+    bio: "Beings of light who war against the Monarchs. They chose seven human vessels and lent them part of their power — among them Sung Il-hwan and Go Gunhee — to fight the Monarchs on Earth. When a vessel dies, the Ruler's power leaves them.",
+    powers: ["Light", "Granting power to vessels"], army: "Ruler vessels"
+  },
+  {
+    id: "architect", kind: "ruler", name: "The Architect", alt: [],
+    domain: "Designer of the System", king: "—", color: "#38bdf8",
+    titles: ["Creator of the System"], status: "Unknown", first: "Manhwa (revealed)", arc: "monarchs", sp: "m",
+    bio: "The being behind the System. It designed the quests, levels and penalties that forged Sung Jinwoo into a vessel fit to inherit the Shadow Monarch's power.",
+    powers: ["The System"], army: "—"
+  }
+];
