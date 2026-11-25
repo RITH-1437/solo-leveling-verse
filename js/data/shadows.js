@@ -97,7 +97,7 @@ SLV.data.shadows = [
     evolution: []
   },
   {
-    id: "kamish_shadow", name: "Kamish", alt: ["Shadow of Kamish"],
+    id: "kamish_shadow", name: "Kamish", alt: ["Khamish", "Shadow of Kamish"],
     titles: ["The dragon's shadow"],
     grade: "", gradeTop: "", origin: "Kamish, the dragon slain years before the story",
     source: "", first: "Manhwa", arc: "japan", sp: "m", color: "#b91c1c",
