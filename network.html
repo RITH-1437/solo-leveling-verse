@@ -13,48 +13,49 @@
   <link rel="stylesheet" href="css/system.css" />
   <link rel="stylesheet" href="css/network.css" />
 </head>
-<body data-page="network" data-no-top>
+<body data-page="network">
   <header id="nav"></header>
 
-  <main class="net-shell">
-    <h1 class="sr-only">Shadow Network: relationship map</h1>
-    <div class="net-bar">
-      <div class="seg" role="radiogroup" aria-label="Layout" id="layouts">
-        <button type="button" role="radio" aria-checked="true" data-layout="universe">Universe</button>
-        <button type="button" role="radio" aria-checked="false" data-layout="army">Shadow Army hierarchy</button>
+  <main>
+    <section class="page-head">
+      <div class="wrap">
+        <p class="kicker">Shadow Network</p>
+        <h1 class="section-title">Relationship <em>flow</em></h1>
+        <p class="section-sub">Pick anyone to see who they are connected to, grouped by kind of relationship. Click a name to put them in the centre, or switch to the Shadow Army chart.</p>
       </div>
-      <div class="net-layers" id="layers" role="group" aria-label="Connection layers"></div>
-      <div class="net-find field">
-        <span class="ico" aria-hidden="true">⌕</span>
-        <input id="find" class="input" type="search" autocomplete="off" placeholder="Find a node…" aria-label="Find a node on the map" aria-controls="find-results" />
-        <div class="find-results sys" id="find-results" hidden role="listbox"></div>
+    </section>
+
+    <section class="net-section">
+      <div class="wrap rel-layout">
+        <aside class="rel-side sys" aria-label="Choose who to centre">
+          <div class="field"><span class="ico" aria-hidden="true">⌕</span><input id="rel-q" class="input" type="search" autocomplete="off" placeholder="Find anyone…" aria-label="Find anyone" /></div>
+          <div class="rel-list" id="rel-list"><p class="flow-none">Loading…</p></div>
+        </aside>
+
+        <div class="rel-main" id="rel-main">
+          <div class="seg" role="radiogroup" aria-label="View" id="views">
+            <button type="button" role="radio" aria-checked="true" data-view="flow">Relationships</button>
+            <button type="button" role="radio" aria-checked="false" data-view="army">Shadow Army</button>
+          </div>
+
+          <div id="flow-wrap">
+            <nav class="flow-trail" id="flow-trail" aria-label="Recently viewed"></nav>
+            <div class="chip-row flow-groups" id="flow-groups" aria-label="Relationship kinds"></div>
+            <div class="flow" id="flow" aria-live="polite">
+              <svg class="flow-lines" id="flow-lines" aria-hidden="true"></svg>
+              <div class="flow-col" id="flow-left"></div>
+              <div class="flow-centre" id="flow-centre"></div>
+              <div class="flow-col" id="flow-right"></div>
+            </div>
+          </div>
+
+          <div class="army" id="army" hidden aria-live="polite">
+            <svg class="flow-lines" id="army-lines" aria-hidden="true"></svg>
+            <div id="army-body"></div>
+          </div>
+        </div>
       </div>
-    </div>
-
-    <div class="net-stage" id="stage">
-      <svg id="net" role="application" aria-label="Relationship map. Drag to pan, scroll or pinch to zoom, click a node for details.">
-        <defs>
-          <filter id="glow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-          <radialGradient id="node-core"><stop offset="0" stop-color="#141a3a"/><stop offset="1" stop-color="#05060f"/></radialGradient>
-        </defs>
-        <g id="vp">
-          <g id="bands"></g>
-          <g id="edges"></g>
-          <g id="nodes"></g>
-        </g>
-      </svg>
-
-      <div class="net-legend sys" id="legend"></div>
-      <div class="net-zoom sys">
-        <button type="button" id="z-in" aria-label="Zoom in">＋</button>
-        <button type="button" id="z-out" aria-label="Zoom out">－</button>
-        <button type="button" id="z-fit" aria-label="Fit to screen" title="Fit (0)">⤢</button>
-      </div>
-      <div class="net-hint" id="hint">Drag to pan · Scroll / pinch to zoom · Click a node for details</div>
-      <div class="net-loading" id="net-loading"><span class="loader"></span> Mapping connections…</div>
-
-      <aside class="net-panel sys" id="panel" aria-label="Node details" hidden></aside>
-    </div>
+    </section>
   </main>
 
   <noscript><p style="padding:20px;text-align:center">The Shadow Network needs JavaScript.</p></noscript>

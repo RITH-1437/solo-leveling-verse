@@ -150,8 +150,8 @@ SLV.data.links = [
   { a: "architect", b: "sung_jinwoo", t: "creator", label: "Built the System", sp: "m" },
 
   /* shadow army: Jinwoo → shadows, origins */
-  { a: "sung_jinwoo", b: "igris", t: "shadow", label: "Knight → Marshal" },
-  { a: "sung_jinwoo", b: "beru", t: "shadow", label: "Ant King → Marshal" },
+  { a: "sung_jinwoo", b: "igris", t: "shadow", label: "Blood-Red Commander" },
+  { a: "sung_jinwoo", b: "beru", t: "shadow", label: "Ant King" },
   { a: "sung_jinwoo", b: "bellion", t: "shadow", label: "Grand Marshal", sp: "m" },
   { a: "sung_jinwoo", b: "iron", t: "shadow", label: "Shadow soldier" },
   { a: "sung_jinwoo", b: "tank", t: "shadow", label: "Shadow soldier" },
