@@ -5,5 +5,10 @@ window.MEDIA_INDEX = [
   "assets/characters/go_gunhee.webp",
   "assets/characters/sung_jinwoo.webp",
   "assets/characters/yoo_jinho.webp",
-  "assets/shadows/igris.webp"
+  "assets/shadows/beru.webp",
+  "assets/shadows/greed.webp",
+  "assets/shadows/igris.webp",
+  "assets/shadows/iron.webp",
+  "assets/shadows/tank.webp",
+  "assets/shadows/tusk.webp"
 ];
