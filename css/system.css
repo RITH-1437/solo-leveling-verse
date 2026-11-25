@@ -1,5 +1,5 @@
 /* ==========================================================================
-   SOLO LEVELING VERSE — System design language
+   SOLO LEVELING VERSE: System design language
    --------------------------------------------------------------------------
    Shared by every page: tokens, base, the "System window" panel, buttons,
    chips, entity cards, nav, command palette, viewer, lightbox, toasts and
@@ -952,6 +952,9 @@ h3 {
 .pager .gap {
   color: var(--text-faint);
   padding: 0 4px;
+}
+.pager .pg-nums {
+  display: contents; /* buttons still lay out in the pager flex row */
 }
 .pager .per {
   display: inline-flex;

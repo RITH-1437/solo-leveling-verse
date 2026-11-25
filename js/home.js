@@ -1,5 +1,5 @@
 /* ==========================================================================
-   SOLO LEVELING VERSE — dashboard (index.html)
+   SOLO LEVELING VERSE: dashboard (index.html)
    Hero with mana-particle canvas and typed System notifications, world
    statistics, featured rails, Monarchs, the hunter ladder, latest additions
    and the explore grid. Everything re-renders when spoiler mode changes.

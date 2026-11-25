@@ -1,5 +1,5 @@
 /* ==========================================================================
-   SOLO LEVELING VERSE — skills & abilities
+   SOLO LEVELING VERSE: skills & abilities
    --------------------------------------------------------------------------
    type: "Active" | "Passive" | "Command" | "Authority" | "Class"
    users[] = entity ids who use the skill.
@@ -20,7 +20,7 @@ SLV.data.skills = [
     bio: "Stores his shadow soldiers inside his own shadow, so his whole army travels with him and can be summoned in an instant. Destroyed shadows reform as long as he has mana." },
   { id: "shadow_exchange", name: "Shadow Exchange", alt: [], type: "Class", users: ["sung_jinwoo"],
     first: "Manhwa", arc: "jeju", sp: "m", color: "#7c3aed", featured: true,
-    bio: "Swaps Jinwoo's position with any of his shadows, wherever it is — effectively teleporting him to a shadow stationed anywhere in the world." },
+    bio: "Swaps Jinwoo's position with any of his shadows, wherever it is, effectively teleporting him to a shadow stationed anywhere in the world." },
   { id: "rulers_authority", name: "Ruler's Authority", alt: [], type: "Authority", users: ["sung_jinwoo"],
     first: "Anime Season 2", arc: "reawakening", color: "#38bdf8", featured: true,
     bio: "An invisible telekinetic force that lets Jinwoo grab, push and crush things at a distance, or pull objects to his hand." },

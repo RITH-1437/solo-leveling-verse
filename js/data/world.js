@@ -1,14 +1,14 @@
 /* ==========================================================================
-   SOLO LEVELING VERSE — world taxonomy
+   SOLO LEVELING VERSE: world taxonomy
    --------------------------------------------------------------------------
    Shared vocabularies every other data file refers to: hunter ranks, shadow
    grades, gate classes, organisations, countries, spoiler tiers and story arcs.
    The entity files (characters.js, monarchs.js, …) push into SLV.data.
 
    SPOILER TIERS
-     anime  — covered by the anime, Season 1 + Season 2 "Arise from the Shadow"
+     anime:  covered by the anime, Season 1 + Season 2 "Arise from the Shadow"
               (Double Dungeon → Jeju Island raid, roughly manhwa ch. 1–110).
-     manhwa — only in the manhwa / novel beyond that point.
+     manhwa: only in the manhwa / novel beyond that point.
    Any entity may carry `sp: "m"` (whole entry is a manhwa spoiler); text fields
    may have a `...M` twin (bioM, titlesM) holding manhwa-only details.
    ========================================================================== */
@@ -41,7 +41,7 @@ SLV.data.world = {
 
   /* Gate / dungeon classification (by measured mana output). */
   gateClasses: [
-    { id: "S", label: "S-Class Gate", color: "#f6c453", note: "Catastrophic. A dungeon break at this grade can cost a city — Jeju Island fell to one." },
+    { id: "S", label: "S-Class Gate", color: "#f6c453", note: "Catastrophic. A dungeon break at this grade can cost a city; Jeju Island fell to one." },
     { id: "A", label: "A-Class Gate", color: "#ff5d6c", note: "Raided by top guilds with A- and S-rank hunters." },
     { id: "B", label: "B-Class Gate", color: "#b67cff", note: "Dangerous; usually cleared by guild strike teams." },
     { id: "C", label: "C-Class Gate", color: "#4f8dff", note: "Mid-grade; cleared by mixed parties." },
@@ -61,17 +61,17 @@ SLV.data.world = {
       note: "The national body that measures ranks, monitors gates and polices hunters. Chaired by Go Gunhee." },
     { id: "scavenger", name: "Scavenger Guild", kind: "guild", country: "United States", color: "#c9a24a", sp: "m",
       note: "America's strongest guild, led by Thomas Andre." },
-    { id: "shadow_army", name: "Shadow Army", kind: "faction", country: "—", color: "#8b5cf6",
+    { id: "shadow_army", name: "Shadow Army", kind: "faction", country: "Other world", color: "#8b5cf6",
       note: "The soldiers of the Shadow Monarch, raised from the dead by Shadow Extraction." },
-    { id: "monarchs", name: "The Monarchs", kind: "faction", country: "—", color: "#e0443e", sp: "m",
+    { id: "monarchs", name: "The Monarchs", kind: "faction", country: "Other world", color: "#e0443e", sp: "m",
       note: "Nine kings of destruction, each ruling an army of their own kind." },
-    { id: "rulers", name: "The Rulers", kind: "faction", country: "—", color: "#ffe9a8", sp: "m",
+    { id: "rulers", name: "The Rulers", kind: "faction", country: "Other world", color: "#ffe9a8", sp: "m",
       note: "Beings of light who serve the Absolute Being and war against the Monarchs." }
   ],
 
   countries: [
     { id: "South Korea", flag: "KR" }, { id: "United States", flag: "US" }, { id: "China", flag: "CN" },
-    { id: "India", flag: "IN" }, { id: "Japan", flag: "JP" }, { id: "Germany", flag: "DE" }, { id: "—", flag: "—" }
+    { id: "India", flag: "IN" }, { id: "Japan", flag: "JP" }, { id: "Germany", flag: "DE" }, { id: "Other world", flag: "" }
   ],
 
   /* Story arcs in order. `sp` marks arcs beyond the anime. */

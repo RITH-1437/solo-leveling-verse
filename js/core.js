@@ -1,5 +1,5 @@
 /* ==========================================================================
-   SOLO LEVELING VERSE — core
+   SOLO LEVELING VERSE: core
    --------------------------------------------------------------------------
    Loaded on every page after js/data/*.js and js/media-index.js.
    Provides:
@@ -216,7 +216,7 @@
     Object.defineProperty(e, "_hay", { get: () => SLV.spoilers.on ? hay.m : hay.a, configurable: true });
     Object.defineProperty(e, "_name", { get: () => SLV.spoilers.on ? nm.m : nm.a, configurable: true });
   });
-  /* Returns { results:[entity], hidden:Number } — hidden = spoiler matches withheld. */
+  /* Returns { results:[entity], hidden:Number }; hidden = spoiler matches withheld. */
   SLV.search = (q, { limit = 30, types = null } = {}) => {
     const terms = norm(q).split(/\s+/).filter(Boolean);
     if (!terms.length) return { results: [], hidden: 0 };

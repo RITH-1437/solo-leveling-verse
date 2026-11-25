@@ -1,5 +1,5 @@
 /* ==========================================================================
-   SOLO LEVELING VERSE — page shell
+   SOLO LEVELING VERSE: page shell
    --------------------------------------------------------------------------
    Builds the shared navigation (one source for every page), the
    global command-palette search (Ctrl/⌘+K or "/"), the spoiler switch,
@@ -47,7 +47,7 @@
     nav.className = "nav";
     nav.innerHTML = `
       <div class="wrap nav-inner">
-        <a class="brand" href="index.html" aria-label="Solo Leveling Verse — dashboard">${BRAND_MARK}
+        <a class="brand" href="index.html" aria-label="Solo Leveling Verse dashboard">${BRAND_MARK}
           <span class="brand-text"><span class="bt-full">Solo Leveling</span><span class="bt-short">SL</span> <em>Verse</em></span></a>
         <nav class="nav-links" id="nav-links" aria-label="Main">
           ${LINKS.map(([k, href, label]) => `<a href="${href}" data-key="${k}">${label}</a>`).join("")}
@@ -121,7 +121,7 @@
     if (!locked) {
       if (e._type === "character") (e.orgs || []).map(SLV.org).filter((o) => o && SLV.visible(o)).slice(0, 2)
         .forEach((o) => tags.push(`<span class="badge" style="--c:${o.color}">${esc(o.name)}</span>`));
-      if (e._type === "character" && e.country && e.country !== "South Korea" && e.country !== "—") tags.push(`<span class="badge" style="--c:#7c8db5">${esc(e.country)}</span>`);
+      if (e._type === "character" && e.country && e.country !== "South Korea" && e.country !== "Other world") tags.push(`<span class="badge" style="--c:#7c8db5">${esc(e.country)}</span>`);
       if (e._type === "shadow" && S.grade(e)) tags.push(`<span class="badge" style="--c:${col}">${esc(S.grade(e))}</span>`);
       if (e._type === "gate" && e.cls) tags.push(`<span class="badge" style="--c:${col}">${esc(e.cls)}-class</span>`);
       if (e._type === "skill" || e._type === "item") tags.push(`<span class="badge" style="--c:${col}">${esc(e.type)}</span>`);

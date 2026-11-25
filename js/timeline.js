@@ -1,5 +1,5 @@
 /* ==========================================================================
-   SOLO LEVELING VERSE — interactive timeline (timeline.html)
+   SOLO LEVELING VERSE: interactive timeline (timeline.html)
    Arc rail with scroll-spy, event-type filters, a glowing progress spine,
    spoiler-sealed events (reveal one or all) and entity chips that open the
    viewer. Deep link: timeline.html#<event id>.

@@ -1,8 +1,8 @@
 /* ==========================================================================
-   SOLO LEVELING VERSE — weapons & equipment
+   SOLO LEVELING VERSE: weapons & equipment
    --------------------------------------------------------------------------
    owners[] = entity ids (characters / shadows / monarchs). from = source id.
-   canon: "verified" (default) | "unverified" — an entry kept on request but
+   canon: "verified" (default) | "unverified": an entry kept on request but
    whose place in the original story is not confirmed; it is badged in the UI.
    Artwork: assets/weapons/<id>.webp
    ========================================================================== */

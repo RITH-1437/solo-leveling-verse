@@ -1,4 +1,4 @@
-# Solo Leveling Verse — The Hunter & Monarch Archive
+# Solo Leveling Verse: The Hunter & Monarch Archive
 
 A static, interactive Solo Leveling encyclopedia: hunters, Monarchs & Rulers, the Shadow Army,
 gates & dungeons, monsters, weapons, skills, a world timeline and the **Shadow Network**
@@ -109,7 +109,7 @@ page is a network map, not a family tree.
 ## Accuracy notes
 
 Content keeps to facts from the anime and manhwa. Where the source was uncertain, details were left out
-(for example unstated shadow grades show "Not stated"; Yogumunt's epithet is "—").
+(for example unstated shadow grades show "Not stated"; Yogumunt has no epithet row).
 **Shadow Scythe** is kept on request but marked **Unverified**: it isn't among the weapons Jinwoo uses in the original story.
 Edit or remove it in `js/data/items.js`.
 

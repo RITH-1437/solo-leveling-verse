@@ -1,5 +1,5 @@
 /* ==========================================================================
-   SOLO LEVELING VERSE — timeline & relationships
+   SOLO LEVELING VERSE: timeline & relationships
    --------------------------------------------------------------------------
    timeline[]  { id, arc, when, title, text, ids[] (entities involved), kind, sp }
                kind: world | battle | milestone | shadow | loss

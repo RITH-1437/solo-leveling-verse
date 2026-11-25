@@ -1,5 +1,5 @@
 /* ==========================================================================
-   SOLO LEVELING VERSE — Shadow Network (network.html)
+   SOLO LEVELING VERSE: Shadow Network (network.html)
    --------------------------------------------------------------------------
    An SVG relationship map adapted from the Naruto Verse lineage scroll.
    Nodes:  characters, Monarchs & Rulers, shadows, guilds / associations.
@@ -75,7 +75,7 @@
     if (FAMILY.has(e.id)) return "family";
     const org = (e.orgs || []).find((o) => CENTERS[o] && byNode.has(o));
     if (org) return org;
-    if (e.country === "—") return "other";
+    if (e.country === "Other world") return "other";
     if (e.country && e.country !== "South Korea") return "intl";
     return "korea";
   }
@@ -148,7 +148,7 @@
     gNodes.textContent = ""; gEdges.textContent = "";
     edges.forEach((e) => {
       e.el = el("path", { class: `edge l-${e.layer} t-${e.t}`, "data-a": e.a, "data-b": e.b }, gEdges);
-      el("title", {}, e.el).textContent = `${S.name(SLV.get(e.a))} — ${S.name(SLV.get(e.b))}: ${e.label}`;
+      el("title", {}, e.el).textContent = `${S.name(SLV.get(e.a))} and ${S.name(SLV.get(e.b))}: ${e.label}`;
     });
     nodes.forEach((n) => {
       const r = radius(n), col = SLV.colorOf(n);

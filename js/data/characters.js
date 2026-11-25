@@ -1,5 +1,5 @@
 /* ==========================================================================
-   SOLO LEVELING VERSE — characters & hunters
+   SOLO LEVELING VERSE: characters & hunters
    --------------------------------------------------------------------------
    Fields
      id, name, ko (Korean), alt[]          names
@@ -44,7 +44,7 @@ SLV.data.characters = [
     titles: ["Vice Guild Master of the Hunters Guild", "S-Rank Swordswoman"], titlesM: ["Wife of Sung Jinwoo"],
     rank: "S", orgs: ["hunters_guild"], role: "Melee · Swordswoman", country: "South Korea", status: "Active",
     first: "Anime Season 1", arc: "awakening", featured: true,
-    bio: "Korea's top swordswoman and the Hunters Guild's vice guild master. Her ability lets her smell mana, which makes most hunters unpleasant to be near — except Sung Jinwoo, whose scent she finds strangely calming. She fights on the front line of the Jeju Island raid.",
+    bio: "Korea's top swordswoman and the Hunters Guild's vice guild master. Her ability lets her smell mana, which makes most hunters unpleasant to be near, except Sung Jinwoo, whose scent she finds strangely calming. She fights on the front line of the Jeju Island raid.",
     bioM: "She grows close to Jinwoo and, after time is rewound and he returns from the war, they marry; their son is Sung Suho.",
     abilities: ["Swordsmanship", "Mana sense (smell)", "Sword aura"], weapons: [],
     forms: []
@@ -228,7 +228,7 @@ SLV.data.characters = [
   {
     id: "esil_radiru", name: "Esil Radiru", alt: ["Esil"],
     titles: ["Demon noble of the Radiru house"],
-    rank: "-", orgs: [], role: "Demon noble", country: "—", status: "Active",
+    rank: "-", orgs: [], role: "Demon noble", country: "Other world", status: "Active",
     first: "Anime Season 2", arc: "demoncastle",
     bio: "A demon noblewoman Jinwoo meets while climbing the Demon Castle. Rather than fight to the death, she bargains with him and guides him through the castle's politics.",
     abilities: ["Demon magic"], weapons: [], forms: []

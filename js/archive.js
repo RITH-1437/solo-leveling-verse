@@ -1,5 +1,5 @@
 /* ==========================================================================
-   SOLO LEVELING VERSE — archive (archive.html)
+   SOLO LEVELING VERSE: archive (archive.html)
    Seven collections behind tabs, each with its own facets and sort orders,
    plus search, content (anime / manhwa) filter and pagination.
    URL: archive.html#<tab>/<page>   e.g. #shadows, #monarchs/2
@@ -31,7 +31,7 @@
     org: { label: "Affiliation", kind: "select", get: (e) => (e.orgs && e.orgs.length ? e.orgs : ["none"]),
       options: () => [...W.orgs.filter((o) => o.kind !== "faction" || o.id === "shadow_army").filter((o) => SLV.visible(o)).map((o) => [o.id, o.name]), ["none", "Unaffiliated"]] },
     country: { label: "Country", kind: "select", get: (e) => e.country,
-      options: () => W.countries.filter((c) => SLV.ofType("character").some((x) => x.country === c.id && SLV.visible(x))).map((c) => [c.id, c.id === "—" ? "None / other world" : c.id]) },
+      options: () => W.countries.filter((c) => SLV.ofType("character").some((x) => x.country === c.id && SLV.visible(x))).map((c) => [c.id, c.id === "Other world" ? "None / other world" : c.id]) },
     mkind: { label: "Kind", kind: "chips", get: (e) => e.kind, options: () => [["monarch", "Monarchs"], ["ruler", "Rulers"]] },
     grade: { label: "Grade", kind: "chips", get: (e) => S.grade(e) || "unknown",
       options: () => [...new Set(SLV.ofType("shadow").filter(SLV.visible).map((s) => S.grade(s) || "unknown"))]
@@ -50,7 +50,7 @@
 
   const TABS = {
     characters: { type: "character", kicker: "Archive · Characters", title: "Character <em>Archive</em>",
-      sub: "Hunters, allies, family and enemies — with ranks, affiliations, abilities, weapons, relationships and history.",
+      sub: "Hunters, allies, family and enemies, with ranks, affiliations, abilities, weapons, relationships and history.",
       facets: ["rank", "org", "country"], sorts: ["order", "rank", "az", "za", "arc"] },
     monarchs: { type: "monarch", kicker: "Archive · Monarchs & Rulers", title: "Monarchs &amp; <em>Rulers</em>",
       sub: "The nine Monarchs and the beings of light they war against. Almost all of it is manhwa territory, so these records stay sealed until you turn spoilers on.",
@@ -109,7 +109,7 @@
     $("#tab-kicker").textContent = T.kicker;
     $("#tab-title").innerHTML = T.title;
     $("#tab-sub").textContent = T.sub;
-    document.title = `${SLV.types[T.type].plural} — Solo Leveling Verse`;
+    document.title = `${SLV.types[T.type].plural} | Solo Leveling Verse`;
     $("#facets").innerHTML = T.facets.map((k) => {
       const f = F[k], cur = state.facet[k] || "all";
       const opts = f.options();
@@ -165,13 +165,22 @@
   }
   function renderPager(pages) {
     const p = state.page;
-    $("#pager").hidden = !lastList.length;
-    $("#pager").innerHTML = `
+    const pager = $("#pager");
+    pager.hidden = !lastList.length;
+    /* The per-page select is built once and kept: rebuilding it on every
+       render destroyed it while in use (focus fell to the page, so the next
+       arrow key turned the page instead of changing the amount). */
+    if (!pager.querySelector(".pg-nums")) {
+      pager.innerHTML = `<span class="pg-nums"></span>
+        <label class="per">Per page <select class="select" data-per>${PAGE_SIZES.map((n) => `<option value="${n}">${n}</option>`).join("")}</select></label>`;
+    }
+    const sel = pager.querySelector("[data-per]");
+    if (Number(sel.value) !== state.per) sel.value = String(state.per);
+    pager.querySelector(".pg-nums").innerHTML = `
       <button type="button" data-page="${p - 1}" ${p <= 1 ? "disabled" : ""} aria-label="Previous page">‹</button>
       ${pageList(p, pages).map((n) => n === "…" ? '<span class="gap">…</span>'
         : `<button type="button" data-page="${n}" ${n === p ? 'aria-current="page"' : ""} aria-label="Page ${n}">${n}</button>`).join("")}
-      <button type="button" data-page="${p + 1}" ${p >= pages ? "disabled" : ""} aria-label="Next page">›</button>
-      <label class="per">Per page <select class="select" data-per>${PAGE_SIZES.map((n) => `<option value="${n}" ${n === state.per ? "selected" : ""}>${n}</option>`).join("")}</select></label>`;
+      <button type="button" data-page="${p + 1}" ${p >= pages ? "disabled" : ""} aria-label="Next page">›</button>`;
   }
 
   /* --------------------------------------------------------------- hash */

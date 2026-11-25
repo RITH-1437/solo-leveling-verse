@@ -1,5 +1,5 @@
 /* ==========================================================================
-   SOLO LEVELING VERSE — hunter database (hunters.html)
+   SOLO LEVELING VERSE: hunter database (hunters.html)
    Rank distribution, national-level spotlight, a sortable / filterable
    registry table, guild directory and a by-country breakdown.
    ========================================================================== */
@@ -85,7 +85,7 @@
       const st = S.status(c);
       return `<tr tabindex="0" data-id="${c.id}" style="--i:${i};animation-delay:${i * 18}ms">
         <td><span class="who">${SLV.artHTML(c)}<span><b>${esc(S.name(c))}</b><small>${esc(c.ko || "")}</small></span></span></td>
-        <td>${r.id === "-" ? '<span style="color:var(--text-faint)">—</span>' : `<span class="rank${r.id === "National" ? " nat" : ""}" style="--c:${r.color}">${r.id === "National" ? "NAT" : r.id}</span>`}</td>
+        <td>${r.id === "-" ? '<span style="color:var(--text-faint)">Unranked</span>' : `<span class="rank${r.id === "National" ? " nat" : ""}" style="--c:${r.color}">${r.id === "National" ? "NAT" : r.id}</span>`}</td>
         <td>${org.length ? org.map((o) => `<span class="badge" style="--c:${o.color}">${esc(o.name)}</span>`).join(" ") : '<span style="color:var(--text-faint)">Independent</span>'}</td>
         <td>${esc(c.country)}</td>
         <td style="color:var(--text-soft)">${esc(c.role || "")}</td>
@@ -101,7 +101,7 @@
     $("#h-rank").innerHTML = opt("all", "All ranks", state.rank) + W.ranks.filter((r) => state.civ || r.id !== "-").map((r) => opt(r.id, r.label, state.rank)).join("");
     $("#h-org").innerHTML = opt("all", "All", state.org) + W.orgs.filter((o) => o.kind !== "faction" && SLV.visible(o)).map((o) => opt(o.id, o.name, state.org)).join("");
     $("#h-country").innerHTML = opt("all", "All countries", state.country) + W.countries.filter((c) => people().some((p) => p.country === c.id && SLV.visible(p) && (state.civ || isHunter(p))))
-      .map((c) => opt(c.id, c.id === "—" ? "Other world" : c.id, state.country)).join("");
+      .map((c) => opt(c.id, c.id === "Other world" ? "Other world" : c.id, state.country)).join("");
   }
 
   /* -------------------------------------------------------------- guilds */
@@ -112,7 +112,7 @@
       return `<div class="sys guild" style="--c:${o.color}">
         <span class="badge" style="--c:${o.color}">${o.kind === "guild" ? "Guild" : "Association"} · ${esc(o.country)}</span>
         <div style="display:flex;align-items:center;gap:12px">${SLV.media.art(o) ? `<img src="${SLV.media.art(o)}" alt="" width="52" height="52" loading="lazy" style="flex:none;object-fit:contain;filter:drop-shadow(0 0 8px ${o.color})">` : ""}<h3>${esc(o.name)}</h3></div><p>${esc(o.note)}</p>
-        <div class="members">${members.map((c) => `<button type="button" class="rel-chip" data-id="${c.id}" style="--c:${SLV.colorOf(c)}">${SLV.artHTML(c)}<span>${esc(S.name(c))} <small>· ${esc(c.rank === "-" ? "—" : c.rank)}</small></span></button>`).join("") || '<span style="color:var(--text-faint);font-size:13px">No members on record.</span>'}</div>
+        <div class="members">${members.map((c) => `<button type="button" class="rel-chip" data-id="${c.id}" style="--c:${SLV.colorOf(c)}">${SLV.artHTML(c)}<span>${esc(S.name(c))} <small>· ${esc(c.rank === "-" ? "Unranked" : c.rank)}</small></span></button>`).join("") || '<span style="color:var(--text-faint);font-size:13px">No members on record.</span>'}</div>
         <button type="button" class="btn sm" data-filter-org="${o.id}" style="align-self:flex-start">Filter registry →</button></div>`;
     }).join("");
   }

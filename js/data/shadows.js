@@ -1,5 +1,5 @@
 /* ==========================================================================
-   SOLO LEVELING VERSE — the Shadow Army
+   SOLO LEVELING VERSE: the Shadow Army
    --------------------------------------------------------------------------
    grade      starting grade when first raised (world.shadowGrades), if known
    gradeTop   highest grade the story shows, if known

@@ -1,5 +1,5 @@
 /* ==========================================================================
-   SOLO LEVELING VERSE — gates, dungeons & monsters
+   SOLO LEVELING VERSE: gates, dungeons & monsters
    --------------------------------------------------------------------------
    gates[]     kind: "type" (a category of gate) | "dungeon" (a specific place/event)
                cls = gate class (world.gateClasses) when known
@@ -21,12 +21,12 @@ SLV.data.gates = [
   {
     id: "dungeon_break", kind: "type", name: "Dungeon Break", alt: [], cls: "",
     titles: ["When a gate is left uncleared"], first: "Anime Season 1", arc: "pre", color: "#f97316",
-    bio: "If a gate is not cleared in time, its monsters pour out into the world. A dungeon break from a high-grade gate is a disaster — the S-class break on Jeju Island cost Korea the entire island."
+    bio: "If a gate is not cleared in time, its monsters pour out into the world. A dungeon break from a high-grade gate is a disaster: the S-class break on Jeju Island cost Korea the entire island."
   },
   {
     id: "red_gate", kind: "type", name: "Red Gate", alt: [], cls: "",
     titles: ["A gate that will not let you leave"], first: "Anime Season 2", arc: "redgate", color: "#ef4444", featured: true,
-    bio: "A rare, dangerous gate whose entrance turns red after hunters enter, cutting them off from the outside. No help can come in and no one can get out until the dungeon is cleared — and its true grade may be far above what was measured.",
+    bio: "A rare, dangerous gate whose entrance turns red after hunters enter, cutting them off from the outside. No help can come in and no one can get out until the dungeon is cleared, and its true grade may be far above what was measured.",
     monsters: ["ice_elves", "alpha_ice_bear"], bosses: ["baruka"], shadows: ["iron", "tank"]
   },
   {
@@ -45,7 +45,7 @@ SLV.data.gates = [
   {
     id: "double_dungeon", kind: "dungeon", name: "The Double Dungeon", alt: ["Cartenon Temple"], cls: "",
     titles: ["A hidden dungeon within a dungeon"], first: "Anime S1 E1–E2", arc: "double", color: "#22d3ee", featured: true,
-    bio: "A low-grade raid hid a second dungeon: the Cartenon Temple, ruled by a giant statue and stone guardians, with three commandments carved at its gate — worship the god, praise the god, prove your faith. Most of the party died there. Jinwoo, offered a choice at death's door, woke up in hospital as the Player.",
+    bio: "A low-grade raid hid a second dungeon: the Cartenon Temple, ruled by a giant statue and stone guardians, with three commandments carved at its gate: worship the god, praise the god, prove your faith. Most of the party died there. Jinwoo, offered a choice at death's door, woke up in hospital as the Player.",
     bosses: ["statue_of_god"], monsters: ["stone_statues"]
   },
   {
@@ -75,7 +75,7 @@ SLV.data.gates = [
   {
     id: "jeju_island", kind: "dungeon", name: "Jeju Island", alt: ["The Ant Nest"], cls: "S",
     titles: ["The S-class gate that took an island"], first: "Anime Season 2", arc: "jeju", color: "#f6c453", featured: true,
-    bio: "Years before the story an S-class gate on Jeju Island broke, and giant ants overran the island. Raids failed and the island was abandoned until Korea's top hunters and a Japanese team launched a new raid. The Ant Queen's newborn king, the Ant King, slaughtered hunters until Jinwoo arrived — and turned the ants into his army.",
+    bio: "Years before the story an S-class gate on Jeju Island broke, and giant ants overran the island. Raids failed and the island was abandoned until Korea's top hunters and a Japanese team launched a new raid. The Ant Queen's newborn king, the Ant King, slaughtered hunters until Jinwoo arrived and turned the ants into his army.",
     bosses: ["ant_queen"], monsters: ["jeju_ants"], shadows: ["beru", "shadow_infantry"]
   }
 ];
@@ -87,7 +87,7 @@ SLV.data.monsters = [
     bioM: "The statues of the Double Dungeon were the Architect's work, built to test candidates for the Shadow Monarch's power." },
   { id: "stone_statues", kind: "monster", name: "Stone Statues", alt: [], home: "double_dungeon",
     first: "Anime S1 E1–E2", arc: "double", color: "#94a3b8",
-    bio: "The temple's carved guardians — musicians, a sword-bearer and more — that come alive and kill anyone who doesn't follow the commandments." },
+    bio: "The temple's carved guardians (musicians, a sword-bearer and more) that come alive and kill anyone who doesn't follow the commandments." },
   { id: "giant_centipedes", kind: "monster", name: "Giant Centipedes", alt: [], home: "penalty_zone",
     first: "Anime Season 1", arc: "awakening", color: "#eab308",
     bio: "Enormous centipedes that burrow through the Penalty Zone's sand, hunting Jinwoo for four hours." },
@@ -102,7 +102,7 @@ SLV.data.monsters = [
   { id: "alpha_ice_bear", kind: "monster", name: "Ice Bears", alt: ["Alpha Ice Bear"], home: "red_gate_incident", first: "Anime Season 2", arc: "redgate", color: "#bae6fd",
     bio: "Huge bears of the Red Gate. Their alpha is raised as the shadow Tank.", becameShadow: "tank" },
   { id: "baruka", kind: "boss", name: "Baruka", alt: [], home: "red_gate_incident", first: "Anime Season 2", arc: "redgate", color: "#38bdf8", featured: true,
-    bio: "The ice elf chieftain and the Red Gate's boss — an extremely fast assassin. Jinwoo kills him and takes his dagger." },
+    bio: "The ice elf chieftain and the Red Gate's boss, an extremely fast assassin. Jinwoo kills him and takes his dagger." },
   { id: "cerberus", kind: "boss", name: "Cerberus", alt: ["Keeper of Hell's Gate"], home: "demon_castle", first: "Anime Season 2", arc: "demoncastle", color: "#dc2626",
     bio: "The three-headed hound guarding the Demon Castle's entrance." },
   { id: "vulcan", kind: "boss", name: "Vulcan", alt: [], home: "demon_castle", first: "Anime Season 2", arc: "demoncastle", color: "#f97316",
@@ -110,7 +110,7 @@ SLV.data.monsters = [
   { id: "demons", kind: "race", name: "Demons", alt: [], home: "demon_castle", first: "Anime Season 2", arc: "demoncastle", color: "#a855f7",
     bio: "The inhabitants of the Demon Castle, from soldiers to nobles. Hunting them is the only way up the castle's floors." },
   { id: "ant_queen", kind: "boss", name: "Ant Queen", alt: [], home: "jeju_island", first: "Anime Season 2", arc: "jeju", color: "#f59e0b",
-    bio: "The mother of Jeju Island's ant hordes, buried deep in the nest. Killing her is the raid's objective — but she has already given birth to the Ant King." },
+    bio: "The mother of Jeju Island's ant hordes, buried deep in the nest. Killing her is the raid's objective, but she has already given birth to the Ant King." },
   { id: "jeju_ants", kind: "race", name: "Jeju Ants", alt: [], home: "jeju_island", first: "Anime Season 2", arc: "jeju", color: "#ca8a04",
     bio: "Giant ants that overran Jeju Island after its dungeon break. After the raid, many of them rise again in Jinwoo's army." },
   { id: "ant_king", kind: "boss", name: "Ant King", alt: [], home: "jeju_island", first: "Anime Season 2", arc: "jeju", color: "#a78bfa", featured: true,

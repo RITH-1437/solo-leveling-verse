@@ -1,5 +1,5 @@
 /* ==========================================================================
-   SOLO LEVELING VERSE — entity viewer
+   SOLO LEVELING VERSE: entity viewer
    --------------------------------------------------------------------------
    SLV.viewer.open(id, { list, tab })  "Status window" profile for any entity:
        overview / powers / relations / history / forms tabs, prev-next through
@@ -57,27 +57,27 @@
     const titles = S.titles(e).map((t) => `<span class="badge" style="--c:${SLV.colorOf(e)}">${esc(t)}</span>`).join(" ");
     const hiddenTitles = !SLV.spoilers.on && (e.titlesM || []).length;
     let rows = "";
-    const first = esc(e.first || "—");
+    const first = esc(e.first || "Unknown");
     switch (e._type) {
       case "character": {
         const r = SLV.rank(e.rank);
-        rows = row("Rank", `<span class="rank${r.id === "National" ? " nat" : ""}" style="--c:${r.color}">${r.id === "National" ? "NAT" : esc(r.id === "-" ? "—" : r.id)}</span> ${esc(r.label)}${e.rankNote ? `<br><small style="color:var(--text-soft)">${esc(e.rankNote)}</small>` : ""}`)
-          + row("Affiliation", orgNames(e) || "—") + row("Role", esc(e.role)) + row("Country", esc(e.country))
+        rows = row("Rank", `<span class="rank${r.id === "National" ? " nat" : ""}" style="--c:${r.color}">${r.id === "National" ? "NAT" : esc(r.id === "-" ? "N/A" : r.id)}</span> ${esc(r.label)}${e.rankNote ? `<br><small style="color:var(--text-soft)">${esc(e.rankNote)}</small>` : ""}`)
+          + row("Affiliation", orgNames(e) || "None") + row("Role", esc(e.role)) + row("Country", esc(e.country))
           + row("Status", esc(S.status(e))) + row("First appearance", first) + row("Debut arc", esc(S.arc(e.arc)));
         break;
       }
       case "monarch":
         rows = row("Title", esc(SLV.spoilers.on ? e.domain : (S.titles(e)[0] || "")))
-          + (SLV.spoilers.on && e.king && e.king !== "—" ? row("Rules", esc(e.king)) : "")
+          + (SLV.spoilers.on && e.king ? row("Rules", esc(e.king)) : "")
           + row("Kind", e.kind === "ruler" ? "Ruler / cosmic being" : "Monarch")
-          + (e.army && e.army !== "—" ? row("Army", esc(e.army)) : "")
+          + (e.army ? row("Army", esc(e.army)) : "")
           + row("Status", esc(S.status(e))) + row("First appearance", first);
         break;
       case "shadow": {
         const g = S.grade(e);
         rows = row("Grade", g ? `<span class="badge" style="--c:${e.color}">${esc(g)}</span>` : "Not stated")
           + row("In life", e.originId ? `<button type="button" class="badge" data-open="${e.originId}">${esc(e.origin)}</button>` : esc(e.origin))
-          + row("Raised at", e.source ? `<button type="button" class="badge" data-open="${e.source}">${esc(nameOf(e.source))}</button>` : "—")
+          + row("Raised at", e.source ? `<button type="button" class="badge" data-open="${e.source}">${esc(nameOf(e.source))}</button>` : "Unknown")
           + row("Master", SLV.visible(ent("sung_jinwoo")) ? `<button type="button" class="badge" data-open="sung_jinwoo">Sung Jinwoo</button>` : "")
           + row("First appearance", first);
         break;
@@ -90,20 +90,20 @@
         break;
       }
       case "monster":
-        rows = row("Kind", esc(S.subtitle(e))) + row("Found in", e.home ? `<button type="button" class="badge" data-open="${e.home}">${esc(nameOf(e.home))}</button>` : "—")
+        rows = row("Kind", esc(S.subtitle(e))) + row("Found in", e.home ? `<button type="button" class="badge" data-open="${e.home}">${esc(nameOf(e.home))}</button>` : "Unknown")
           + (e.becameShadow ? row("Became", `<button type="button" class="badge" data-open="${e.becameShadow}" style="--c:var(--violet)">${esc(nameOf(e.becameShadow))}</button>`) : "")
           + row("First appearance", first);
         break;
       case "item":
         rows = row("Type", esc(e.type)) + row("Ability", esc(e.ability))
-          + row("Owners", (e.owners || []).filter((o) => SLV.visible(ent(o))).map((o) => `<button type="button" class="badge" data-open="${o}">${esc(nameOf(o))}</button>`).join(" ") || "—")
-          + row("Obtained from", e.from && SLV.visible(ent(e.from)) ? `<button type="button" class="badge" data-open="${e.from}">${esc(nameOf(e.from))}</button>` : "—")
+          + row("Owners", (e.owners || []).filter((o) => SLV.visible(ent(o))).map((o) => `<button type="button" class="badge" data-open="${o}">${esc(nameOf(o))}</button>`).join(" ") || "None")
+          + row("Obtained from", e.from && SLV.visible(ent(e.from)) ? `<button type="button" class="badge" data-open="${e.from}">${esc(nameOf(e.from))}</button>` : "Unknown")
           + row("Canon", e.canon === "unverified" ? '<span class="badge unverified">Unverified</span>' : "Original story")
           + row("First appearance", first);
         break;
       case "skill":
         rows = row("Type", esc(e.type))
-          + row("Users", (e.users || []).filter((o) => SLV.visible(ent(o))).map((o) => `<button type="button" class="badge" data-open="${o}">${esc(nameOf(o))}</button>`).join(" ") || "—")
+          + row("Users", (e.users || []).filter((o) => SLV.visible(ent(o))).map((o) => `<button type="button" class="badge" data-open="${o}">${esc(nameOf(o))}</button>`).join(" ") || "None")
           + row("First appearance", first);
         break;
       case "org": {
@@ -161,8 +161,8 @@
   function historyTab(e) {
     const events = (SLV.data.timeline || []).filter((t) => (t.ids || []).includes(e.id));
     const ev = events.map((t) => {
-      const body = `<div class="form-step"><b>${esc(t.title)}</b><span><em style="color:var(--cyan);font-style:normal">${esc(t.when)}</em> — ${esc(t.text)}</span></div>`;
-      return t.sp === "m" && !SLV.spoilers.on ? `<div class="form-step"><b style="color:var(--danger)">Classified event</b><span>A manhwa event — enable spoilers to read it.</span></div>` : body;
+      const body = `<div class="form-step"><b>${esc(t.title)}</b><span><em style="color:var(--cyan);font-style:normal">${esc(t.when)}:</em> ${esc(t.text)}</span></div>`;
+      return t.sp === "m" && !SLV.spoilers.on ? `<div class="form-step"><b style="color:var(--danger)">Classified event</b><span>A manhwa event. Enable spoilers to read it.</span></div>` : body;
     }).join("");
     return `<h4>Chronicle</h4><p>${esc(e.bio || e.note || "")}</p>${e.bioM ? spoilerBlock(`<p style="margin:0">${esc(e.bioM)}</p>`) : ""}
       ${ev ? `<h4>On the timeline</h4><div class="form-steps">${ev}</div><div class="v-actions"><a class="btn sm" href="timeline.html#${events[0].id}">Open the timeline →</a></div>` : ""}`;
@@ -172,7 +172,7 @@
   function forms(e) {
     const steps = (e.forms || e.evolution || []).map((f) => {
       const html = `<div class="form-step"><b>${esc(f.name || f.grade || "Raised")}</b><span>${esc(f.desc || f.note || "")}</span></div>`;
-      return f.m && !SLV.spoilers.on ? `<div class="form-step"><b style="color:var(--danger)">Classified</b><span>Manhwa spoiler — enable spoilers to see this stage.</span></div>` : html;
+      return f.m && !SLV.spoilers.on ? `<div class="form-step"><b style="color:var(--danger)">Classified</b><span>Manhwa spoiler. Enable spoilers to see this stage.</span></div>` : html;
     }).join("");
     const grades = e._type === "shadow" ? `<h4>Shadow grades</h4><div class="chip-row">${(SLV.data.world.shadowGrades || []).map((g) =>
       `<span class="chip${g.id === S.grade(e) ? " active" : ""}">${esc(g.id)}</span>`).join("")}</div>` : "";
@@ -208,7 +208,7 @@
     const badges = [typeBadge,
       r && r.id !== "-" ? `<span class="badge" style="--c:${r.color}">${esc(r.label)}</span>` : "",
       e._type === "shadow" && S.grade(e) ? `<span class="badge" style="--c:${col}">${esc(S.grade(e))}</span>` : "",
-      e.country && e.country !== "—" ? `<span class="badge" style="--c:#7c8db5">${esc(e.country)}</span>` : "",
+      e.country && e.country !== "Other world" ? `<span class="badge" style="--c:#7c8db5">${esc(e.country)}</span>` : "",
       S.status(e) ? `<span class="badge" style="--c:${/Deceased|Slain|Defeated/.test(S.status(e)) ? "#ff4d6a" : "#3ed598"}">${esc(S.status(e))}</span>` : "",
       e.sp === "m" ? '<span class="badge spoiler">Manhwa</span>' : '<span class="badge" style="--c:#5ec8ff">Anime</span>',
       e.canon === "unverified" ? '<span class="badge unverified">Unverified</span>' : "",

@@ -1,5 +1,5 @@
 /* ==========================================================================
-   SOLO LEVELING VERSE — Monarchs & Rulers
+   SOLO LEVELING VERSE: Monarchs & Rulers
    --------------------------------------------------------------------------
    kind: "monarch" | "ruler".  domain = the Monarch title, king = the race they rule.
    Nearly everything about the Monarchs is a manhwa spoiler; the anime only
@@ -18,7 +18,7 @@ SLV.data.monarchs = [
     titles: ["Shadow Monarch"], titlesM: ["Monarch of Shadows", "King of the Dead", "Former Ruler"],
     status: "Unknown", statusM: "Passed his power to Sung Jinwoo",
     first: "Anime S1 finale (the class) · identity in the manhwa", arc: "jobchange",
-    bio: "\"Shadow Monarch\" is the hidden class Sung Jinwoo receives at the end of his Job Change quest — a power over the dead that no other hunter has.",
+    bio: "\"Shadow Monarch\" is the hidden class Sung Jinwoo receives at the end of his Job Change quest: a power over the dead that no other hunter has.",
     bioM: "Ashborn was once the strongest of the Rulers before he became the Monarch of Shadows. Baran and Rakan were among the Monarchs who rebelled against him. In time he chose Sung Jinwoo as the vessel for his power. The System, designed by the Architect, existed to make Jinwoo strong enough to receive it. His shadows, led by Grand Marshal Bellion, pass to Jinwoo.",
     powers: ["shadow_extraction", "shadow_preservation", "monarchs_domain", "Command of the Shadow Army"],
     army: "Shadow Army", sp: ""
@@ -73,10 +73,10 @@ SLV.data.monarchs = [
   },
   {
     id: "yogumunt", kind: "monarch", name: "Yogumunt", alt: [],
-    domain: "Monarch of Transfiguration", king: "—", color: "#c084fc",
+    domain: "Monarch of Transfiguration", king: "", color: "#c084fc",
     titles: ["Monarch of Transfiguration"], status: "Enemy of Sung Jinwoo", first: "Manhwa", arc: "monarchs", sp: "m",
     bio: "The Monarch of Transfiguration, one of the nine kings who make war on the Rulers and on Earth.",
-    powers: ["Transfiguration"], army: "—"
+    powers: ["Transfiguration"], army: ""
   },
   {
     id: "legia", kind: "monarch", name: "Legia", alt: [],
@@ -89,23 +89,23 @@ SLV.data.monarchs = [
   /* ----------------------------------------------------------------- Rulers */
   {
     id: "absolute_being", kind: "ruler", name: "The Absolute Being", alt: ["The Creator"],
-    domain: "Creator of the Rulers and Monarchs", king: "—", color: "#fff4cc",
+    domain: "Creator of the Rulers and Monarchs", king: "", color: "#fff4cc",
     titles: ["The Absolute Being"], status: "Unknown", first: "Manhwa", arc: "monarchs", sp: "m",
     bio: "The god-like entity at the top of Solo Leveling's cosmology, who created both the Rulers (from light) and the Monarchs (from darkness), whose endless war spills into the human world through the gates.",
-    powers: ["Creation"], army: "—"
+    powers: ["Creation"], army: ""
   },
   {
     id: "the_rulers", kind: "ruler", name: "The Rulers", alt: ["Fragments of Brilliant Light"],
-    domain: "Servants of the Absolute Being", king: "—", color: "#ffe9a8", featured: true,
+    domain: "Servants of the Absolute Being", king: "", color: "#ffe9a8", featured: true,
     titles: ["Beings of light"], status: "Opposed to the Monarchs", first: "Manhwa", arc: "monarchs", sp: "m",
-    bio: "Beings of light who war against the Monarchs. They chose seven human vessels and lent them part of their power — among them Sung Il-hwan and Go Gunhee — to fight the Monarchs on Earth. When a vessel dies, the Ruler's power leaves them.",
+    bio: "Beings of light who war against the Monarchs. They chose seven human vessels and lent them part of their power (among them Sung Il-hwan and Go Gunhee) to fight the Monarchs on Earth. When a vessel dies, the Ruler's power leaves them.",
     powers: ["Light", "Granting power to vessels"], army: "Ruler vessels"
   },
   {
     id: "architect", kind: "ruler", name: "The Architect", alt: [],
-    domain: "Designer of the System", king: "—", color: "#38bdf8",
+    domain: "Designer of the System", king: "", color: "#38bdf8",
     titles: ["Creator of the System"], status: "Unknown", first: "Manhwa (revealed)", arc: "monarchs", sp: "m",
     bio: "The being behind the System. It designed the quests, levels and penalties that forged Sung Jinwoo into a vessel fit to inherit the Shadow Monarch's power.",
-    powers: ["The System"], army: "—"
+    powers: ["The System"], army: ""
   }
 ];
