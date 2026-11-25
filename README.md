@@ -6,7 +6,7 @@ relationship map. It is built on the same architecture as `../naruto-verse`, wit
 "System window" identity.
 
 Currently **100 records**: 22 characters, 9 Monarchs + 3 Rulers/cosmic beings, 10 shadows,
-11 gates & dungeons, 16 monsters, 9 items, 12 skills, 23 timeline events and 61 explicit relationships.
+11 gates & dungeons, 16 monsters, 9 items, 12 skills, 23 timeline events and 62 explicit relationships.
 
 ## Run it
 
