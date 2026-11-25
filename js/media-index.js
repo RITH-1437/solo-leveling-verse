@@ -92,6 +92,7 @@ window.MEDIA_INDEX = [
   "assets/skills/shadow_preservation.webp",
   "assets/skills/stealth.webp",
   "assets/skills/vital_strike.webp",
+  "assets/weapons/barukas_dagger.webp",
   "assets/weapons/kamishs_wrath.webp",
   "assets/weapons/kasakas_venom_fang.webp",
   "assets/weapons/knight_killer.webp"
