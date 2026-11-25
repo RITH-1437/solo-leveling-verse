@@ -111,7 +111,7 @@
       const members = people().filter((c) => (c.orgs || []).includes(o.id) && SLV.visible(c));
       return `<div class="sys guild" style="--c:${o.color}">
         <span class="badge" style="--c:${o.color}">${o.kind === "guild" ? "Guild" : "Association"} · ${esc(o.country)}</span>
-        <h3>${esc(o.name)}</h3><p>${esc(o.note)}</p>
+        <div style="display:flex;align-items:center;gap:12px">${SLV.media.art(o) ? `<img src="${SLV.media.art(o)}" alt="" width="52" height="52" loading="lazy" style="flex:none;object-fit:contain;filter:drop-shadow(0 0 8px ${o.color})">` : ""}<h3>${esc(o.name)}</h3></div><p>${esc(o.note)}</p>
         <div class="members">${members.map((c) => `<button type="button" class="rel-chip" data-id="${c.id}" style="--c:${SLV.colorOf(c)}">${SLV.artHTML(c)}<span>${esc(S.name(c))} <small>· ${esc(c.rank === "-" ? "—" : c.rank)}</small></span></button>`).join("") || '<span style="color:var(--text-faint);font-size:13px">No members on record.</span>'}</div>
         <button type="button" class="btn sm" data-filter-org="${o.id}" style="align-self:flex-start">Filter registry →</button></div>`;
     }).join("");

@@ -15,7 +15,7 @@ import json
 import re
 
 ROOT = Path(__file__).resolve().parent.parent
-FOLDERS = ["characters", "hunters", "monarchs", "shadows", "weapons", "monsters", "backgrounds", "skills", "videos"]
+FOLDERS = ["characters", "hunters", "monarchs", "shadows", "weapons", "monsters", "backgrounds", "skills", "guilds", "videos"]
 MEDIA = {".webp", ".png", ".jpg", ".jpeg", ".avif", ".mp4", ".webm"}
 
 

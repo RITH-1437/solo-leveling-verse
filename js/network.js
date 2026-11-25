@@ -162,7 +162,8 @@
         const cid = "clip-" + n.id;
         const cp = el("clipPath", { id: cid }, g);
         shape(n, r - 3, {}, cp);
-        el("image", { href: art, x: -r, y: -r, width: r * 2, height: r * 2, "clip-path": `url(#${cid})`, preserveAspectRatio: "xMidYMid slice" }, g);
+        const logo = n._type === "org", s = logo ? r * .68 : r;   // guild logos: whole emblem, padded
+        el("image", { href: art, x: -s, y: -s, width: s * 2, height: s * 2, "clip-path": `url(#${cid})`, preserveAspectRatio: logo ? "xMidYMid meet" : "xMidYMid slice" }, g);
       } else {
         el("text", { class: "init", y: 1, fill: col }, g).textContent = SLV.util.initials(S.name(n));
       }
@@ -276,16 +277,17 @@
   /* ---------------------------------------------------------- highlight */
   function neighbours(id) {
     const s = new Set([id]);
-    edges.forEach((e) => { if (e.el.classList.contains("off")) return; if (e.a === id) s.add(e.b); if (e.b === id) s.add(e.a); });
+    // !e.el: called mid-rebuild (focusout fires while the map is redrawn)
+    edges.forEach((e) => { if (!e.el || e.el.classList.contains("off")) return; if (e.a === id) s.add(e.b); if (e.b === id) s.add(e.a); });
     return s;
   }
   function highlight() {
     const id = state.hover || state.selected;
     svg.classList.toggle("focus", !!id);
-    if (!id) { nodes.forEach((n) => n._g.classList.remove("hl", "sel")); edges.forEach((e) => e.el.classList.remove("hl")); return; }
+    if (!id) { nodes.forEach((n) => n._g?.classList.remove("hl", "sel")); edges.forEach((e) => e.el?.classList.remove("hl")); return; }
     const nb = neighbours(id);
-    nodes.forEach((n) => { n._g.classList.toggle("hl", nb.has(n.id)); n._g.classList.toggle("sel", n.id === state.selected); });
-    edges.forEach((e) => e.el.classList.toggle("hl", e.a === id || e.b === id));
+    nodes.forEach((n) => { n._g?.classList.toggle("hl", nb.has(n.id)); n._g?.classList.toggle("sel", n.id === state.selected); });
+    edges.forEach((e) => e.el?.classList.toggle("hl", e.a === id || e.b === id));
   }
 
   /* -------------------------------------------------------------- panel */

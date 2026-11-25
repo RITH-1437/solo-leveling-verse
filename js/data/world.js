@@ -71,7 +71,7 @@ SLV.data.world = {
 
   countries: [
     { id: "South Korea", flag: "KR" }, { id: "United States", flag: "US" }, { id: "China", flag: "CN" },
-    { id: "India", flag: "IN" }, { id: "Japan", flag: "JP" }, { id: "—", flag: "—" }
+    { id: "India", flag: "IN" }, { id: "Japan", flag: "JP" }, { id: "Germany", flag: "DE" }, { id: "—", flag: "—" }
   ],
 
   /* Story arcs in order. `sp` marks arcs beyond the anime. */

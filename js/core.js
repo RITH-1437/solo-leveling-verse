@@ -53,7 +53,7 @@
     monster: { label: "Monster", plural: "Monsters & Bosses", tab: "monsters", folders: ["monsters"], color: P.monster, glyph: "B" },
     item: { label: "Equipment", plural: "Weapons & Equipment", tab: "items", folders: ["weapons"], color: P.item, glyph: "W" },
     skill: { label: "Skill", plural: "Skills & Abilities", tab: "skills", folders: ["skills"], color: P.skill, glyph: "K" },
-    org: { label: "Organisation", plural: "Guilds & Factions", tab: "", folders: ["backgrounds"], color: "#7c5cff", glyph: "O" }
+    org: { label: "Organisation", plural: "Guilds & Factions", tab: "", folders: ["guilds"], color: "#7c5cff", glyph: "O" }
   };
 
   /* -------------------------------------------------------------- registry */

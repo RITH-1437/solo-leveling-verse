@@ -5,7 +5,7 @@ gates & dungeons, monsters, weapons, skills, a world timeline and the **Shadow N
 relationship map. It is built on the same architecture as `../naruto-verse`, with its own
 "System window" identity.
 
-Currently **101 records**: 23 characters, 9 Monarchs + 3 Rulers/cosmic beings, 10 shadows,
+Currently **102 records**: 24 characters, 9 Monarchs + 3 Rulers/cosmic beings, 10 shadows,
 11 gates & dungeons, 16 monsters, 9 items, 12 skills, 23 timeline events and 63 explicit relationships.
 
 ## Run it
@@ -59,6 +59,7 @@ generated "sigil" (rank- or faction-coloured emblem). To add real art:
    | Monsters & bosses | `assets/monsters/` | `assets/monsters/ant_king.webp` |
    | Gates & dungeons | `assets/backgrounds/` | `assets/backgrounds/jeju_island.webp` |
    | Skills | `assets/skills/` | `assets/skills/shadow_extraction.webp` |
+   | Guild logos (square, transparent) | `assets/guilds/` | `assets/guilds/white_tiger.webp` |
 
    The `id` is the `id:` field in `js/data/*.js` (lowercase, underscores). Portrait images (3:4, about 900×1200,
    under ~300 KB) look best.
@@ -85,7 +86,7 @@ solo-leveling-verse/
 │   ├── viewer.js      status window + full-screen artwork
 │   ├── shell.js       nav, footer, global search, spoiler switch, toasts, cards, ?view= deep links
 │   └── home.js  archive.js  hunters.js  timeline.js  network.js
-├── assets/            characters/ hunters/ monarchs/ shadows/ weapons/ monsters/ backgrounds/ skills/ videos/ icons/
+├── assets/            characters/ hunters/ monarchs/ shadows/ weapons/ monsters/ backgrounds/ skills/ guilds/ videos/ icons/
 └── tools/
     ├── build_media_index.py   rebuild js/media-index.js after changing assets/
     └── check_site.py          checks links, script order, media paths and every data reference
@@ -113,7 +114,7 @@ Edit or remove it in `js/data/items.js`.
 
 ## Testing done
 
-- `tools/check_site.py`: all local links, script order and 101 records' cross-references resolve.
+- `tools/check_site.py`: all local links, script order and 102 records' cross-references resolve.
 - Headless Chrome on all 5 pages at desktop (1440), tablet (820) and mobile (390): no console errors, no failed
   requests, no horizontal overflow.
 - 68 automated interaction checks: viewer tabs, deep links, keyboard, lightbox, global search incl. spoiler

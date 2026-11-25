@@ -126,6 +126,14 @@ SLV.data.characters = [
     abilities: [], weapons: [], forms: []
   },
   {
+    id: "lennart_niermann", name: "Lennart Niermann", alt: ["Lennart"],
+    titles: ["Germany's strongest hunter", "Master of the Richter Guild"],
+    rank: "S", rankNote: "Ranked 12th in the world.", orgs: [], role: "Guild master", country: "Germany", status: "Active",
+    first: "Manhwa", arc: "monarchs", sp: "m",
+    bio: "Germany's strongest hunter and master of the Richter Guild, ranked 12th in the world. He appears in the manhwa as the Monarchs War spreads beyond Korea.",
+    abilities: ["Mana-based combat"], weapons: [], forms: []
+  },
+  {
     id: "hwang_dongsoo", name: "Hwang Dongsoo", ko: "황동수", alt: [],
     titles: ["S-Rank of the Scavenger Guild"],
     rank: "S", orgs: ["scavenger"], role: "Fighter", country: "United States", status: "Deceased",
