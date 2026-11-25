@@ -187,17 +187,17 @@ SLV.data.characters = [
   {
     id: "song_chiyul", name: "Song Chiyul", ko: "송치열", alt: ["Mr. Song"],
     titles: ["Leader of the Double Dungeon party"],
-    rank: "-", orgs: [], role: "Raid leader", country: "South Korea", status: "Deceased",
+    rank: "C", rankNote: "Officially a magic-type hunter, though he fights with a sword.", orgs: [], role: "Raid leader", country: "South Korea", status: "Alive",
     first: "Anime S1 E1", arc: "double",
-    bio: "A veteran hunter who leads the raid party into the dungeon that turns out to be the Double Dungeon, and tries to keep the survivors alive inside the Cartenon Temple.",
-    abilities: [], weapons: [], forms: []
+    bio: "A veteran C-rank hunter and kumdo teacher who leads the raid party into the dungeon that turns out to be the Double Dungeon. Calm under pressure, he tries to keep the survivors alive inside the Cartenon Temple and makes it out, though he loses his left arm.",
+    abilities: ["Swordsmanship (kumdo)"], weapons: [], forms: []
   },
   {
     id: "min_byunggu", name: "Min Byung-gu", ko: "민병구", alt: [],
-    titles: ["Korea's top healer"],
-    rank: "A", orgs: [], role: "Healer", country: "South Korea", status: "Deceased",
+    titles: ["Korea's only S-rank healer"],
+    rank: "S", rankNote: "The only S-rank healer in South Korea.", orgs: [], role: "Healer", country: "South Korea", status: "Deceased",
     first: "Anime Season 2", arc: "jeju",
-    bio: "An A-rank healer on the Jeju Island raid. He is killed and devoured by the Ant King, which takes his healing abilities for itself.",
+    bio: "South Korea's only S-rank healer, a retired hunter and close friend of White Tiger's Baek Yoonho. He returns for the Jeju Island raid, where the Ant King kills and devours him and takes his healing abilities for itself.",
     abilities: ["Healing magic"], weapons: [], forms: []
   },
   {

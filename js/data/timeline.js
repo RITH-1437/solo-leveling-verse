@@ -131,6 +131,7 @@ SLV.data.links = [
   { a: "ashborn", b: "rakan", t: "enemy", label: "Rebelled against him", sp: "m" },
   { a: "the_rulers", b: "antares", t: "enemy", label: "Eternal war", sp: "m" },
   { a: "beru", b: "min_byunggu", t: "enemy", label: "Devoured, took his healing" },
+  { a: "baek_yoonho", b: "min_byunggu", t: "ally", label: "Close friends" },
 
   /* monarch hierarchy */
   { a: "antares", b: "sillad", t: "command", label: "Leads the Monarchs' war", sp: "m" },
