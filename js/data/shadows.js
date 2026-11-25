@@ -81,7 +81,7 @@ SLV.data.shadows = [
   {
     id: "kaisel", name: "Kaisel", alt: ["Kaisellin"],
     titles: ["Shadow wyvern"],
-    grade: "", gradeTop: "", origin: "Kaisellin, the flying mount of Demon King Baran", originId: "baran",
+    grade: "", gradeTop: "", origin: "Kaisellin, Demon King Baran's wyvern (the mount, not Baran himself)",
     source: "demon_castle", first: "Anime Season 2", arc: "demoncastle", featured: true, color: "#64748b",
     bio: "Baran's wyvern, raised as a shadow after Jinwoo defeated its master in the Demon Castle. Jinwoo wasn't sure of its original name, so he named it Kaisel. It is his flying mount, carrying him across the sky at high speed.",
     abilities: ["Flight", "Mount"],
