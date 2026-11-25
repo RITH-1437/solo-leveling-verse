@@ -3,7 +3,13 @@
 window.MEDIA_INDEX = [
   "assets/backgrounds/demon_castle.webp",
   "assets/backgrounds/double_dungeon.webp",
+  "assets/backgrounds/dungeon_break.webp",
   "assets/backgrounds/jeju_island.webp",
+  "assets/backgrounds/job_change_dungeon.webp",
+  "assets/backgrounds/orc_gate.webp",
+  "assets/backgrounds/penalty_zone.webp",
+  "assets/backgrounds/red_gate.webp",
+  "assets/backgrounds/red_gate_incident.webp",
   "assets/backgrounds/standard_gate.webp",
   "assets/characters/cha_haein.webp",
   "assets/characters/esil_radiru.webp",
