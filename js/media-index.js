@@ -93,8 +93,12 @@ window.MEDIA_INDEX = [
   "assets/skills/stealth.webp",
   "assets/skills/vital_strike.webp",
   "assets/weapons/barukas_dagger.webp",
+  "assets/weapons/cup_of_reincarnation.webp",
+  "assets/weapons/demon_kings_daggers.webp",
   "assets/weapons/demon_kings_longsword.webp",
+  "assets/weapons/holy_water_of_life.webp",
   "assets/weapons/kamishs_wrath.webp",
   "assets/weapons/kasakas_venom_fang.webp",
-  "assets/weapons/knight_killer.webp"
+  "assets/weapons/knight_killer.webp",
+  "assets/weapons/shadow_scythe.webp"
 ];
