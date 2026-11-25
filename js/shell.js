@@ -1,7 +1,7 @@
 /* ==========================================================================
    SOLO LEVELING VERSE — page shell
    --------------------------------------------------------------------------
-   Builds the shared navigation + footer (one source for every page), the
+   Builds the shared navigation (one source for every page), the
    global command-palette search (Ctrl/⌘+K or "/"), the spoiler switch,
    System toasts, scroll reveals, the back-to-top button and `?view=<id>`
    deep links (opened in the viewer from viewer.js).
@@ -86,16 +86,6 @@
     });
   }
   SLV.spoilers.onChange((on) => { const t = $("#spoiler-toggle"); if (t) t.checked = on; });
-
-  function buildFooter() {
-    const f = $("#foot");
-    if (!f) return;
-    f.className = "foot";
-    f.innerHTML = `<div class="wrap foot-inner">
-      <span>Solo Leveling Verse — a fan-made, non-commercial encyclopedia. <span style="color:var(--text-soft)">Solo Leveling</span> belongs to its creators (Chugong, DUBU / REDICE Studio) and A-1 Pictures for the anime.</span>
-      <nav aria-label="Footer">${LINKS.map(([, h, l]) => `<a href="${h}">${l}</a>`).join("")}</nav>
-    </div>`;
-  }
 
   /* ------------------------------------------------------------- toasts */
   let toastBox;
@@ -271,7 +261,7 @@
 
   /* ---------------------------------------------------------------- boot */
   function boot() {
-    buildNav(); buildFooter(); backToTop();
+    buildNav(); backToTop();
     if (!SLV.ready) {
       const main = document.querySelector("main");
       if (main) main.innerHTML = `<div class="wrap">${SLV.stateHTML("error", "Archive offline",
