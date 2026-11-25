@@ -143,7 +143,8 @@
     const empty = $("#empty");
     empty.hidden = list.length > 0;
     if (!list.length) {
-      const hiddenMatches = state.q && SLV.ofType(T.type).some((e) => !SLV.visible(e) && norm(state.q).split(/\s+/).every((t) => e._hay.includes(t)));
+      /* the list is empty, so any match on the full (manhwa) index is a withheld spoiler */
+      const hiddenMatches = !SLV.spoilers.on && state.q && SLV.ofType(T.type).some((e) => norm(state.q).split(/\s+/).every((t) => e._hayAll.includes(t)));
       empty.innerHTML = SLV.stateHTML("empty", "No records found",
         hiddenMatches ? "Matching records exist, but they are manhwa spoilers. Turn on spoilers to see them." : "Nothing in this collection matches your filters.",
         `<div class="chip-row" style="justify-content:center"><button type="button" class="btn" data-reset>Reset filters</button>${hiddenMatches ? '<button type="button" class="btn primary" data-unlock>Reveal spoilers</button>' : ""}</div>`);

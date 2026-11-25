@@ -26,9 +26,19 @@
     if (!e) return "";
     return `<button type="button" class="rel-chip" data-open="${esc(id)}" style="--c:${SLV.colorOf(e)}">${SLV.artHTML(e)}<span>${esc(S.name(e))}${note ? ` <small>· ${esc(note)}</small>` : ""}</span></button>`;
   };
-  const spoilerBlock = (html, label = "Manhwa spoiler") => SLV.spoilers.on ? html
-    : `<div class="spoiler-block"><div class="sb-head">${SLV.ICON.lock.replace("<svg", '<svg width="14" height="14"')}${esc(label)}</div>
-        <div class="sb-body">${html}</div><div class="sb-reveal"><button type="button" class="btn sm" data-reveal>Reveal this once</button></div></div>`;
+  /* Sealed text is kept out of the DOM until revealed, so screen readers,
+     find-in-page and translation tools can't read it through the blur.
+     The block shows placeholder bars of roughly the right length instead. */
+  const sealedHTML = new Map();
+  const spoilerBlock = (html, label = "Manhwa spoiler") => {
+    if (SLV.spoilers.on) return html;
+    const key = "s" + sealedHTML.size;
+    sealedHTML.set(key, html);
+    const lines = Math.min(6, Math.max(1, Math.round(html.replace(/<[^>]+>/g, "").length / 70)));
+    const bars = Array.from({ length: lines }, (_, i) => `<span class="sb-bar" style="width:${i === lines - 1 && lines > 1 ? 55 : 92 + (i % 2) * 6}%"></span>`).join("");
+    return `<div class="spoiler-block" data-sealed="${key}"><div class="sb-head">${SLV.ICON.lock.replace("<svg", '<svg width="14" height="14"')}${esc(label)}</div>
+        <div class="sb-body" aria-hidden="true">${bars}</div><div class="sb-reveal"><button type="button" class="btn sm" data-reveal>Reveal this once</button></div></div>`;
+  };
   const row = (k, v) => v ? `<div class="k">${esc(k)}</div><div>${v}</div>` : "";
   const orgNames = (e) => (e.orgs || []).map((o) => SLV.get(o)).filter((o) => o && SLV.visible(o))
     .map((o) => `<button type="button" class="badge" data-open="${o.id}" style="--c:${o.color}">${esc(o.name)}</button>`).join(" ");
@@ -171,6 +181,7 @@
 
   /* -------------------------------------------------------------- render */
   function render() {
+    sealedHTML.clear();
     const e = ent(state.id);
     const { box } = root;
     const col = SLV.colorOf(e);
@@ -276,7 +287,12 @@
     if (tab) { state.tab = tab.dataset.tab; render(); const b = root.box.querySelector(`[data-tab="${state.tab}"]`); if (b) b.focus(); return; }
     const o = t.closest("[data-open]");
     if (o) { const id = o.dataset.open; const list = state.list.includes(id) ? state.list : [...state.list, id]; return open(id, { list }); }
-    if (t.closest("[data-reveal]")) { t.closest(".spoiler-block").classList.add("revealed"); return; }
+    if (t.closest("[data-reveal]")) {
+      const blk = t.closest(".spoiler-block"), body = blk.querySelector(".sb-body");
+      body.innerHTML = sealedHTML.get(blk.dataset.sealed) || ""; body.removeAttribute("aria-hidden");
+      blk.classList.add("revealed"); body.setAttribute("tabindex", "-1"); body.focus({ preventScroll: true });
+      return;
+    }
     if (t.closest("[data-unlock]")) { SLV.spoilers.set(true); return; }
     if (t.closest("[data-lightbox]") || t.closest(".v-art .art")) return lightbox(state.id, { list: state.list });
   }

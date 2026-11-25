@@ -24,7 +24,8 @@ Double Dungeon through the Jeju Island raid, roughly manhwa ch. 1–110).
 The **Manhwa spoilers** switch in the top bar (remembered per browser) unseals the rest:
 
 - whole records marked `sp: "m"` show as locked "Classified" cards until then, and never appear in search results;
-- text fields have manhwa twins (`bioM`, `titlesM`, `statusM`, `forms[].m`, `evolution[].m`), shown blurred with a *Reveal this once* button;
+- text fields have manhwa twins (`bioM`, `titlesM`, `statusM`, `forms[].m`, `evolution[].m`), shown as a sealed block with a *Reveal this once* button (the text isn't added to the page until revealed, so screen readers and find-in-page can't read it);
+- search uses an anime-safe index in anime mode: manhwa-only names, titles and guilds don't match, and are counted as withheld instead;
 - relationships and timeline events with `sp: "m"` are hidden or sealed;
 - Ashborn appears as "The Shadow Monarch" (`nameA`) until spoilers are on.
 

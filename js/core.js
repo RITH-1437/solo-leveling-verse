@@ -196,12 +196,26 @@
   SLV.linkLabel = (t) => LINK_LABEL[t] || ({ member: "Affiliation", wields: "Equipment", skill: "Skills", source: "Places & sources" }[t] || t);
 
   /* --------------------------------------------------------------- search */
-  function haystack(e) {
-    return norm([e.name, e.nameA, ...(e.alt || []), e.ko, ...(e.titles || []), ...(e.titlesM || []), e.role, e.domain, e.king,
+  /* Two indexes per entity: `m` (everything) and `a` (anime-safe). The anime
+     one leaves out manhwa-only names, titles and guilds, so a search such as
+     "white flames" can't confirm a spoiler on an entry that is itself visible. */
+  function haystack(e, m) {
+    const anime = !m && !isSpoiler(e);
+    return norm([anime && e.nameA ? "" : e.name, e.nameA, ...(anime && e.altM ? [] : e.alt || []), e.ko, ...(e.titles || []),
+      ...(anime ? [] : [...(e.titlesM || []), e.domain, e.king]), e.role,
       e.type, e.kind, e.country, e.rank && SLV.rank(e.rank).label, e.origin, e.ability, e.bio,
-      ...(e.orgs || []).map((o) => (SLV.org(o) || {}).name)].filter(Boolean).join(" "));
+      ...(e.orgs || []).map((o) => SLV.org(o) || {}).filter((o) => !anime || !isSpoiler(o)).map((o) => o.name)].filter(Boolean).join(" "));
   }
-  all.forEach((e) => { e._hay = haystack(e); e._name = norm([e.name, e.nameA, ...(e.alt || []), e.ko].join(" ")); });
+  const nameKey = (e, m) => {
+    const anime = !m && !isSpoiler(e);
+    return norm([anime && e.nameA ? "" : e.name, e.nameA, ...(anime && e.altM ? [] : e.alt || []), e.ko].filter(Boolean).join(" "));
+  };
+  all.forEach((e) => {
+    const hay = { a: haystack(e, false), m: haystack(e, true) }, nm = { a: nameKey(e, false), m: nameKey(e, true) };
+    e._hayAll = hay.m;
+    Object.defineProperty(e, "_hay", { get: () => SLV.spoilers.on ? hay.m : hay.a, configurable: true });
+    Object.defineProperty(e, "_name", { get: () => SLV.spoilers.on ? nm.m : nm.a, configurable: true });
+  });
   /* Returns { results:[entity], hidden:Number } — hidden = spoiler matches withheld. */
   SLV.search = (q, { limit = 30, types = null } = {}) => {
     const terms = norm(q).split(/\s+/).filter(Boolean);
@@ -210,7 +224,11 @@
     const scored = [];
     all.forEach((e) => {
       if (types && !types.includes(e._type)) return;
-      if (!terms.every((t) => e._hay.includes(t))) return;
+      if (!terms.every((t) => e._hay.includes(t))) {
+        /* matches only on manhwa details: count it as withheld, don't show it */
+        if (terms.every((t) => e._hayAll.includes(t))) hidden++;
+        return;
+      }
       if (!visible(e)) { hidden++; return; }
       let s = 0;
       terms.forEach((t) => {
@@ -263,11 +281,14 @@
     skill: '<path d="M150 112l56 88-56 88-56-88z" fill="none" stroke-width="8"/><path d="M150 150l26 50-26 50-26-50z"/>',
     org: '<path d="M150 112l72 30v52c0 46-32 78-72 94-40-16-72-48-72-94v-52z" fill="none" stroke-width="9"/><path d="M150 152l34 14v26c0 22-16 38-34 46-18-8-34-24-34-46v-26z"/>'
   };
+  let sigilCount = 0;
   SLV.sigil = (e, { label = true } = {}) => {
     const type = e._type === "monarch" && e.kind === "ruler" ? "ruler" : e._type;
     const col = SLV.colorOf(e);
     const r = util.rng(util.hash(e.id));
-    const uid = "sg" + util.hash(e.id).toString(36);
+    /* unique per drawing: the same entity can appear twice on a page, and
+       duplicate gradient ids break when the first copy is hidden */
+    const uid = "sg" + util.hash(e.id).toString(36) + "-" + (++sigilCount).toString(36);
     const ticks = Array.from({ length: 36 }, (_, i) => {
       const a = (i / 36) * Math.PI * 2, l = r() > 0.6 ? 14 : 6;
       const x1 = 150 + Math.cos(a) * 118, y1 = 200 + Math.sin(a) * 118;
