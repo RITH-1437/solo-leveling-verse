@@ -193,6 +193,14 @@ SLV.data.characters = [
     abilities: ["Swordsmanship (kumdo)"], weapons: [], forms: []
   },
   {
+    id: "goto_ryuji", name: "Goto Ryuji", alt: ["Ryuji Goto", "Goto"],
+    titles: ["Japan's strongest hunter", "Master of the Draw Sword Guild"],
+    rank: "S", rankNote: "Japan's strongest hunter, ranked just below the national level.", orgs: [], role: "Guild master", country: "Japan", status: "Deceased",
+    first: "Anime Season 2", arc: "jeju",
+    bio: "Japan's strongest hunter and master of the Draw Sword Guild. He leads the Japanese team that joins Korea's S-ranks for the Jeju Island raid, and is killed there when the Ant King appears. His death leaves a power vacuum among Japan's hunters.",
+    abilities: [], weapons: [], forms: []
+  },
+  {
     id: "min_byunggu", name: "Min Byung-gu", ko: "민병구", alt: [],
     titles: ["Korea's only S-rank healer"],
     rank: "S", rankNote: "The only S-rank healer in South Korea.", orgs: [], role: "Healer", country: "South Korea", status: "Deceased",

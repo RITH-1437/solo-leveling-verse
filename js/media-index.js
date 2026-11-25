@@ -21,6 +21,7 @@ window.MEDIA_INDEX = [
   "assets/hunters/baek_yoonho.webp",
   "assets/hunters/choi_jongin.webp",
   "assets/hunters/christopher_reed.webp",
+  "assets/hunters/goto_ryuji.webp",
   "assets/hunters/hwang_dongsoo.webp",
   "assets/hunters/hwang_dongsuk.webp",
   "assets/hunters/kang_taeshik.webp",

@@ -59,7 +59,7 @@ SLV.data.timeline = [
     ids: ["park_kyunghye", "holy_water_of_life"] },
   { id: "t_jeju", arc: "jeju", when: "Anime S2 finale", kind: "shadow", title: "The Jeju Island raid",
     text: "Korea's S-ranks and a Japanese team strike the ant nest. The newborn Ant King devours Min Byung-gu and overwhelms the raid until Jinwoo arrives, kills him and raises him as Beru, along with an army of ants.",
-    ids: ["jeju_island", "ant_king", "beru", "cha_haein", "choi_jongin", "baek_yoonho", "min_byunggu"] },
+    ids: ["jeju_island", "ant_king", "beru", "cha_haein", "choi_jongin", "baek_yoonho", "min_byunggu", "goto_ryuji"] },
 
   { id: "t_ahjin", arc: "ahjin", when: "Manhwa", kind: "milestone", sp: "m", title: "The Ahjin Guild",
     text: "Jinwoo founds the Ahjin Guild, with Yoo Jinho as his vice guild master.",
@@ -131,6 +131,7 @@ SLV.data.links = [
   { a: "ashborn", b: "rakan", t: "enemy", label: "Rebelled against him", sp: "m" },
   { a: "the_rulers", b: "antares", t: "enemy", label: "Eternal war", sp: "m" },
   { a: "beru", b: "min_byunggu", t: "enemy", label: "Devoured, took his healing" },
+  { a: "beru", b: "goto_ryuji", t: "enemy", label: "Killed him on Jeju" },
   { a: "baek_yoonho", b: "min_byunggu", t: "ally", label: "Close friends" },
 
   /* monarch hierarchy */
