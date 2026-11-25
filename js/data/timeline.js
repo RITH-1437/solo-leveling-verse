@@ -116,6 +116,7 @@ SLV.data.links = [
   /* enemies */
   { a: "sung_jinwoo", b: "hwang_dongsuk", t: "enemy", label: "Killed the traitor" },
   { a: "sung_jinwoo", b: "kim_chul", t: "enemy", label: "Killed in the Red Gate" },
+  { a: "sung_jinwoo", b: "kang_taeshik", t: "enemy", label: "Killed the assassin" },
   { a: "sung_jinwoo", b: "baran", t: "enemy", label: "Defeated in the Demon Castle" },
   { a: "sung_jinwoo", b: "hwang_dongsoo", t: "enemy", label: "Revenge, then death", sp: "m" },
   { a: "sung_jinwoo", b: "antares", t: "enemy", label: "Final battle", sp: "m" },

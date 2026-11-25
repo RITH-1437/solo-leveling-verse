@@ -201,6 +201,15 @@ SLV.data.characters = [
     abilities: ["Heavy armor combat"], weapons: [], forms: []
   },
   {
+    id: "kang_taeshik", name: "Kang Taeshik", ko: "강태식", alt: ["Kang Tae-shik"],
+    titles: ["B-Rank assassin of the Association"],
+    rank: "B", orgs: ["kha"], role: "Assassin", country: "South Korea", status: "Deceased",
+    first: "Anime S1 E3", arc: "awakening",
+    bio: "A B-rank assassin-type hunter from the Hunters Association's surveillance division, assigned to escort a raid of convict hunters. He is secretly a contract killer: inside the dungeon he murders the prisoners he was sent to watch, then turns on Jinwoo, who kills him in their fight (S1 E9).",
+    bioM: "In the manhwa, defeating him earns Jinwoo a rune stone holding his Stealth ability.",
+    abilities: ["Assassin-type combat", "Stealth"], weapons: [], forms: []
+  },
+  {
     id: "esil_radiru", name: "Esil Radiru", alt: ["Esil"],
     titles: ["Demon noble of the Radiru house"],
     rank: "-", orgs: [], role: "Demon noble", country: "—", status: "Active",

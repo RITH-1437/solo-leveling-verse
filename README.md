@@ -5,8 +5,8 @@ gates & dungeons, monsters, weapons, skills, a world timeline and the **Shadow N
 relationship map. It is built on the same architecture as `../naruto-verse`, with its own
 "System window" identity.
 
-Currently **100 records**: 22 characters, 9 Monarchs + 3 Rulers/cosmic beings, 10 shadows,
-11 gates & dungeons, 16 monsters, 9 items, 12 skills, 23 timeline events and 62 explicit relationships.
+Currently **101 records**: 23 characters, 9 Monarchs + 3 Rulers/cosmic beings, 10 shadows,
+11 gates & dungeons, 16 monsters, 9 items, 12 skills, 23 timeline events and 63 explicit relationships.
 
 ## Run it
 
@@ -113,7 +113,7 @@ Edit or remove it in `js/data/items.js`.
 
 ## Testing done
 
-- `tools/check_site.py`: all local links, script order and 100 records' cross-references resolve.
+- `tools/check_site.py`: all local links, script order and 101 records' cross-references resolve.
 - Headless Chrome on all 5 pages at desktop (1440), tablet (820) and mobile (390): no console errors, no failed
   requests, no horizontal overflow.
 - 68 automated interaction checks: viewer tabs, deep links, keyboard, lightbox, global search incl. spoiler
