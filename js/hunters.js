@@ -1,5 +1,5 @@
 /* ==========================================================================
-   SOLO LEVELING VERSE: hunter database (hunters.html)
+   SOLO LEVELING VERSE: hunter database (html/hunters.html)
    Rank distribution, national-level spotlight, a sortable / filterable
    registry table, guild directory and a by-country breakdown.
    ========================================================================== */
@@ -25,7 +25,7 @@
     $("#tiers").innerHTML = W.ranks.filter((r) => r.id !== "-").map((r) => {
       const n = hunters.filter((c) => c.rank === r.id).length;
       const hid = sealed.filter((c) => c.rank === r.id).length;
-      return `<button type="button" class="tier" data-rank="${r.id}" aria-pressed="${state.rank === r.id}" style="--c:${r.color}">
+      return `<button type="button" class="tier" data-rank="${r.id}" aria-pressed="${state.rank === r.id}" aria-label="${esc(r.label)}: ${n} hunter${n === 1 ? "" : "s"}${hid ? `, ${hid} sealed` : ""}. Filter the registry" style="--c:${r.color}">
         <span class="rank${r.id === "National" ? " nat" : ""}" style="--c:${r.color}">${r.id === "National" ? "NAT" : r.id}</span>
         <span><span class="tier-name">${esc(r.label)}${hid ? ` <small style="color:var(--danger);font-size:11px">+${hid} sealed</small>` : ""}</span>
           <span class="tier-bar"><span style="width:${(n / max) * 100}%"></span></span><span class="tier-note">${esc(r.note)}</span></span>
@@ -89,7 +89,7 @@
         <td>${org.length ? org.map((o) => `<span class="badge" style="--c:${o.color}">${esc(o.name)}</span>`).join(" ") : '<span style="color:var(--text-faint)">Independent</span>'}</td>
         <td>${esc(c.country)}</td>
         <td style="color:var(--text-soft)">${esc(c.role || "")}</td>
-        <td><span class="badge" style="--c:${/Deceased/.test(st) ? "#ff4d6a" : /Missing|Hospital/.test(st) ? "#f59e0b" : "#3ed598"}">${esc(st)}</span></td>
+        <td><span class="badge" style="--c:${/Deceased/.test(st) ? "#ff4d6a" : /Missing|Hospital/.test(st) ? "#f59e0b" : /Not stated|Unknown/.test(st) ? "#8b95ad" : "#3ed598"}">${esc(st)}</span></td>
         <td style="color:var(--text-soft);white-space:nowrap">${esc(S.arc(c.arc))}</td></tr>`;
     }).join("");
     $("#h-empty").hidden = list.length > 0;
@@ -112,7 +112,7 @@
       return `<div class="sys guild" style="--c:${o.color}">
         <span class="badge" style="--c:${o.color}">${o.kind === "guild" ? "Guild" : "Association"} · ${esc(o.country)}</span>
         <div style="display:flex;align-items:center;gap:12px">${SLV.media.art(o) ? `<img src="${SLV.media.art(o)}" alt="" width="52" height="52" loading="lazy" style="flex:none;object-fit:contain;filter:drop-shadow(0 0 8px ${o.color})">` : ""}<h3>${esc(o.name)}</h3></div><p>${esc(o.note)}</p>
-        <div class="members">${members.map((c) => `<button type="button" class="rel-chip" data-id="${c.id}" style="--c:${SLV.colorOf(c)}">${SLV.artHTML(c)}<span>${esc(S.name(c))} <small>· ${esc(c.rank === "-" ? "Unranked" : c.rank)}</small></span></button>`).join("") || '<span style="color:var(--text-faint);font-size:13px">No members on record.</span>'}</div>
+        <div class="members">${members.map((c) => `<button type="button" class="rel-chip" data-id="${c.id}" style="--c:${SLV.colorOf(c)}">${SLV.artHTML(c)}<span>${esc(S.name(c))} <small>· ${esc(c.rank === "-" ? "Unranked" : c.rank === "?" ? "Grade not stated" : c.rank)}</small></span></button>`).join("") || '<span style="color:var(--text-faint);font-size:13px">No members on record.</span>'}</div>
         <button type="button" class="btn sm" data-filter-org="${o.id}" style="align-self:flex-start">Filter registry →</button></div>`;
     }).join("");
   }
@@ -128,7 +128,7 @@
   function renderAll() { tiers(); national(); selects(); table(); guilds(); countries(); }
 
   /* -------------------------------------------------------------- events */
-  function goRegistry() { $("#registry").scrollIntoView({ behavior: "smooth", block: "start" }); }
+  function goRegistry() { $("#registry").scrollIntoView({ behavior: SLV.util.reducedMotion() ? "auto" : "smooth", block: "start" }); }
   function bind() {
     document.addEventListener("click", (e) => {
       if (e.target.closest(".viewer, .palette, .lightbox, .nav")) return;

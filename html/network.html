@@ -6,12 +6,12 @@
   <title>Shadow Network | Solo Leveling Verse</title>
   <meta name="description" content="Interactive relationship map of Solo Leveling: family, allies, enemies, guilds, Monarchs, Rulers and the Shadow Army hierarchy." />
   <meta name="theme-color" content="#04050c" />
-  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg" />
+  <link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/system.css" />
-  <link rel="stylesheet" href="css/network.css" />
+  <link rel="stylesheet" href="../css/system.css" />
+  <link rel="stylesheet" href="../css/network.css" />
 </head>
 <body data-page="network">
   <header id="nav"></header>
@@ -38,10 +38,11 @@
             <button type="button" role="radio" aria-checked="false" data-view="army">Shadow Army</button>
           </div>
 
+          <p class="sr-only" id="net-status" role="status" aria-live="polite"></p>
           <div id="flow-wrap">
             <nav class="flow-trail" id="flow-trail" aria-label="Recently viewed"></nav>
             <div class="chip-row flow-groups" id="flow-groups" aria-label="Relationship kinds"></div>
-            <div class="flow" id="flow" aria-live="polite">
+            <div class="flow" id="flow">
               <svg class="flow-lines" id="flow-lines" aria-hidden="true"></svg>
               <div class="flow-col" id="flow-left"></div>
               <div class="flow-centre" id="flow-centre"></div>
@@ -49,7 +50,7 @@
             </div>
           </div>
 
-          <div class="army" id="army" hidden aria-live="polite">
+          <div class="army" id="army" hidden>
             <svg class="flow-lines" id="army-lines" aria-hidden="true"></svg>
             <div id="army-body"></div>
           </div>
@@ -60,18 +61,18 @@
 
   <noscript><p style="padding:20px;text-align:center">The Shadow Network needs JavaScript.</p></noscript>
 
-  <script src="js/data/world.js"></script>
-  <script src="js/data/characters.js"></script>
-  <script src="js/data/monarchs.js"></script>
-  <script src="js/data/shadows.js"></script>
-  <script src="js/data/gates.js"></script>
-  <script src="js/data/items.js"></script>
-  <script src="js/data/skills.js"></script>
-  <script src="js/data/timeline.js"></script>
-  <script src="js/media-index.js"></script>
-  <script src="js/core.js"></script>
-  <script src="js/viewer.js"></script>
-  <script src="js/shell.js"></script>
-  <script src="js/network.js"></script>
+  <script src="../js/data/world.js"></script>
+  <script src="../js/data/characters.js"></script>
+  <script src="../js/data/monarchs.js"></script>
+  <script src="../js/data/shadows.js"></script>
+  <script src="../js/data/gates.js"></script>
+  <script src="../js/data/items.js"></script>
+  <script src="../js/data/skills.js"></script>
+  <script src="../js/data/timeline.js"></script>
+  <script src="../js/media-index.js"></script>
+  <script src="../js/core.js"></script>
+  <script src="../js/viewer.js"></script>
+  <script src="../js/shell.js"></script>
+  <script src="../js/network.js"></script>
 </body>
 </html>

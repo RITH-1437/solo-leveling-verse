@@ -122,9 +122,32 @@ select {
   position: absolute !important;
   width: 1px;
   height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
   overflow: hidden;
   clip: rect(0 0 0 0);
   white-space: nowrap;
+}
+.skip-link {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 1000;
+  padding: 10px 16px;
+  background: #070a18;
+  color: #fff;
+  border: 1px solid var(--cyan);
+  font: 600 14px/1 var(--display, sans-serif);
+  letter-spacing: 1px;
+  transform: translateY(-160%);
+  transition: transform 0.15s;
+}
+.skip-link:focus {
+  transform: none;
+}
+main:focus {
+  outline: none;
 }
 kbd {
   display: inline-block;

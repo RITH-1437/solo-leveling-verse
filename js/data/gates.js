@@ -52,13 +52,13 @@ SLV.data.gates = [
     id: "job_change_dungeon", kind: "dungeon", name: "Job Change Dungeon", alt: [], cls: "",
     titles: ["The trial for Jinwoo's class"], first: "Anime S1 finale", arc: "jobchange", color: "#ef4444",
     bio: "The System's Job Change quest drops Jinwoo into an endless wave of undead knights and mages, and finally into a duel with the Blood-Red Commander Igris. Surviving earns him the hidden class bound to shadows and his first Shadow Extraction.",
-    bosses: [], shadows: ["igris", "shadow_infantry"]
+    bosses: ["igris_knight"], monsters: ["job_change_knights"], shadows: ["igris", "shadow_knights", "shadow_infantry"]
   },
   {
     id: "orc_gate", kind: "dungeon", name: "High Orc Gate", alt: [], cls: "",
     titles: ["Home of Kargalgan"], first: "Anime Season 2", arc: "reawakening", color: "#22c55e",
     bio: "A gate full of high orcs under the shaman Kargalgan. Jinwoo slays the orc army and raises Kargalgan as his shadow mage, Tusk.",
-    monsters: ["high_orcs"], shadows: ["tusk"]
+    bosses: ["kargalgan"], monsters: ["high_orcs"], shadows: ["tusk", "shadow_orcs"]
   },
   {
     id: "red_gate_incident", kind: "dungeon", name: "The Red Gate Incident", alt: [], cls: "",
@@ -70,13 +70,19 @@ SLV.data.gates = [
     id: "demon_castle", kind: "dungeon", name: "Demon Castle", alt: ["Demon's Castle"], cls: "",
     titles: ["A hundred floors to the Demon King"], first: "Anime Season 2", arc: "demoncastle", color: "#a855f7", featured: true,
     bio: "A huge instant dungeon Jinwoo climbs floor by floor to collect the Holy Water of Life that can cure his mother. Its guardian Cerberus, the demon noble Vulcan, and finally Demon King Baran at the summit stand in his way.",
-    bosses: ["cerberus", "vulcan"], monsters: ["demons"], shadows: ["kaisel"]
+    bosses: ["cerberus", "vulcan", "baran"], monsters: ["demons", "kaisellin"], shadows: ["kaisel"]
   },
   {
     id: "jeju_island", kind: "dungeon", name: "Jeju Island", alt: ["The Ant Nest"], cls: "S",
     titles: ["The S-class gate that took an island"], first: "Anime Season 2", arc: "jeju", color: "#f6c453", featured: true,
     bio: "Years before the story an S-class gate on Jeju Island broke, and giant ants overran the island. Raids failed and the island was abandoned until Korea's top hunters and a Japanese team launched a new raid. The Ant Queen's newborn king, the Ant King, slaughtered hunters until Jinwoo arrived and turned the ants into his army.",
-    bosses: ["ant_queen"], monsters: ["jeju_ants"], shadows: ["beru", "shadow_infantry"]
+    bosses: ["ant_queen", "ant_king"], monsters: ["jeju_ants"], shadows: ["beru", "shadow_ants", "shadow_infantry"]
+  },
+  {
+    id: "japan_gate", kind: "dungeon", name: "The Giants' Gate in Japan", alt: ["Japan Crisis"], cls: "S",
+    titles: ["The gate that nearly took Japan"], first: "Manhwa", arc: "japan", sp: "m", color: "#d6a35c",
+    bio: "An S-class gate in Japan releases an army of giants. With Goto Ryuji and many of Japan's top hunters already lost on Jeju Island, the country cannot hold them back alone. Sung Jinwoo and his army step in, and the crisis ends with the death of the giants' king, Legia.",
+    bosses: ["legia"], monsters: ["giants"]
   }
 ];
 
@@ -88,11 +94,20 @@ SLV.data.monsters = [
   { id: "stone_statues", kind: "monster", name: "Stone Statues", alt: [], home: "double_dungeon",
     first: "Anime S1 E1–E2", arc: "double", color: "#94a3b8",
     bio: "The temple's carved guardians (musicians, a sword-bearer and more) that come alive and kill anyone who doesn't follow the commandments." },
+  { id: "steel_fanged_lycan", kind: "monster", name: "Steel-Fanged Lycans", alt: ["Lycans"], home: "instant_dungeon",
+    first: "Anime Season 1", arc: "awakening", color: "#64748b",
+    bio: "Wolf-like beasts with steel-hard fangs that fill the first instant dungeon Jinwoo enters, an early hunting ground where he levels up in secret." },
   { id: "giant_centipedes", kind: "monster", name: "Giant Centipedes", alt: [], home: "penalty_zone",
     first: "Anime Season 1", arc: "awakening", color: "#eab308",
     bio: "Enormous centipedes that burrow through the Penalty Zone's sand, hunting Jinwoo for four hours." },
   { id: "kasaka", kind: "boss", name: "Kasaka", alt: ["Rasaka"], home: "", first: "Anime Season 1", arc: "awakening", color: "#0ea5e9",
     bio: "A giant blue serpent and one of the first bosses Jinwoo defeated alone. Its fang became his dagger, Kasaka's Venom Fang." },
+  { id: "job_change_knights", kind: "race", name: "Knights of the Job Change", alt: ["Undead knights"], home: "job_change_dungeon",
+    first: "Anime S1 finale", arc: "jobchange", color: "#94a3b8",
+    bio: "The armored soldiers and knights the Job Change quest throws at Jinwoo wave after wave before their commander Igris takes the field. Afterwards they rise again as his first shadows.", becameShadow: "shadow_knights" },
+  { id: "igris_knight", kind: "boss", name: "Blood-Red Commander Igris", alt: ["Igris (boss)"], home: "job_change_dungeon",
+    first: "Anime S1 finale", arc: "jobchange", color: "#ef4444",
+    bio: "The crimson-plumed knight commander at the end of the Job Change quest: a swordsman fast and strong enough to push Jinwoo to his limit. Defeating him completes the quest, and he rises as the shadow Igris.", becameShadow: "igris" },
   { id: "high_orcs", kind: "race", name: "High Orcs", alt: [], home: "orc_gate", first: "Anime Season 2", arc: "reawakening", color: "#16a34a",
     bio: "Far tougher than ordinary orcs, organised into an army with warriors and shamans. Jinwoo turns many of them into shadow soldiers." },
   { id: "kargalgan", kind: "boss", name: "Kargalgan", alt: [], home: "orc_gate", first: "Anime Season 2", arc: "reawakening", color: "#22c55e",
@@ -107,6 +122,8 @@ SLV.data.monsters = [
     bio: "The three-headed hound guarding the Demon Castle's entrance." },
   { id: "vulcan", kind: "boss", name: "Vulcan", alt: [], home: "demon_castle", first: "Anime Season 2", arc: "demoncastle", color: "#f97316",
     bio: "A giant demon lord who blocks Jinwoo's way in the Demon Castle." },
+  { id: "kaisellin", kind: "monster", name: "Kaisellin", alt: ["Baran's wyvern"], home: "demon_castle", first: "Anime Season 2", arc: "demoncastle", color: "#64748b",
+    bio: "The wyvern Demon King Baran rides into battle at the top of the Demon Castle. After Baran falls, Jinwoo raises it as his flying mount, Kaisel.", becameShadow: "kaisel" },
   { id: "demons", kind: "race", name: "Demons", alt: [], home: "demon_castle", first: "Anime Season 2", arc: "demoncastle", color: "#a855f7",
     bio: "The inhabitants of the Demon Castle, from soldiers to nobles. Hunting them is the only way up the castle's floors." },
   { id: "ant_queen", kind: "boss", name: "Ant Queen", alt: [], home: "jeju_island", first: "Anime Season 2", arc: "jeju", color: "#f59e0b",
@@ -116,5 +133,9 @@ SLV.data.monsters = [
   { id: "ant_king", kind: "boss", name: "Ant King", alt: [], home: "jeju_island", first: "Anime Season 2", arc: "jeju", color: "#a78bfa", featured: true,
     bio: "The Ant Queen's offspring, born to be king: fast, flying, and hungry for strong opponents. He nearly wipes out the Jeju raid before Jinwoo kills him and raises him as Beru.", becameShadow: "beru" },
   { id: "kamish", kind: "boss", name: "Kamish", alt: ["Khamish"], home: "", first: "Manhwa", arc: "pre", sp: "m", color: "#b91c1c",
-    bio: "A dragon whose rampage years before the story is one of the worst disasters of the gate era, overcome only at the cost of many hunters' lives. A fang from its body was forged into the daggers Kamish's Wrath. Long after its death, Jinwoo raises it briefly as a shadow.", becameShadow: "kamish_shadow" }
+    bio: "A dragon whose rampage years before the story is one of the worst disasters of the gate era, overcome only at the cost of many hunters' lives. A fang from its body was forged into the daggers Kamish's Wrath. (A shadow of Kamish is listed in the Shadow Army but marked Unverified.)", becameShadow: "kamish_shadow" },
+  { id: "giants", kind: "race", name: "Giants", alt: [], home: "japan_gate", first: "Manhwa", arc: "japan", sp: "m", color: "#d6a35c",
+    bio: "The colossal race ruled by Legia, the Monarch of the Beginning. They pour out of an S-class gate in Japan and rampage across the country until Sung Jinwoo's army stops them." },
+  { id: "dragons", kind: "race", name: "Dragons", alt: ["Dragon army"], home: "", first: "Manhwa", arc: "monarchs", sp: "m", color: "#e0443e",
+    bio: "The army of Antares, the Monarch of Destruction and King of Dragons. He leads them against Sung Jinwoo and the Shadow Army in the final battle of the Monarchs War." }
 ];

@@ -12,12 +12,38 @@
      SLV.search    ranked global search
      SLV.media     artwork lookup through the generated media index
      SLV.sigil     generated "System" artwork for entries without a picture
+     SLV.base      relative path from the current page to the site root
+                   ("" for index.html, "../" for pages in html/)
+     SLV.path(p)   root-relative path (assets/…, index.html) → usable href
+     SLV.page(n)   page file name (archive.html#shadows) → href to html/<n>
    ========================================================================== */
 
 (() => {
   "use strict";
   const SLV = (window.SLV = window.SLV || {});
   const D = SLV.data || {};
+
+  /* ----------------------------------------------------------- base path */
+  /* Worked out from where core.js itself was loaded (always <root>/js/core.js),
+     so a page in any folder finds assets and other pages without a per-page
+     setting. Works over http:// and file://. */
+  SLV.base = (() => {
+    try {
+      const me = document.currentScript || [...document.scripts].find((s) => /js\/core\.js(\?|$)/.test(s.src));
+      const root = new URL("../", me.src).href;
+      const dir = new URL(".", location.href).href;
+      if (!dir.startsWith(root)) return root;
+      const depth = dir.slice(root.length).split("/").filter(Boolean).length;
+      return "../".repeat(depth);
+    } catch (e) { return typeof location !== "undefined" && /\/html\/[^/]*$/.test(location.pathname) ? "../" : ""; }
+  })();
+  const isAbs = (p) => /^(?:[a-z][a-z0-9+.-]*:|\/|#)/i.test(p);
+  SLV.path = (p) => (!p || isAbs(p) ? p : SLV.base + p);
+  SLV.page = (name) => {
+    if (!name || isAbs(name)) return name;
+    const file = name.split(/[?#]/)[0];
+    return SLV.path(file === "index.html" ? name : "html/" + name);
+  };
 
   /* ------------------------------------------------------------------ util */
   const util = {
@@ -252,17 +278,17 @@
     /* Path of the entity's artwork if one exists in assets/, else null. */
     art(e) {
       if (!e) return null;
-      if (e.image) return e.image;
+      if (e.image) return SLV.path(e.image);
       if (!INDEX) return null;
       for (const f of (SLV.types[e._type] || {}).folders || []) {
-        for (const x of EXTS) { const p = `assets/${f}/${e.id}.${x}`; if (INDEX.has(p)) return p; }
+        for (const x of EXTS) { const p = `assets/${f}/${e.id}.${x}`; if (INDEX.has(p)) return SLV.path(p); }
       }
       return null;
     },
     video(e) {
       if (!e || !INDEX) return null;
-      if (e.video && INDEX.has(e.video)) return e.video;
-      for (const x of ["mp4", "webm"]) { const p = `assets/videos/${e.id}.${x}`; if (INDEX.has(p)) return p; }
+      if (e.video && INDEX.has(e.video)) return SLV.path(e.video);
+      for (const x of ["mp4", "webm"]) { const p = `assets/videos/${e.id}.${x}`; if (INDEX.has(p)) return SLV.path(p); }
       return null;
     }
   };
@@ -350,7 +376,8 @@
   /* ------------------------------------------------------------------ urls */
   SLV.url = {
     view: (id) => { const u = new URL(location.href); u.searchParams.set("view", id); return u.pathname.split("/").pop() + u.search + u.hash; },
-    archive: (tab) => `archive.html#${tab}`,
-    network: (id) => `network.html${id ? "?focus=" + encodeURIComponent(id) : ""}`
+    archive: (tab) => SLV.page(`archive.html#${tab}`),
+    network: (id) => SLV.page(`network.html${id ? "?focus=" + encodeURIComponent(id) : ""}`),
+    timeline: (id) => SLV.page(`timeline.html${id ? "#" + encodeURIComponent(id) : ""}`)
   };
 })();

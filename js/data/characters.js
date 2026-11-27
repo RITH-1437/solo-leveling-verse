@@ -126,6 +126,22 @@ SLV.data.characters = [
     abilities: [], weapons: [], forms: []
   },
   {
+    id: "adam_white", name: "Adam White", alt: [],
+    titles: ["Agent of the Hunter Bureau"],
+    rank: "-", rankNote: "No hunter grade is given for him.", orgs: ["hunter_bureau"], role: "Bureau agent", country: "United States", status: "Active",
+    first: "Manhwa", arc: "ahjin", sp: "m",
+    bio: "An agent of America's Hunter Bureau who serves as the Bureau's contact with Sung Jinwoo when the United States invites him to its International Guild Conference, and ends up on friendly terms with him.",
+    abilities: [], weapons: [], forms: []
+  },
+  {
+    id: "norma_selner", name: "Norma Selner", alt: ["Selner"],
+    titles: ["American hunter with an awakening ability"],
+    rank: "?", rankNote: "Her official grade isn't stated.", orgs: [], role: "Support · Awakening", country: "United States", status: "Active",
+    first: "Manhwa", arc: "ahjin", sp: "m",
+    bio: "An elderly American hunter whose rare ability draws out the hidden potential of other hunters. When she turns it on Sung Jinwoo, what she glimpses of the power inside him terrifies her.",
+    abilities: ["Drawing out hidden potential"], weapons: [], forms: []
+  },
+  {
     id: "lennart_niermann", name: "Lennart Niermann", alt: ["Lennart"],
     titles: ["Germany's strongest hunter", "Master of the Richter Guild"],
     rank: "S", rankNote: "Ranked 12th in the world.", orgs: [], role: "Guild master", country: "Germany", status: "Active",
@@ -195,9 +211,17 @@ SLV.data.characters = [
   {
     id: "goto_ryuji", name: "Goto Ryuji", alt: ["Ryuji Goto", "Goto"],
     titles: ["Japan's strongest hunter", "Master of the Draw Sword Guild"],
-    rank: "S", rankNote: "Japan's strongest hunter, ranked just below the national level.", orgs: [], role: "Guild master", country: "Japan", status: "Deceased",
+    rank: "S", rankNote: "Japan's strongest hunter, ranked just below the national level.", orgs: ["draw_sword"], role: "Guild master", country: "Japan", status: "Deceased",
     first: "Anime Season 2", arc: "jeju",
     bio: "Japan's strongest hunter and master of the Draw Sword Guild. He leads the Japanese team that joins Korea's S-ranks for the Jeju Island raid, and is killed there when the Ant King appears. His death leaves a power vacuum among Japan's hunters.",
+    abilities: [], weapons: [], forms: []
+  },
+  {
+    id: "matsumoto_shigeo", name: "Matsumoto Shigeo", alt: ["Shigeo Matsumoto"],
+    titles: ["Chairman of the Japanese Hunters Association"],
+    rank: "-", rankNote: "His own hunter grade isn't stated.", orgs: ["japan_ha"], role: "Association Chairman", country: "Japan", status: "Not stated",
+    first: "Jeju Island arc", arc: "jeju",
+    bio: "The head of Japan's Hunters Association. He sends Goto Ryuji and a team of Japanese hunters to join Korea's raid on Jeju Island, where Goto is killed once the Ant King appears.",
     abilities: [], weapons: [], forms: []
   },
   {
@@ -217,11 +241,19 @@ SLV.data.characters = [
     abilities: ["Heavy armor combat"], weapons: [], forms: []
   },
   {
+    id: "han_songyi", name: "Han Song-yi", ko: "한송이", alt: ["Song-yi Han"],
+    titles: ["Red Gate survivor"],
+    rank: "?", rankNote: "A hunter in training; her official grade isn't stated.", orgs: [], role: "Trainee hunter", country: "South Korea", status: "Active",
+    first: "Anime Season 2", arc: "redgate",
+    bio: "One of the young trainees trapped with Jinwoo inside the Red Gate. She lives through the ice elves' attacks and Kim Chul turning on the group because Jinwoo protects the trainees.",
+    abilities: [], weapons: [], forms: []
+  },
+  {
     id: "kang_taeshik", name: "Kang Taeshik", ko: "강태식", alt: ["Kang Tae-shik"],
     titles: ["B-Rank assassin of the Association"],
     rank: "B", orgs: ["kha"], role: "Assassin", country: "South Korea", status: "Deceased",
-    first: "Anime S1 E3", arc: "awakening",
-    bio: "A B-rank assassin-type hunter from the Hunters Association's surveillance division, assigned to escort a raid of convict hunters. He is secretly a contract killer: inside the dungeon he murders the prisoners he was sent to watch, then turns on Jinwoo, who kills him in their fight (S1 E9).",
+    first: "Anime Season 1", arc: "awakening",
+    bio: "A B-rank assassin-type hunter from the Hunters Association's surveillance division, assigned to escort a raid of convict hunters. He is secretly a contract killer: inside the dungeon he murders the prisoners he was sent to watch, then turns on Jinwoo, who kills him in their fight.",
     bioM: "In the manhwa, defeating him earns Jinwoo a rune stone holding his Stealth ability.",
     abilities: ["Assassin-type combat", "Stealth"], weapons: [], forms: []
   },

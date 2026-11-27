@@ -5,8 +5,9 @@ gates & dungeons, monsters, weapons, skills, a world timeline and the **Shadow N
 relationship map. It is built on the same architecture as `../naruto-verse`, with its own
 "System window" identity.
 
-Currently **103 records**: 25 characters, 9 Monarchs + 3 Rulers/cosmic beings, 10 shadows,
-11 gates & dungeons, 16 monsters, 9 items, 12 skills, 23 timeline events and 65 explicit relationships.
+Currently **126 records**: 29 characters, 9 Monarchs + 3 Rulers/cosmic beings, 13 shadows,
+12 gates & dungeons, 22 monsters, 11 items, 16 skills and 11 guilds/organisations, plus 28 timeline events
+and 86 explicit relationships. In the default anime-safe mode 20 characters, 10 shadows and 45 relationships are visible.
 
 ## Run it
 
@@ -14,6 +15,8 @@ No build step, no dependencies, no backend.
 
 - Double-click `index.html`, **or**
 - serve the folder (VS Code Live Server, or `python -m http.server`) and open `index.html`.
+
+`index.html` is the only page at the root; every other page lives in `html/`.
 
 Only Google Fonts load from a CDN. Everything else is local, and the site works offline and from `file://`.
 
@@ -34,14 +37,14 @@ The **Manhwa spoilers** switch in the top bar (remembered per browser) unseals t
 | Page | What it does |
 |---|---|
 | `index.html` | Dashboard: hero with typed System notifications and mana particles, world stats, featured hunters, Monarchs, top-hunter ladder, Shadow Army rail, explore grid, latest additions |
-| `archive.html` | 7 collections behind tabs (`#characters`, `#monarchs`, `#shadows`, `#gates`, `#monsters`, `#items`, `#skills`), with search, per-tab facets, sort, anime/manhwa filter and pagination (`#shadows/2`) |
-| `hunters.html` | Hunter Database: rank distribution, national-level & S-rank spotlight, sortable registry table, guild directory, hunters by country |
-| `timeline.html` | Arc rail with scroll-spy, event-type filters, glowing progress spine, sealed manhwa events, deep links (`timeline.html#t_redgate`) |
-| `network.html` | Shadow Network: SVG map with 5 toggleable layers, *Universe* vs *Shadow Army hierarchy* layouts, pan / wheel / pinch zoom, detail panel, find-a-node (`?focus=igris&layout=army`) |
+| `html/archive.html` | 7 collections behind tabs (`#characters`, `#monarchs`, `#shadows`, `#gates`, `#monsters`, `#items`, `#skills`), with search, per-tab facets, sort, anime/manhwa filter and pagination (`html/archive.html#shadows/2`) |
+| `html/hunters.html` | Hunter Database: rank distribution, national-level & S-rank spotlight, sortable registry table, guild directory, hunters by country |
+| `html/timeline.html` | Arc rail with scroll-spy, event-type filters, glowing progress spine, sealed manhwa events, deep links (`html/timeline.html#t_redgate`) |
+| `html/network.html` | Shadow Network: pick anyone to put them in the centre, with their connections grouped into boxes (family, powers & origins, guilds, allies, rivals, enemies, Shadow Army) and curved lines to each; group toggles, a path trail, a find-anyone list, and a *Shadow Army* chart by grade (`html/network.html?focus=igris`, `html/network.html?layout=army`) |
 
 On every page: **Ctrl/⌘ + K** or **/** opens the global search. Any record opens in the **status window**
 (Overview / Abilities / Relations / History / Transformations), and **⛶ Full screen** shows its artwork
-(shadows enter with an *ARISE* effect). `?view=<id>` deep-links any record on any page.
+(shadows enter with an *ARISE* effect). `?view=<id>` deep-links any record on any page (`index.html?view=igris`, `html/hunters.html?view=cha_haein`).
 **Esc** closes, and **← / →** step through the current list.
 
 ## Adding artwork (character / hunter / Monarch / shadow pictures)
@@ -74,7 +77,8 @@ To use a different filename, set `image: "assets/…"` on the record instead.
 
 ```text
 solo-leveling-verse/
-├── index.html  archive.html  hunters.html  timeline.html  network.html
+├── index.html     the only page at the root
+├── html/          archive.html  hunters.html  timeline.html  network.html  (they load ../css, ../js, ../assets)
 ├── css/
 │   ├── system.css     design tokens, System window, buttons, cards, nav, search palette, viewer, lightbox, states
 │   ├── home.css       dashboard          ├── archive.css   archive + hunter database
@@ -83,22 +87,30 @@ solo-leveling-verse/
 │   ├── data/          world.js (ranks, grades, gate classes, orgs, arcs, changelog), characters.js,
 │   │                  monarchs.js, shadows.js, gates.js (+ monsters), items.js, skills.js, timeline.js (+ links)
 │   ├── media-index.js GENERATED list of files in assets/
-│   ├── core.js        registry, spoilers, relations graph, search, media lookup, sigil art, data validation
+│   ├── core.js        base path (SLV.base / SLV.path / SLV.page), registry, spoilers, relations graph, search, media lookup, sigil art, data validation
 │   ├── viewer.js      status window + full-screen artwork
-│   ├── shell.js       nav, footer, global search, spoiler switch, toasts, cards, ?view= deep links
+│   ├── shell.js       skip link, nav, global search, spoiler switch, toasts, cards, ?view= deep links
 │   └── home.js  archive.js  hunters.js  timeline.js  network.js
 ├── assets/            characters/ hunters/ monarchs/ shadows/ weapons/ monsters/ backgrounds/ skills/ guilds/ videos/ icons/
 └── tools/
     ├── build_media_index.py   rebuild js/media-index.js after changing assets/
-    └── check_site.py          checks links, script order, media paths and every data reference
+    └── check_site.py          checks folder layout, links, script order, JS page links, media paths and data references
 ```
 
-`network.html` replaces the Naruto project's `scroll.html`: a parchment "scroll" doesn't fit this universe, and the
+### Links and paths
+
+Pages in `html/` sit one folder below the root, so `core.js` works out `SLV.base` (empty on `index.html`,
+`../` in `html/`) from its own script URL. Build page links with `SLV.page("archive.html#shadows")`
+(gives `html/archive.html#shadows`, or `index.html` for the dashboard) and root files with `SLV.path("assets/...")`.
+Artwork paths in `js/media-index.js` stay root-relative and get the prefix automatically, over `http://` and `file://`.
+
+`html/network.html` replaces the Naruto project's `scroll.html`: a parchment "scroll" doesn't fit this universe, and the
 page is a network map, not a family tree.
 
 ## Adding or editing content
 
-- **New record:** add an object to the matching file in `js/data/` with a unique `id`. Cards, search, filters, the viewer,
+- **New record:** add an object to the matching file in `js/data/` with a unique `id`. A hunter whose grade the story
+  never gives uses `rank: "?"` ("Rank not stated"); `"-"` is for people with no hunter grade. Cards, search, filters, the viewer,
   the network (for characters / Monarchs / shadows / guilds) and the hunter database pick it up automatically.
 - **Relationships:** add `{ a, b, t, label, sp }` to `SLV.data.links` in `timeline.js`
   (`t`: family, spouse, ally, rival, enemy, shadow, origin, vessel, successor, creator, command, mount).
@@ -110,18 +122,32 @@ page is a network map, not a family tree.
 
 Content keeps to facts from the anime and manhwa. Where the source was uncertain, details were left out
 (for example unstated shadow grades show "Not stated"; Yogumunt has no epithet row).
-**Shadow Scythe** is kept on request but marked **Unverified**: it isn't among the weapons Jinwoo uses in the original story.
-Edit or remove it in `js/data/items.js`.
+Hunters whose grade or fate isn't given show "Rank not stated" / "Not stated" instead of a guess.
+Two records are kept but marked **Unverified** (badged on cards and in the status window):
+
+- **Shadow Scythe** (`js/data/items.js`): it isn't among the weapons Jinwoo uses in the original story.
+- **Kamish (shadow)** (`js/data/shadows.js`): no reliable source confirms Jinwoo raising the long-dead dragon, and Shadow
+  Extraction is known to fail on bodies that have been dead too long.
+
+Lower-confidence details from the first release, worth checking against the source: Lennart Niermann's world ranking
+and guild, the name of Goto Ryuji's guild (Draw Sword) and the shadow grades of Iron and Tank.
 
 ## Testing done
 
-- `tools/check_site.py`: all local links, script order and 103 records' cross-references resolve.
-- Headless Chrome on all 5 pages at desktop (1440), tablet (820) and mobile (390): no console errors, no failed
-  requests, no horizontal overflow.
-- 68 automated interaction checks: viewer tabs, deep links, keyboard, lightbox, global search incl. spoiler
-  withholding, archive search / facets / sort / pagination / empty state, spoiler switch + persistence, hunter table
-  sort and filters, timeline reveal / filters / deep link, network zoom / pan / select / layers / army layout / find /
-  `?focus=`, and the mobile menu, viewer and network.
-- Artwork pipeline verified over `http://` and `file://` with a test image (removed afterwards).
+Last full run: 2026-11-27.
+
+- `python tools/build_media_index.py` and `python tools/check_site.py`: folder layout (only `index.html` at the root),
+  every local link and script resolved from each page's own folder, JS page links, 100 media files and 126 records'
+  cross-references.
+- Headless Chrome (cache disabled) on all 5 pages plus archive / network deep links, at 1440, 820, 390 and 320 px, in
+  both spoiler modes: no console errors or warnings, no failed requests, no horizontal overflow.
+- 128 automated checks: viewer tabs (incl. arrow / Home / End keys), prev / next, deep links, focus trap and focus return,
+  lightbox (incl. focus trap), sealed text kept out of the DOM, global search incl. spoiler withholding and focus trap,
+  skip link, archive search / facets / sort / pagination / tab keys / empty state, spoiler switch + persistence, hunter
+  table sort / tier / country filters / keyboard rows, timeline reveal / filters / deep links, network focus / group
+  toggles / Shadow Army chart / find / `?focus=` / `?layout=army` / radiogroup keys, reduced motion (static notification,
+  idle particle canvas), and the mobile menu, viewer and network.
+- Every link on `index.html` and on each `html/` page, the search palette's quick links and the viewer's timeline and
+  network links, followed over both `http://` and `file://`: all load with no 404s, and artwork renders on `html/` pages.
 
 Fan-made and non-commercial. *Solo Leveling* belongs to Chugong, DUBU (REDICE Studio) and the anime to A-1 Pictures.

@@ -29,6 +29,7 @@ SLV.data.world = {
     { id: "C", label: "C-Rank", n: 3, color: "#4f8dff", note: "Mid-grade hunters, the backbone of most raids." },
     { id: "D", label: "D-Rank", n: 2, color: "#3ed598", note: "Low-grade hunters." },
     { id: "E", label: "E-Rank", n: 1, color: "#8b95ad", note: "The weakest awakened grade." },
+    { id: "?", label: "Rank not stated", n: 0, color: "#7d89a3", note: "An awakened hunter whose official grade the story doesn't give." },
     { id: "-", label: "Unranked", n: 0, color: "#5b6478", note: "Not an awakened hunter, or no official grade." }
   ],
 
@@ -61,6 +62,12 @@ SLV.data.world = {
       note: "The national body that measures ranks, monitors gates and polices hunters. Chaired by Go Gunhee." },
     { id: "scavenger", name: "Scavenger Guild", kind: "guild", country: "United States", color: "#c9a24a", sp: "m",
       note: "America's strongest guild, led by Thomas Andre." },
+    { id: "draw_sword", name: "Draw Sword Guild", kind: "guild", country: "Japan", color: "#e11d48",
+      note: "The Japanese guild led by Goto Ryuji, Japan's strongest hunter." },
+    { id: "japan_ha", name: "Japanese Hunters Association", kind: "association", country: "Japan", color: "#f87171",
+      note: "Japan's national hunter body, chaired by Matsumoto Shigeo. It sends a Japanese team to join Korea's Jeju Island raid." },
+    { id: "hunter_bureau", name: "Hunter Bureau", kind: "association", country: "United States", color: "#60a5fa", sp: "m",
+      note: "The American government agency that oversees the country's hunters. Its agent Adam White is its contact with Sung Jinwoo." },
     { id: "shadow_army", name: "Shadow Army", kind: "faction", country: "Other world", color: "#8b5cf6",
       note: "The soldiers of the Shadow Monarch, raised from the dead by Shadow Extraction." },
     { id: "monarchs", name: "The Monarchs", kind: "faction", country: "Other world", color: "#e0443e", sp: "m",
@@ -98,6 +105,8 @@ SLV.data.world = {
 
   /* What changed on the site, newest first. "Latest additions" reads the top entry. */
   changelog: [
+    { date: "2026-11-27", note: "Update: more hunters from Korea, Japan and the US, System skills, the first soldiers of the Shadow Army, new monsters, timeline events and relationships.",
+      ids: ["han_songyi", "matsumoto_shigeo", "adam_white", "norma_selner", "daily_quest", "status_window", "shadow_knights", "shadow_ants", "steel_fanged_lycan", "kaisellin", "japan_gate"] },
     { date: "2026-11-25", note: "Archive opened: Monarchs War spoilers, Shadow Army grades and the Shadow Network.",
       ids: ["antares", "bellion", "kamishs_wrath", "monarchs_domain", "thomas_andre", "legia", "jeju_island", "demon_castle"] }
   ]

@@ -47,7 +47,7 @@
       ["Weapons & skills", vis("item").length + vis("skill").length, "archive.html#items"],
       ["Connections", links.length, "network.html"]
     ];
-    $("#stats").innerHTML = rows.map(([k, v, h], i) => `<a class="stat" href="${h}" style="--i:${i}"><dt>${k}</dt><dd data-count="${v}">${v}</dd></a>`).join("");
+    $("#stats").innerHTML = rows.map(([k, v, h], i) => `<a class="stat" href="${esc(SLV.page(h))}" style="--i:${i}"><dt>${k}</dt><dd data-count="${v}">${v}</dd></a>`).join("");
     if (!SLV.util.reducedMotion()) countUp();
   }
   function countUp() {
@@ -112,7 +112,7 @@
     $("#explore").innerHTML = TILES.map(([href, name, sub, t], i) => {
       const col = t === "timeline" ? "#5ec8ff" : t === "network" ? "#b06bff" : (SLV.types[t] || {}).color;
       const n = href === "hunters.html" ? SLV.ofType("character").filter((c) => SLV.visible(c) && c.rank !== "-").length : count(t);
-      return `<a class="tile sys reveal" href="${href}" style="--c:${col};--i:${i}">
+      return `<a class="tile sys reveal" href="${esc(SLV.page(href))}" style="--c:${col};--i:${i}">
         <span class="tile-n">${n}</span><span class="tile-name">${esc(name)}</span><span class="tile-sub">${esc(sub)}</span><span class="tile-go">→</span></a>`;
     }).join("");
     SLV.observeReveals($("#explore"));
@@ -139,6 +139,8 @@
     if (SLV.util.reducedMotion()) { el.textContent = LINES[0]; return; }
     let li = 0, ci = 0, del = false;
     const tick = () => {
+      /* pause while the tab is hidden or the hero is scrolled away */
+      if (document.hidden || window.scrollY > innerHeight * 1.5) return setTimeout(tick, 600);
       const line = LINES[li];
       if (!del) { ci++; el.textContent = line.slice(0, ci); if (ci >= line.length) { del = true; return setTimeout(tick, 2600); } }
       else { ci -= 3; el.textContent = line.slice(0, Math.max(0, ci)); if (ci <= 0) { del = false; li = (li + 1) % LINES.length; return setTimeout(tick, 350); } }
@@ -164,22 +166,32 @@
       vy: -(Math.random() * .45 + .15), vx: (Math.random() - .5) * .15, a: Math.random() * .6 + .2,
       hue: Math.random() < .55 ? "94,200,255" : "176,107,255"
     });
+    /* Pre-rendered glow sprites: one per hue, instead of a shadowBlur on
+       every particle every frame (much cheaper on low-end phones). */
+    const sprites = {};
+    ["94,200,255", "176,107,255"].forEach((hue) => {
+      const s = document.createElement("canvas"); s.width = s.height = 32;
+      const g = s.getContext("2d"), grd = g.createRadialGradient(16, 16, 0, 16, 16, 16);
+      grd.addColorStop(0, `rgba(${hue},1)`); grd.addColorStop(0.18, `rgba(${hue},.95)`); grd.addColorStop(0.45, `rgba(${hue},.28)`); grd.addColorStop(1, `rgba(${hue},0)`);
+      g.fillStyle = grd; g.fillRect(0, 0, 32, 32); sprites[hue] = s;
+    });
     const draw = () => {
       ctx.clearRect(0, 0, w, h);
       parts.forEach((p, i) => {
         p.x += p.vx; p.y += p.vy;
         if (p.y < -10) parts[i] = spawn(false);
-        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${p.hue},${p.a})`; ctx.shadowBlur = 8; ctx.shadowColor = `rgba(${p.hue},.9)`; ctx.fill();
+        const d = p.r * 9;
+        ctx.globalAlpha = p.a; ctx.drawImage(sprites[p.hue], p.x - d / 2, p.y - d / 2, d, d);
       });
+      ctx.globalAlpha = 1;
       if (running) raf = requestAnimationFrame(draw);
     };
     resize(); draw();
     window.addEventListener("resize", SLV.util.debounce(resize, 150));
-    if ("IntersectionObserver" in window) new IntersectionObserver(([en]) => {
-      running = en.isIntersecting; cancelAnimationFrame(raf); if (running) draw();
-    }).observe(cv);
-    document.addEventListener("visibilitychange", () => { running = !document.hidden; cancelAnimationFrame(raf); if (running) draw(); });
+    let onScreen = true;
+    const sync = () => { running = onScreen && !document.hidden; cancelAnimationFrame(raf); if (running) draw(); };
+    if ("IntersectionObserver" in window) new IntersectionObserver(([en]) => { onScreen = en.isIntersecting; sync(); }).observe(cv);
+    document.addEventListener("visibilitychange", sync);
   }
 
   /* -------------------------------------------------------------- events */
@@ -194,7 +206,7 @@
       const rb = e.target.closest("[data-rail]");
       if (rb) {
         const rail = rb.closest(".section").querySelector(".rail");
-        rail.scrollBy({ left: Number(rb.dataset.rail) * rail.clientWidth * .8, behavior: "smooth" });
+        rail.scrollBy({ left: Number(rb.dataset.rail) * rail.clientWidth * .8, behavior: SLV.util.reducedMotion() ? "auto" : "smooth" });
       }
     });
     $("#random").addEventListener("click", () => {

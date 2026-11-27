@@ -41,16 +41,26 @@
     }
     return page;
   }
+  function skipLink() {
+    const main = document.querySelector("main");
+    if (!main) return;
+    if (!main.id) main.id = "main";
+    if (!main.hasAttribute("tabindex")) main.setAttribute("tabindex", "-1");
+    const a = document.createElement("a");
+    a.className = "skip-link"; a.href = "#" + main.id; a.textContent = "Skip to content";
+    a.addEventListener("click", (e) => { e.preventDefault(); main.focus({ preventScroll: true }); main.scrollIntoView(); });
+    document.body.prepend(a);
+  }
   function buildNav() {
     const nav = $("#nav");
     if (!nav) return;
     nav.className = "nav";
     nav.innerHTML = `
       <div class="wrap nav-inner">
-        <a class="brand" href="index.html" aria-label="Solo Leveling Verse dashboard">${BRAND_MARK}
+        <a class="brand" href="${esc(SLV.page("index.html"))}" aria-label="Solo Leveling Verse dashboard">${BRAND_MARK}
           <span class="brand-text"><span class="bt-full">Solo Leveling</span><span class="bt-short">SL</span> <em>Verse</em></span></a>
         <nav class="nav-links" id="nav-links" aria-label="Main">
-          ${LINKS.map(([k, href, label]) => `<a href="${href}" data-key="${k}">${label}</a>`).join("")}
+          ${LINKS.map(([k, href, label]) => `<a href="${esc(SLV.page(href))}" data-key="${k}">${label}</a>`).join("")}
         </nav>
         <div class="nav-tools">
           <button type="button" class="btn sm nav-search" id="open-search" aria-label="Search the archive (Ctrl+K)">
@@ -168,6 +178,7 @@
       <div class="field"><span class="ico">${ICON.search}</span>
         <input class="input" id="pal-q" type="search" autocomplete="off" spellcheck="false" placeholder="Search characters, shadows, gates, skills…" aria-controls="pal-results" aria-autocomplete="list"></div>
       <div class="palette-results" id="pal-results" role="listbox" aria-label="Results"></div>
+      <p class="sr-only" id="pal-status" role="status" aria-live="polite"></p>
       <div class="palette-foot"><span><kbd>↑</kbd> <kbd>↓</kbd> move</span><span><kbd>Enter</kbd> open</span><span><kbd>Esc</kbd> close</span></div>`;
     document.body.append(scrim, box);
     pal = { scrim, box };
@@ -179,6 +190,14 @@
       if (e.key === "ArrowDown") { e.preventDefault(); movePal(1); }
       else if (e.key === "ArrowUp") { e.preventDefault(); movePal(-1); }
       else if (e.key === "Enter") { e.preventDefault(); const it = palItems[palSel]; if (it) choose(it); }
+    });
+    /* keep Tab inside the dialog (aria-modal) */
+    box.addEventListener("keydown", (e) => {
+      if (e.key !== "Tab") return;
+      const f = [...box.querySelectorAll("input, button")].filter((x) => x.offsetParent !== null);
+      if (!f.length) return;
+      if (e.shiftKey && document.activeElement === f[0]) { e.preventDefault(); f[f.length - 1].focus(); }
+      else if (!e.shiftKey && document.activeElement === f[f.length - 1]) { e.preventDefault(); f[0].focus(); }
     });
     box.addEventListener("click", (e) => {
       const b = e.target.closest("[data-pi]");
@@ -212,13 +231,15 @@
     const out = $("#pal-results", pal.box);
     const { results, hidden } = SLV.search(text, { limit: 40 });
     if (!text.trim()) {
-      palItems = QUICK.map(([href, name, sub]) => ({ href, name, sub }));
+      palItems = QUICK.map(([href, name, sub]) => ({ href: SLV.page(href), name, sub }));
       out.innerHTML = `<div class="palette-note" style="text-align:left;padding:8px 10px 4px;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--text-faint)">Jump to</div>` +
         palItems.map((it, i) => `<button type="button" class="pr-item" role="option" data-pi="${i}" aria-selected="${i === palSel}">
           <span><span class="pr-name">${esc(it.name)}</span><br><span class="pr-sub">${esc(it.sub)}</span></span></button>`).join("");
       return;
     }
     palItems = results.map((e) => ({ id: e.id, e }));
+    const st = $("#pal-status", pal.box);
+    if (st) st.textContent = `${palItems.length} result${palItems.length === 1 ? "" : "s"}${hidden ? `, ${hidden} hidden as spoilers` : ""}`;
     const hiddenNote = hidden ? `<div class="palette-note">${hidden} more result${hidden > 1 ? "s are" : " is"} hidden as manhwa spoilers.<br>
       <button type="button" class="btn sm" data-unlock>Reveal spoilers</button></div>` : "";
     if (!palItems.length) {
@@ -254,14 +275,18 @@
     const b = document.createElement("button");
     b.type = "button"; b.className = "btn icon to-top sys"; b.hidden = true; b.setAttribute("aria-label", "Back to top"); b.textContent = "↑";
     document.body.appendChild(b);
-    const on = () => { b.hidden = window.scrollY < 900; };
-    window.addEventListener("scroll", on, { passive: true }); on();
-    b.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+    let ticking = false;
+    const on = () => { ticking = false; const h = window.scrollY < 900; if (b.hidden !== h) b.hidden = h; };
+    window.addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(on); } }, { passive: true }); on();
+    b.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: SLV.util.reducedMotion() ? "auto" : "smooth" });
+      const first = document.querySelector(".skip-link, .brand"); if (first) first.focus({ preventScroll: true });
+    });
   }
 
   /* ---------------------------------------------------------------- boot */
   function boot() {
-    buildNav(); backToTop();
+    skipLink(); buildNav(); backToTop();
     if (!SLV.ready) {
       const main = document.querySelector("main");
       if (main) main.innerHTML = `<div class="wrap">${SLV.stateHTML("error", "Archive offline",

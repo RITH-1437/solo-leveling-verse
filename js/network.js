@@ -1,5 +1,5 @@
 /* ==========================================================================
-   SOLO LEVELING VERSE: Shadow Network (network.html)
+   SOLO LEVELING VERSE: Shadow Network (html/network.html)
    --------------------------------------------------------------------------
    Two structured views instead of one big tangle:
    "Relationships"  one person in a centre card, their connections grouped by
@@ -8,7 +8,7 @@
                     name. Click a name to put them in the centre.
    "Shadow Army"    a top-down chart: the Shadow Monarch, then one row per
                     grade, highest first.
-   Deep links: network.html?focus=<id>   network.html?layout=army
+   Deep links: html/network.html?focus=<id>   html/network.html?layout=army
    ========================================================================== */
 
 (() => {
@@ -87,6 +87,7 @@
     $("#flow-trail").innerHTML = state.trail.length > 1
       ? "<span>Path:</span>" + state.trail.map((id, i) => `${i ? '<span aria-hidden="true">›</span>' : ""}<button type="button" data-goto="${id}"${id === state.focus ? ' aria-current="true"' : ""}>${esc(S.name(SLV.get(id)))}</button>`).join("")
       : "<span>Click any name to put them in the centre.</span>";
+    const st = $("#net-status"); if (st) st.textContent = `${S.name(c)} in the centre: ${people} connection${people === 1 ? "" : "s"}.`;
     flow.classList.remove("enter"); void flow.offsetWidth; flow.classList.add("enter");
     requestAnimationFrame(drawLines);
   }
@@ -130,6 +131,7 @@
         <div class="army-grid">${l.sort((a, b) => S.name(a).localeCompare(S.name(b))).map((s) => `<div class="fr" data-row="${s.id}"><button type="button" class="fr-go" data-profile="${s.id}">${SLV.artHTML(s)}<span><b>${esc(S.name(s))}</b><small>${esc(s.origin ? "In life: " + s.origin : S.subtitle(s))}</small></span></button>
           <button type="button" class="fr-open" data-goto="${s.id}" aria-label="See ${esc(S.name(s))}'s relationships" title="See relationships">⇄</button></div>`).join("")}</div></section>`).join("")}
       ${hidden ? `<p class="flow-none">${hidden} more shadow${hidden === 1 ? "" : "s"} hidden as manhwa spoilers.</p>` : ""}`;
+    const st = $("#net-status"); if (st) st.textContent = `Shadow Army chart: ${shadows.length} shadow${shadows.length === 1 ? "" : "s"} by grade.`;
     $("#army").classList.remove("enter"); void $("#army").offsetWidth; $("#army").classList.add("enter");
     requestAnimationFrame(drawLines);
   }
@@ -157,7 +159,7 @@
   };
   function setView(v) {
     state.view = v;
-    document.querySelectorAll("#views [data-view]").forEach((b) => b.setAttribute("aria-checked", String(b.dataset.view === v)));
+    document.querySelectorAll("#views [data-view]").forEach((b) => { b.setAttribute("aria-checked", String(b.dataset.view === v)); b.tabIndex = b.dataset.view === v ? 0 : -1; });
     $("#flow-wrap").hidden = v !== "flow";
     $("#army").hidden = v !== "army";
     if (v === "flow") drawFlow(); else drawArmy();
@@ -202,6 +204,13 @@
   flow.addEventListener("mouseover", (ev) => { const r = ev.target.closest(".fr"); hot(r ? r.dataset.row : null); });
   flow.addEventListener("mouseleave", () => hot(null));
   flow.addEventListener("focusin", (ev) => { const r = ev.target.closest(".fr"); hot(r ? r.dataset.row : null); });
+  /* radiogroup keyboard: arrows move the selection */
+  $("#views").addEventListener("keydown", (ev) => {
+    if (!["ArrowRight", "ArrowLeft", "ArrowUp", "ArrowDown"].includes(ev.key)) return;
+    ev.preventDefault();
+    const v = state.view === "flow" ? "army" : "flow";
+    setView(v); const b = $(`#views [data-view="${v}"]`); if (b) b.focus();
+  });
   $("#rel-q").addEventListener("input", SLV.util.debounce((ev) => { state.q = ev.target.value; drawList(); }, 100));
   $("#rel-q").addEventListener("keydown", (ev) => { if (ev.key === "Enter") { const b = $("#rel-list [data-goto]"); if (b) { ev.preventDefault(); b.click(); } } });
   SLV.spoilers.onChange(() => {

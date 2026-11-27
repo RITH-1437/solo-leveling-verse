@@ -1,7 +1,7 @@
 /* ==========================================================================
    SOLO LEVELING VERSE: skills & abilities
    --------------------------------------------------------------------------
-   type: "Active" | "Passive" | "Command" | "Authority" | "Class"
+   type: "Active" | "Passive" | "Command" | "Authority" | "Class" | "System"
    users[] = entity ids who use the skill.
    ========================================================================== */
 
@@ -9,6 +9,18 @@ window.SLV = window.SLV || {};
 SLV.data = SLV.data || {};
 
 SLV.data.skills = [
+  { id: "daily_quest", name: "Daily Quest", alt: ["Strength Training", "Preparations to Become Powerful"], type: "System", users: ["sung_jinwoo"],
+    first: "Anime Season 1", arc: "awakening", color: "#5ec8ff", featured: true,
+    bio: "Every day the System orders 100 push-ups, 100 sit-ups, 100 squats and a 10 km run. Completing it restores Jinwoo and pays out rewards; failing it sends him to the Penalty Zone." },
+  { id: "status_window", name: "Status Window", alt: ["Stats", "Level Up"], type: "System", users: ["sung_jinwoo"],
+    first: "Anime Season 1", arc: "awakening", color: "#4f8dff",
+    bio: "The System's readout of Jinwoo's level, job, title, HP and MP, and his five stats: Strength, Agility, Sense, Vitality and Intelligence. Every level-up brings stat points he can assign freely, so unlike any other hunter he can keep getting stronger." },
+  { id: "inventory", name: "Inventory", alt: [], type: "System", users: ["sung_jinwoo"],
+    first: "Anime Season 1", arc: "awakening", color: "#60a5fa",
+    bio: "A storage space only Jinwoo can open. Weapons, potions, keys and quest rewards wait there until he calls them to hand." },
+  { id: "system_shop", name: "Shop", alt: ["System Shop"], type: "System", users: ["sung_jinwoo"],
+    first: "Anime Season 1", arc: "awakening", color: "#93c5fd",
+    bio: "The System's store, where Jinwoo spends the gold he earns from quests and hunting on potions, equipment and other items." },
   { id: "shadow_extraction", name: "Shadow Extraction", alt: [], type: "Class", users: ["sung_jinwoo", "ashborn"],
     first: "Anime S1 finale", arc: "jobchange", color: "#8b5cf6", featured: true,
     bio: "Pulls the shadow out of a dead body and binds it to Jinwoo as a soldier. The stronger the target, and the longer it has been dead, the more likely the extraction is to fail. A failed shadow can be tried again only a few times before the body is lost for good." },

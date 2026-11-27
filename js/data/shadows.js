@@ -6,6 +6,7 @@
    origin     what the shadow was in life; originId links to another entity
    source     where Jinwoo extracted it (gates.js id)
    evolution  [{ grade, note, m }] the shadow's growth, in order
+   canon      "unverified" marks a record whose place in the story isn't confirmed (badged in the UI)
    Artwork: assets/shadows/<id>.webp
    ========================================================================== */
 
@@ -100,19 +101,44 @@ SLV.data.shadows = [
     id: "kamish_shadow", name: "Kamish", alt: ["Khamish", "Shadow of Kamish"],
     titles: ["The dragon's shadow"],
     grade: "", gradeTop: "", origin: "Kamish, the dragon slain years before the story",
-    source: "", first: "Manhwa", arc: "japan", sp: "m", color: "#b91c1c",
-    bio: "Years after the dragon's death, Jinwoo is allowed to see Kamish's remains and uses Shadow Extraction on them. Kamish rises as his shadow, but it had been dead too long: the shadow fades away after only a short time, making it the shortest-lived soldier of the army.",
+    source: "", first: "Unverified", arc: "japan", sp: "m", color: "#b91c1c", canon: "unverified",
+    bio: "Unverified. This record says Jinwoo raised the long-dead dragon Kamish as a short-lived shadow, but no reliable source confirms that the scene happens in the manhwa, and Shadow Extraction is known to fail on bodies that have been dead too long. It stays as a marked placeholder until a source confirms it. Edit or remove it in js/data/shadows.js.",
     abilities: ["Dragon (in life)"],
-    evolution: [
-      { grade: "", note: "Raised from the dragon's long-dead remains, then faded soon after.", m: 1 }
-    ]
+    evolution: []
+  },
+  {
+    id: "shadow_knights", name: "Shadow Knights", alt: ["The first shadows"],
+    titles: ["The army's first soldiers"],
+    grade: "", gradeTop: "", origin: "The knights who fought Jinwoo in the Job Change dungeon",
+    source: "job_change_dungeon", first: "Anime S1 finale", arc: "jobchange", color: "#94a3b8",
+    bio: "The armored knights who attacked Jinwoo wave after wave during his Job Change quest. Raised together with their commander Igris, they are the very first soldiers of the Shadow Army.",
+    abilities: ["Swordsmanship", "Heavy armor"],
+    evolution: [{ grade: "", note: "Raised at the end of the Job Change quest." }]
+  },
+  {
+    id: "shadow_orcs", name: "Shadow High Orcs", alt: ["Orc shadows"],
+    titles: ["The orc legion"],
+    grade: "", gradeTop: "", origin: "The high orc army of Kargalgan's gate",
+    source: "orc_gate", first: "Anime Season 2", arc: "reawakening", color: "#16a34a",
+    bio: "The high orc warriors Jinwoo cut down along with their shaman Kargalgan. Raised as shadows, the orcs, far tougher than ordinary orcs, become a large part of his army, with Tusk as their mage.",
+    abilities: ["Brute strength", "Numbers"],
+    evolution: [{ grade: "", note: "Raised in the high orc gate." }]
+  },
+  {
+    id: "shadow_ants", name: "Shadow Ants", alt: ["Ant shadows"],
+    titles: ["The swarm of Jeju Island"],
+    grade: "", gradeTop: "", origin: "The giant ants of the Jeju Island nest",
+    source: "jeju_island", first: "Anime S2 finale", arc: "jeju", color: "#ca8a04",
+    bio: "After the Jeju Island raid Jinwoo raises the nest's giant ants by the hundreds. The swarm that had held the island for years becomes one of the biggest units of his army, alongside its former king, Beru.",
+    abilities: ["Numbers", "Hard carapaces"],
+    evolution: [{ grade: "", note: "Raised after the Jeju Island raid." }]
   },
   {
     id: "shadow_infantry", name: "Shadow Infantry", alt: ["Shadow soldiers"],
     titles: ["The rank and file"],
     grade: "Normal", gradeTop: "", origin: "Monsters and soldiers Jinwoo has slain: knights, high orcs, ants and more", source: "",
     first: "Anime S1 finale", arc: "jobchange", color: "#6d28d9",
-    bio: "The bulk of the army: hundreds, and later thousands, of soldiers raised from slain monsters. Jinwoo's army swells after the Red Gate, the Demon Castle and above all Jeju Island, where he raises ants by the hundreds.",
+    bio: "The bulk of the army: hundreds, and later thousands, of soldiers raised from slain monsters. It began with the Job Change knights, grew with the high orcs and swelled above all on Jeju Island, where Jinwoo raised ants by the hundreds. Destroyed soldiers reform inside his shadow as long as he has mana.",
     abilities: ["Numbers", "Regenerate inside Jinwoo's shadow"],
     evolution: []
   }

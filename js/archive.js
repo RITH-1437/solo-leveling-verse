@@ -1,8 +1,8 @@
 /* ==========================================================================
-   SOLO LEVELING VERSE: archive (archive.html)
+   SOLO LEVELING VERSE: archive (html/archive.html)
    Seven collections behind tabs, each with its own facets and sort orders,
    plus search, content (anime / manhwa) filter and pagination.
-   URL: archive.html#<tab>/<page>   e.g. #shadows, #monarchs/2
+   URL: html/archive.html#<tab>/<page>   e.g. #shadows, #monarchs/2
    ========================================================================== */
 
 (() => {
@@ -27,7 +27,7 @@
   /* Facets: options() lists [value, label]; get(e) returns the value(s) of an entity. */
   const F = {
     rank: { label: "Rank", kind: "chips", get: (e) => e.rank,
-      options: () => W.ranks.filter((r) => SLV.ofType("character").some((c) => c.rank === r.id)).map((r) => [r.id, r.id === "National" ? "National" : r.id === "-" ? "Unranked" : r.id]) },
+      options: () => W.ranks.filter((r) => SLV.ofType("character").some((c) => c.rank === r.id && SLV.visible(c))).map((r) => [r.id, r.id === "National" ? "National" : r.id === "-" ? "Unranked" : r.id === "?" ? "Not stated" : r.id]) },
     org: { label: "Affiliation", kind: "select", get: (e) => (e.orgs && e.orgs.length ? e.orgs : ["none"]),
       options: () => [...W.orgs.filter((o) => o.kind !== "faction" || o.id === "shadow_army").filter((o) => SLV.visible(o)).map((o) => [o.id, o.name]), ["none", "Unaffiliated"]] },
     country: { label: "Country", kind: "select", get: (e) => e.country,
@@ -39,11 +39,11 @@
     gkind: { label: "Record", kind: "chips", get: (e) => e.kind, options: () => [["type", "Classifications"], ["dungeon", "Dungeons & events"]] },
     monkind: { label: "Kind", kind: "chips", get: (e) => e.kind, options: () => [["boss", "Bosses"], ["monster", "Monsters"], ["race", "Races"]] },
     home: { label: "Found in", kind: "select", get: (e) => e.home || "none",
-      options: () => [...SLV.ofType("gate").filter((g) => SLV.ofType("monster").some((m) => m.home === g.id)).map((g) => [g.id, g.name]), ["none", "Elsewhere"]] },
+      options: () => [...SLV.ofType("gate").filter((g) => SLV.visible(g) && SLV.ofType("monster").some((m) => m.home === g.id && SLV.visible(m))).map((g) => [g.id, g.name]), ["none", "Elsewhere"]] },
     itype: { label: "Type", kind: "select", get: (e) => e.type,
       options: () => [...new Set(SLV.ofType("item").filter(SLV.visible).map((i) => i.type))].map((t) => [t, t]) },
     stype: { label: "Type", kind: "chips", get: (e) => e.type,
-      options: () => [...new Set(SLV.ofType("skill").map((i) => i.type))].map((t) => [t, t]) },
+      options: () => [...new Set(SLV.ofType("skill").filter(SLV.visible).map((i) => i.type))].map((t) => [t, t]) },
     owner: { label: "Wielder", kind: "select", get: (e) => e.owners || [],
       options: () => [...new Set(SLV.ofType("item").flatMap((i) => i.owners || []))].map(SLV.get).filter((o) => o && SLV.visible(o)).map((o) => [o.id, S.name(o)]) }
   };
@@ -100,7 +100,7 @@
     $("#tabs").innerHTML = TAB_KEYS.map((k) => {
       const n = SLV.ofType(TABS[k].type).filter(SLV.visible).length;
       const all = SLV.ofType(TABS[k].type).length;
-      return `<button type="button" role="tab" class="tab" data-tab="${k}" aria-selected="${k === state.tab}">
+      return `<button type="button" role="tab" class="tab" id="tab-${k}" data-tab="${k}" aria-controls="grid" aria-selected="${k === state.tab}" tabindex="${k === state.tab ? 0 : -1}">
         ${esc(SLV.types[TABS[k].type].plural)}<span class="count">${n}${n < all ? `<i title="${all - n} hidden spoiler records">+${all - n}</i>` : ""}</span></button>`;
     }).join("");
   }
@@ -134,6 +134,7 @@
     const start = (state.page - 1) * state.per;
     const slice = list.slice(start, start + state.per);
     const grid = $("#grid");
+    grid.setAttribute("aria-labelledby", "tab-" + state.tab);
     grid.innerHTML = slice.map((e, i) => SLV.cardHTML(e, i)).join("");
     const locked = list.filter((e) => !SLV.visible(e)).length;
     const plural = SLV.types[T.type].plural.toLowerCase();
@@ -151,7 +152,7 @@
     }
     renderPager(pages);
     writeHash();
-    if (scroll) $("#tabs").scrollIntoView({ behavior: "smooth", block: "start" });
+    if (scroll) $("#tabs").scrollIntoView({ behavior: SLV.util.reducedMotion() ? "auto" : "smooth", block: "start" });
   }
 
   function pageList(cur, total) {
@@ -209,9 +210,11 @@
   function bind() {
     $("#tabs").addEventListener("click", (e) => { const b = e.target.closest("[data-tab]"); if (b) setTab(b.dataset.tab); });
     $("#tabs").addEventListener("keydown", (e) => {
-      if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+      if (!["ArrowRight", "ArrowLeft", "Home", "End"].includes(e.key)) return;
       e.preventDefault(); e.stopPropagation();
-      const i = TAB_KEYS.indexOf(state.tab), n = TAB_KEYS[(i + (e.key === "ArrowRight" ? 1 : -1) + TAB_KEYS.length) % TAB_KEYS.length];
+      const i = TAB_KEYS.indexOf(state.tab);
+      const n = e.key === "Home" ? TAB_KEYS[0] : e.key === "End" ? TAB_KEYS[TAB_KEYS.length - 1]
+        : TAB_KEYS[(i + (e.key === "ArrowRight" ? 1 : -1) + TAB_KEYS.length) % TAB_KEYS.length];
       setTab(n); const b = $(`#tabs [data-tab="${n}"]`); if (b) b.focus();
     });
     $("#facets").addEventListener("click", (e) => {

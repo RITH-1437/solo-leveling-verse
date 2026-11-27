@@ -11,6 +11,10 @@ window.SLV = window.SLV || {};
 SLV.data = SLV.data || {};
 
 SLV.data.items = [
+  { id: "instant_dungeon_key", name: "Instant Dungeon Keys", alt: ["Dungeon keys"], type: "Key",
+    owners: ["sung_jinwoo"], from: "instant_dungeon", first: "Anime Season 1", arc: "awakening", color: "#38bdf8",
+    ability: "Opens a dungeon only the Player can enter",
+    bio: "System items that open an instant dungeon for Jinwoo alone. He earns them as rewards and drops, and uses the dungeons behind them to train and level up out of sight of other hunters." },
   { id: "kasakas_venom_fang", name: "Kasaka's Venom Fang", alt: ["Rasaka's Fang"], type: "Dagger",
     owners: ["sung_jinwoo"], from: "kasaka", first: "Anime Season 1", arc: "awakening", color: "#0ea5e9",
     ability: "Paralysis and bleeding poison",
@@ -36,6 +40,10 @@ SLV.data.items = [
     owners: ["sung_jinwoo"], from: "kamish", first: "Manhwa", arc: "ahjin", sp: "m", color: "#b91c1c", featured: true,
     ability: "Among the strongest weapons on Earth",
     bio: "Twin daggers forged from a fang of the dragon Kamish. Thomas Andre gives them to Jinwoo, and they replace the Demon King's Daggers as his weapons of choice." },
+  { id: "demon_castle_key", name: "Demon Castle Key", alt: ["Key to the Demon Castle"], type: "Key",
+    owners: ["sung_jinwoo"], from: "", first: "Anime Season 2", arc: "demoncastle", color: "#a855f7",
+    ability: "Opens the Demon Castle",
+    bio: "The key to the Demon Castle, the vast instant dungeon Jinwoo climbs floor by floor in search of the Holy Water of Life." },
   { id: "holy_water_of_life", name: "Holy Water of Life", alt: ["Elixir of Life"], type: "Elixir",
     owners: ["sung_jinwoo", "park_kyunghye"], from: "demon_castle", first: "Anime Season 2", arc: "demoncastle", color: "#5eead4",
     ability: "Cures any illness, including the Eternal Sleep",

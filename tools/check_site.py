@@ -3,7 +3,10 @@
     python tools/check_site.py
 
 Checks, without a browser:
+  * the site root holds only index.html; every other page lives in html/
   * every local href/src in the HTML pages points at an existing file
+    (resolved from the page's own folder, so html/ pages need ../)
+  * page links built in JS (SLV.page("archive.html#…")) name real pages
   * every page loads the same data/core script order
   * every path in js/media-index.js exists on disk
   * the data layer loads in Node and SLV.validate() reports no broken ids
@@ -18,7 +21,7 @@ import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parent.parent
-PAGES = ["index.html", "archive.html", "hunters.html", "timeline.html", "network.html"]
+PAGES = ["index.html", "html/archive.html", "html/hunters.html", "html/timeline.html", "html/network.html"]
 CORE = ["js/data/world.js", "js/data/characters.js", "js/data/monarchs.js", "js/data/shadows.js",
         "js/data/gates.js", "js/data/items.js", "js/data/skills.js", "js/data/timeline.js",
         "js/media-index.js", "js/core.js", "js/viewer.js", "js/shell.js"]
@@ -38,16 +41,31 @@ console.log(JSON.stringify({ entities: ids.length, problems }));
 
 def main():
     errors = []
+    stray = sorted(p.name for p in ROOT.glob("*.html") if p.name != "index.html")
+    if stray:
+        errors.append("root: only index.html belongs at the root, move to html/: " + ", ".join(stray))
     for page in PAGES:
-        html = (ROOT / page).read_text(encoding="utf-8")
+        path = ROOT / page
+        if not path.exists():
+            errors.append(f"{page}: page missing")
+            continue
+        html = path.read_text(encoding="utf-8")
         for ref in re.findall(r'(?:href|src)="([^"#?:]+)(?:[#?][^"]*)?"', html):
             if ref.startswith(("http", "//", "mailto")) or ref == "":
                 continue
-            if not (ROOT / ref).exists():
+            if not (path.parent / ref).resolve().exists():
                 errors.append(f"{page}: missing {ref}")
-        scripts = re.findall(r'<script src="([^"]+)"', html)
-        if scripts[: len(CORE)] != CORE:
+        scripts = [(path.parent / s).resolve() for s in re.findall(r'<script src="([^"]+)"', html)]
+        if scripts[: len(CORE)] != [(ROOT / c).resolve() for c in CORE]:
             errors.append(f"{page}: script order differs from the shared core list")
+
+    # page names used by the JS link builders resolve to html/<name> (or index.html at the root)
+    for js in sorted((ROOT / "js").glob("*.js")):
+        src = js.read_text(encoding="utf-8")
+        for name in set(re.findall(r'["`]((?:index|archive|hunters|timeline|network)\.html)', src)):
+            target = ROOT / name if name == "index.html" else ROOT / "html" / name
+            if not target.exists():
+                errors.append(f"js/{js.name}: links to {name}, but {target.relative_to(ROOT)} is missing")
 
     idx = (ROOT / "js" / "media-index.js").read_text(encoding="utf-8")
     listed = json.loads(idx[idx.index("["): idx.rindex("]") + 1])

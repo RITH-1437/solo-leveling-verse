@@ -165,7 +165,7 @@
       return t.sp === "m" && !SLV.spoilers.on ? `<div class="form-step"><b style="color:var(--danger)">Classified event</b><span>A manhwa event. Enable spoilers to read it.</span></div>` : body;
     }).join("");
     return `<h4>Chronicle</h4><p>${esc(e.bio || e.note || "")}</p>${e.bioM ? spoilerBlock(`<p style="margin:0">${esc(e.bioM)}</p>`) : ""}
-      ${ev ? `<h4>On the timeline</h4><div class="form-steps">${ev}</div><div class="v-actions"><a class="btn sm" href="timeline.html#${events[0].id}">Open the timeline →</a></div>` : ""}`;
+      ${ev ? `<h4>On the timeline</h4><div class="form-steps">${ev}</div><div class="v-actions"><a class="btn sm" href="${esc(SLV.url.timeline(events[0].id))}">Open the timeline →</a></div>` : ""}`;
   }
 
   /* --------------------------------------------------------------- forms */
@@ -209,7 +209,7 @@
       r && r.id !== "-" ? `<span class="badge" style="--c:${r.color}">${esc(r.label)}</span>` : "",
       e._type === "shadow" && S.grade(e) ? `<span class="badge" style="--c:${col}">${esc(S.grade(e))}</span>` : "",
       e.country && e.country !== "Other world" ? `<span class="badge" style="--c:#7c8db5">${esc(e.country)}</span>` : "",
-      S.status(e) ? `<span class="badge" style="--c:${/Deceased|Slain|Defeated/.test(S.status(e)) ? "#ff4d6a" : "#3ed598"}">${esc(S.status(e))}</span>` : "",
+      S.status(e) ? `<span class="badge" style="--c:${/Deceased|Slain|Defeated/.test(S.status(e)) ? "#ff4d6a" : /Not stated|Unknown/.test(S.status(e)) ? "#8b95ad" : "#3ed598"}">${esc(S.status(e))}</span>` : "",
       e.sp === "m" ? '<span class="badge spoiler">Manhwa</span>' : '<span class="badge" style="--c:#5ec8ff">Anime</span>',
       e.canon === "unverified" ? '<span class="badge unverified">Unverified</span>' : "",
       S.hasHidden(e) ? '<span class="badge spoiler">Has hidden spoilers</span>' : ""
@@ -225,8 +225,8 @@
           ${alt.length ? `<p class="v-alt">Also known as ${alt.map(esc).join(" · ")}</p>` : ""}
           <div class="v-badges">${badges}</div>
         </div>
-        <div class="v-tabs" role="tablist">${tabs.map(([k, l]) => `<button type="button" role="tab" data-tab="${k}" aria-selected="${k === state.tab}">${l}</button>`).join("")}</div>
-        <div class="v-panel" role="tabpanel" id="v-panel">${panel(e)}</div>
+        <div class="v-tabs" role="tablist" aria-label="Profile sections">${tabs.map(([k, l]) => `<button type="button" role="tab" id="vt-${k}" data-tab="${k}" aria-controls="v-panel" aria-selected="${k === state.tab}" tabindex="${k === state.tab ? 0 : -1}">${l}</button>`).join("")}</div>
+        <div class="v-panel" role="tabpanel" id="v-panel" aria-labelledby="vt-${state.tab}" tabindex="0">${panel(e)}</div>
       </div>`;
     box.setAttribute("aria-labelledby", "v-title");
   }
@@ -297,6 +297,16 @@
     if (t.closest("[data-lightbox]") || t.closest(".v-art .art")) return lightbox(state.id, { list: state.list });
   }
   function trap(ev) {
+    const tabBtn = ev.target.closest && ev.target.closest("[role=tab][data-tab]");
+    if (tabBtn && ["ArrowRight", "ArrowLeft", "Home", "End"].includes(ev.key)) {
+      ev.preventDefault(); ev.stopPropagation();
+      const keys = [...root.box.querySelectorAll("[role=tab][data-tab]")].map((b) => b.dataset.tab);
+      const i = keys.indexOf(state.tab);
+      const n = ev.key === "Home" ? 0 : ev.key === "End" ? keys.length - 1 : (i + (ev.key === "ArrowRight" ? 1 : -1) + keys.length) % keys.length;
+      state.tab = keys[n]; render();
+      const b = root.box.querySelector(`[data-tab="${state.tab}"]`); if (b) b.focus();
+      return;
+    }
     if (ev.key !== "Tab" || !root) return;
     const f = [...root.box.querySelectorAll("button, a[href], input, [tabindex]:not([tabindex='-1'])")].filter((x) => x.offsetParent !== null);
     if (!f.length) return;
@@ -305,6 +315,14 @@
   }
   document.addEventListener("keydown", (ev) => {
     if (lb) {
+      if (ev.key === "Tab") {
+        const f = [...lb.el.querySelectorAll("button")].filter((x) => x.offsetParent !== null);
+        const i = f.indexOf(document.activeElement);
+        if (f.length && (i < 0 || (ev.shiftKey && i === 0) || (!ev.shiftKey && i === f.length - 1))) {
+          ev.preventDefault(); f[ev.shiftKey ? f.length - 1 : 0].focus();
+        }
+        return;
+      }
       if (ev.key === "Escape") { ev.preventDefault(); closeLightbox(); }
       else if (ev.key === "ArrowRight") lbStep(1);
       else if (ev.key === "ArrowLeft") lbStep(-1);
@@ -347,7 +365,7 @@
   }
   function renderLightbox() {
     const e = ent(lb.id);
-    const t = e._type === "monarch" && e.kind === "ruler" ? "Ruler" : e._type === "character" && e.rank && e.rank !== "-" ? SLV.rank(e.rank).label : WORD[e._type] || "";
+    const t = e._type === "monarch" && e.kind === "ruler" ? "Ruler" : e._type === "character" && e.rank && e.rank !== "-" ? (e.rank === "?" ? "Hunter" : SLV.rank(e.rank).label) : WORD[e._type] || "";
     const motion = !SLV.util.reducedMotion();
     const smoke = e._type === "shadow" && motion ? `<div class="lb-smoke">${[8, 30, 52, 70].map((x, i) => `<span style="left:${x}%;animation-delay:${i * 0.12}s"></span>`).join("")}</div>` : "";
     const many = lb.list.length > 1;
