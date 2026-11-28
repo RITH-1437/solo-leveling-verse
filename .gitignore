@@ -13,3 +13,14 @@ __pycache__/
 # Local scratch
 *.log
 tmp/
+
+# --- Secrets: never commit (added by projects audit 2026-11-28) ---
+.env
+.env.*
+!.env*.example
+*.pem
+*.key
+*.p12
+*.keystore
+*.jks
+*recovery-codes*.txt
