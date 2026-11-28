@@ -61,8 +61,10 @@
           <span class="brand-text"><span class="bt-full">Solo Leveling</span><span class="bt-short">SL</span> <em>Verse</em></span></a>
         <nav class="nav-links" id="nav-links" aria-label="Main">
           ${LINKS.map(([k, href, label]) => `<a href="${esc(SLV.page(href))}" data-key="${k}">${label}</a>`).join("")}
+          <a class="hub-menu-link" href="https://rith-1437.github.io/anime-verse/">← Anime Verse</a>
         </nav>
         <div class="nav-tools">
+          <a class="btn sm hub-link" href="https://rith-1437.github.io/anime-verse/" title="Back to Anime Verse" aria-label="Back to Anime Verse"><span aria-hidden="true">←</span><span class="lbl">Anime Verse</span></a>
           <button type="button" class="btn sm nav-search" id="open-search" aria-label="Search the archive (Ctrl+K)">
             ${ICON.search}<span class="lbl">Search the archive</span><kbd>Ctrl K</kbd></button>
           <label class="switch spoiler-switch" title="Show manhwa content beyond the anime (Season 1–2)">

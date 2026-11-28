@@ -1849,3 +1849,29 @@ button.ability:hover {
     transform: none;
   }
 }
+
+/* Back-to-hub button in the header (label hides on narrow screens) */
+.hub-link { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; text-decoration: none; }
+.hub-menu-link { display: none !important; }
+@media (max-width: 1440px) { .hub-link .lbl { display: none; } }
+/* once the links fold into the menu, the hub link moves into the menu too */
+@media (max-width: 920px) { .hub-link { display: none; } .hub-menu-link { display: block !important; } }
+/* keep the header tools from squeezing, and make room between 921px and 1360px */
+.nav-tools > * { flex: none; }
+.nav-search { white-space: nowrap; }
+@media (max-width: 1360px) {
+  .nav-search { min-width: 0; }
+  .nav-search kbd { display: none; }
+}
+@media (min-width: 921px) and (max-width: 1180px) {
+  .brand-text .bt-full { display: none; }
+  .brand-text .bt-short { display: inline; }
+  .nav-links { margin-left: 4px; }
+  .nav-links a { padding: 8px 8px; letter-spacing: 0.8px; }
+  .nav-links a[aria-current="page"]::after { left: 8px; right: 8px; }
+}
+@media (min-width: 1181px) and (max-width: 1360px) {
+  .nav-links { margin-left: 6px; }
+  .nav-links a { padding: 8px 9px; letter-spacing: 1px; }
+  .nav-links a[aria-current="page"]::after { left: 9px; right: 9px; }
+}
