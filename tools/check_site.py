@@ -55,7 +55,7 @@ def main():
                 continue
             if not (path.parent / ref).resolve().exists():
                 errors.append(f"{page}: missing {ref}")
-        scripts = [(path.parent / s).resolve() for s in re.findall(r'<script src="([^"]+)"', html)]
+        scripts = [(path.parent / re.sub(r'\.min\.js$', '.js', s)).resolve() for s in re.findall(r'<script src="([^"]+)"', html)]
         if scripts[: len(CORE)] != [(ROOT / c).resolve() for c in CORE]:
             errors.append(f"{page}: script order differs from the shared core list")
 

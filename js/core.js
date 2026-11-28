@@ -29,7 +29,7 @@
      setting. Works over http:// and file://. */
   SLV.base = (() => {
     try {
-      const me = document.currentScript || [...document.scripts].find((s) => /js\/core\.js(\?|$)/.test(s.src));
+      const me = document.currentScript || [...document.scripts].find((s) => /js\/core(?:\.min)?\.js(\?|$)/.test(s.src));
       const root = new URL("../", me.src).href;
       const dir = new URL(".", location.href).href;
       if (!dir.startsWith(root)) return root;
